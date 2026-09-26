@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SKT Travels - Premium, comfortable, and reliable travel and transportation services across Tamil Nadu and Kerala, starting from Tenkasi.">
+    <title>SKT Travels | Your Journey. Our Drive.</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lightweight Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* =========================================
+           1. CSS VARIABLES & RESET
+           ========================================= */
+        :root {
+            --navy: #0A192F;
+            --charcoal: #1E293B;
+            --white: #F8FAFC;
+            --gold: #D4AF37;
+            --gold-hover: #B5952F;
+            --gold-light: rgba(212, 175, 55, 0.1);
+            --text-muted: #94A3B8;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+            --radius: 12px;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif;
+            background-color: var(--white);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            display: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--gold); }
+        .cursor-outline { 
+            width: 40px; height: 40px; 
+            border: 1px solid var(--gold); 
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-dot, .cursor-outline { display: block; }
+            body:hover .cursor-outline.hovered {
+                width: 60px; height: 60px;
+                background-color: var(--gold-light);
+                border-color: transparent;
+            }
+        }
+
+        /* Utilities */
+        .container {
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .section-padding { padding: 5rem 0; }
+        .text-center { text-align: center; }
+        .text-gold { color: var(--gold); }
+        .bg-navy { background-color: var(--navy); color: var(--white); }
+        .bg-charcoal { background-color: var(--charcoal); color: var(--white); }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--navy);
+        }
+        .btn-primary:hover {
+            background-color: var(--gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.4);
+        }
+        .btn-outline {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background-color: var(--gold);
+            color: var(--navy);
+        }
+
+        /* Language Toggle */
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 0.45rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .lang-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+            border-color: var(--gold);
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           2. NAVIGATION
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.1rem 0;
+            transition: var(--transition);
+            background: rgba(10, 25, 47, 0.4);
+            backdrop-filter: blur(8px);
+        }
+        .navbar.scrolled {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .logo {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .logo span { color: var(--gold); }
+        
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a:not(.btn) {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.92rem;
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+        .nav-links a:not(.btn):hover::after { width: 100%; }
+
+        .desktop-lang { display: none; }
+        .mobile-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+        }
+
+        @media (min-width: 980px) {
+            .nav-links { display: flex; }
+            .desktop-lang { display: inline-flex; }
+            .mobile-actions { display: none; }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 82%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--navy);
+            z-index: 1001;
+            padding: 5rem 2rem 2rem;
+            transition: var(--transition);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .mobile-menu-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+        .close-menu {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+        }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        .overlay.active { opacity: 1; pointer-events: all; }
+
+        /* =========================================
+           3. HERO SECTION
+           ========================================= */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--navy);
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(10, 25, 47, 0.75), rgba(10, 25, 47, 0.85)), 
+                        url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=2021') center/cover no-repeat;
+            transform: scale(1.1);
+            transition: transform 0.1s linear;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--white);
+            max-width: 840px;
+            padding: 0 1.5rem;
+        }
+        .hero-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeInDown 1s ease forwards;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 7vw, 4.4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+        @media (min-width: 640px) {
+            .hero-buttons { flex-direction: row; justify-content: center; }
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--white);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(20px); } }
+        @keyframes fadeInDown { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(-20px); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+
+        /* =========================================
+           4. QUICK CONTACT BAR
+           ========================================= */
+        .quick-contact {
+            background: var(--white);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        @media (max-width: 640px) {
+            .quick-contact { grid-template-columns: 1fr; }
+        }
+        .qc-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--charcoal);
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .qc-item:hover { background: var(--gold-light); color: var(--navy); }
+        .qc-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--navy);
+            color: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .qc-text { display: flex; flex-direction: column; }
+        .qc-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+        .qc-value { font-size: 0.9rem; font-weight: 700; }
+
+        /* =========================================
+           5. ABOUT SECTION
+           ========================================= */
+        .about-grid {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .about-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .about-image {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .about-image:hover img { transform: scale(1.05); }
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            line-height: 1.25;
+        }
+        .section-subtitle {
+            color: var(--gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* =========================================
+           6. FLEET SECTION
+           ========================================= */
+        .fleet-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .fleet-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 1rem 0 2rem 0;
+            scrollbar-width: none;
+        }
+        .fleet-track::-webkit-scrollbar { display: none; }
+        .fleet-card {
+            flex: 0 0 85%;
+            max-width: 350px;
+            scroll-snap-align: center;
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        @media (min-width: 768px) {
+            .fleet-card { flex: 0 0 40%; max-width: 400px; }
+        }
+        .fleet-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        .fleet-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+        .fleet-info { padding: 1.5rem; }
+        .fleet-name { font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+        .fleet-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .feature-tag {
+            background: var(--gold-light);
+            color: var(--navy);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .fleet-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .fleet-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .fleet-nav-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--navy);
+            background: transparent;
+            color: var(--navy);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .fleet-nav-btn:hover { background: var(--navy); color: var(--gold); }
+        .fleet-dots {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .dot.active { background: var(--gold); width: 30px; border-radius: 5px; }
+
+        /* Fleet Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 25, 47, 0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 1.5rem;
+        }
+        .modal.active { opacity: 1; pointer-events: all; }
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+        .modal.active .modal-content { transform: scale(1); }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--white);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-img { width: 100%; height: 300px; object-fit: cover; }
+        .modal-body { padding: 2rem; }
+
+        /* =========================================
+           7. DESTINATIONS
+           ========================================= */
+        .destinations-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 1rem 0 2rem 0;
+            scrollbar-width: none;
+        }
+        .destinations-track::-webkit-scrollbar { display: none; }
+        .dest-card {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            height: 350px;
+        }
+        .dest-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .dest-card:hover img { transform: scale(1.1); }
+        .dest-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,25,47,0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            color: var(--white);
+        }
+
+        /* =========================================
+           8. MAP EXPERIENCE (TAMIL NADU & KERALA)
+           ========================================= */
+        .map-container {
+            position: relative;
+            background: var(--navy);
+            border-radius: var(--radius);
+            padding: 3.5rem 1.5rem;
+            overflow: hidden;
+            text-align: center;
+        }
+        .map-visual {
+            position: relative;
+            max-width: 760px;
+            margin: 2.5rem auto 0;
+            height: 360px;
+        }
+        .map-node {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 4px var(--gold-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .map-node:hover { transform: scale(1.3); }
+        .map-node.tenkasi { top: 62%; left: 52%; transform: translate(-50%, -50%); width: 24px; height: 24px; z-index: 3; }
+        
+        /* Tamil Nadu Nodes */
+        .map-node.madurai { top: 46%; left: 66%; }
+        .map-node.kodaikanal { top: 35%; left: 58%; }
+        .map-node.ooty { top: 22%; left: 45%; }
+        .map-node.chennai { top: 14%; left: 82%; }
+        .map-node.kanyakumari { top: 88%; left: 55%; }
+        
+        /* Kerala Nodes */
+        .map-node.kerala-hub { top: 40%; left: 24%; border-color: #38bdf8; background: var(--gold); }
+        .map-node.trivandrum { top: 72%; left: 34%; }
+        .map-node.munnar { top: 30%; left: 34%; }
+        .map-node.kochi { top: 48%; left: 18%; }
+        
+        .map-label {
+            position: absolute;
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transform: translate(-50%, -150%);
+        }
+        .kerala-tag {
+            color: #38bdf8 !important;
+            font-weight: 700;
+        }
+
+        /* =========================================
+           9. BOOKING FORM
+           ========================================= */
+        .booking-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .form-grid { grid-template-columns: 1fr 1fr; }
+            .form-full { grid-column: 1 / -1; }
+        }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 0.875rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-light);
+        }
+        .error-msg {
+            color: #ef4444;
+            font-size: 0.75rem;
+            display: none;
+        }
+        .form-group.error input, .form-group.error select { border-color: #ef4444; }
+        .form-group.error .error-msg { display: block; }
+
+        /* =========================================
+           10. WHY CHOOSE US & GALLERY
+           ========================================= */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        .stat-item p { color: var(--text-muted); font-size: 0.9rem; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; }
+            .gallery-grid .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        }
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        .lightbox.active { opacity: 1; pointer-events: all; }
+        .lightbox img { max-width: 90%; max-height: 90vh; border-radius: 8px; }
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: var(--white);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* =========================================
+           11. REVIEWS SECTION
+           ========================================= */
+        .reviews-section {
+            background: #0d1b2e;
+            color: var(--white);
+        }
+        .reviews-wrapper {
+            display: grid;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        @media (min-width: 992px) {
+            .reviews-wrapper { grid-template-columns: 1fr 1.3fr; align-items: start; }
+        }
+        .review-form-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        .review-form-card input, .review-form-card textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: var(--white);
+            margin-top: 0.4rem;
+            margin-bottom: 1.25rem;
+            font-family: inherit;
+        }
+        .review-form-card input:focus, .review-form-card textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .star-rating-select {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0 1.25rem;
+            cursor: pointer;
+        }
+        .star-rating-select svg {
+            color: #475569;
+            transition: color 0.2s;
+        }
+        .star-rating-select svg.selected {
+            color: var(--gold);
+            fill: var(--gold);
+        }
+
+        .reviews-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            max-height: 580px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+        .reviews-feed::-webkit-scrollbar { width: 6px; }
+        .reviews-feed::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.3); border-radius: 10px; }
+
+        .review-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 1.25rem 1.5rem;
+            transition: var(--transition);
+        }
+        .review-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px);
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .reviewer-meta {
+            font-weight: 700;
+            color: var(--white);
+            font-size: 1rem;
+        }
+        .reviewer-route {
+            font-size: 0.8rem;
+            color: var(--gold);
+            display: block;
+        }
+        .stars-display {
+            color: var(--gold);
+            display: inline-flex;
+            gap: 2px;
+        }
+        .review-comment {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           12. CONTACT & FOOTER
+           ========================================= */
+        .contact-cards {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            margin-top: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2.25rem 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .contact-card:hover { border-color: var(--gold); background: rgba(255,255,255,0.1); }
+        .contact-card i { color: var(--gold); margin-bottom: 1rem; }
+        .contact-card a { color: var(--white); text-decoration: none; font-weight: 600; display: block; margin-top: 0.5rem; }
+
+        footer {
+            background: #050d1a;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            text-align: center;
+        }
+
+        /* =========================================
+           13. FLOATING MOBILE BUTTONS
+           ========================================= */
+        .floating-actions {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 0.75rem 1rem;
+            display: flex;
+            gap: 0.75rem;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 900;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .floating-actions.visible { transform: translateY(0); }
+        .float-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .float-call { background: var(--navy); color: var(--white); }
+        .float-wa { background: #25D366; color: var(--white); }
+        .float-book { background: var(--gold); color: var(--navy); }
+
+        @media (min-width: 768px) {
+            .floating-actions { display: none; }
+            body { padding-bottom: 0; }
+        }
+        @media (max-width: 767px) {
+            body { padding-bottom: 80px; }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">SKT <span>TRAVELS</span></a>
+            
+            <!-- Desktop Links & Actions -->
+            <ul class="nav-links">
+                <li><a href="#home" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" data-i18n="nav_about">About</a></li>
+                <li><a href="#fleet" data-i18n="nav_fleet">Fleet</a></li>
+                <li><a href="#destinations" data-i18n="nav_destinations">Destinations</a></li>
+                <li><a href="#reviews" data-i18n="nav_reviews">Reviews</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                <li><a href="#booking" class="btn btn-primary" data-i18n="nav_book">Book Your Trip</a></li>
+                <li class="desktop-lang">
+                    <button class="lang-btn" onclick="toggleLanguage()" aria-label="Toggle language">
+                        <i data-lucide="globe" size="14"></i>
+                        <span id="langLabelDesktop">தமிழ்</span>
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Mobile Actions -->
+            <div class="mobile-actions">
+                <button class="lang-btn" onclick="toggleLanguage()" aria-label="Toggle language">
+                    <i data-lucide="globe" size="14"></i>
+                    <span id="langLabelMobile">தமிழ்</span>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Drawer -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div>
+            <button class="close-menu" id="closeMenu" aria-label="Close menu"><i data-lucide="x"></i></button>
+            <div class="logo" style="margin-bottom: 2rem;">SKT <span>TRAVELS</span></div>
+            <ul class="mobile-menu-links">
+                <li><a href="#home" class="mobile-link" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" class="mobile-link" data-i18n="nav_about">About</a></li>
+                <li><a href="#fleet" class="mobile-link" data-i18n="nav_fleet">Fleet</a></li>
+                <li><a href="#destinations" class="mobile-link" data-i18n="nav_destinations">Destinations</a></li>
+                <li><a href="#reviews" class="mobile-link" data-i18n="nav_reviews">Reviews</a></li>
+                <li><a href="#contact" class="mobile-link" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+        </div>
+        <a href="#booking" class="btn btn-primary mobile-link" style="width: 100%; text-align: center;" data-i18n="nav_book">Book Your Trip</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-content">
+            <div class="hero-location">
+                <i data-lucide="map-pin" size="16"></i>
+                <span data-i18n="hero_location">Tenkasi • Tamil Nadu & Kerala</span>
+            </div>
+            <h1 data-i18n="hero_title">Your Journey.<br>Our <span class="text-gold">Drive.</span></h1>
+            <p data-i18n="hero_desc">Comfortable, reliable, and premium travel services across Tamil Nadu and Kerala, starting from the heart of Tenkasi.</p>
+            <div class="hero-buttons">
+                <a href="#booking" class="btn btn-primary" data-i18n="hero_book_btn">Book Your Trip <i data-lucide="arrow-right" size="18"></i></a>
+                <a href="#fleet" class="btn btn-outline" style="color: white; border-color: white;" data-i18n="hero_fleet_btn">Explore Our Fleet</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i data-lucide="chevron-down" size="32"></i>
+        </div>
+    </section>
+
+    <!-- Quick Contact Bar -->
+    <div class="container">
+        <div class="quick-contact reveal">
+            <a href="tel:9840708760" class="qc-item">
+                <div class="qc-icon"><i data-lucide="phone"></i></div>
+                <div class="qc-text">
+                    <span class="qc-label" data-i18n="qc_call_label">Call Now</span>
+                    <span class="qc-value">98407 08760</span>
+                </div>
+            </a>
+            <a href="https://wa.me/919840708760" target="_blank" class="qc-item">
+                <div class="qc-icon" style="background: #25D366; color: white;"><i data-lucide="message-circle"></i></div>
+                <div class="qc-text">
+                    <span class="qc-label" data-i18n="qc_wa_label">WhatsApp</span>
+                    <span class="qc-value" data-i18n="qc_wa_val">Chat with Us</span>
+                </div>
+            </a>
+            <a href="#" id="instagramLink" target="_blank" class="qc-item">
+                <div class="qc-icon" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white;"><i data-lucide="instagram"></i></div>
+                <div class="qc-text">
+                    <span class="qc-label" data-i18n="qc_insta_label">Instagram</span>
+                    <span class="qc-value" data-i18n="qc_insta_val">Follow Us</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section-padding" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1000" alt="SKT Travels Vehicle" loading="lazy">
+                </div>
+                <div class="reveal">
+                    <span class="section-subtitle" data-i18n="about_subtitle">About Us</span>
+                    <h2 class="section-title" data-i18n="about_title">Travel Across Tamil Nadu & Kerala With <span class="text-gold">SKT Travels</span></h2>
+                    <p style="margin-bottom: 1.5rem; color: var(--text-muted);" data-i18n="about_desc">Based in the scenic town of Tenkasi, SKT Travels provides comfortable, reliable, and premium transportation services throughout Tamil Nadu and Kerala. Whether it's a family pilgrimage, an outstation corporate trip, or a custom tourist itinerary, we ensure your journey is as memorable as the destination.</p>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
+                        <li style="display: flex; align-items: center; gap: 0.75rem;"><i data-lucide="check-circle" class="text-gold" size="20"></i> <span data-i18n="about_f1">Experienced & Professional Drivers</span></li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem;"><i data-lucide="check-circle" class="text-gold" size="20"></i> <span data-i18n="about_f2">Well-Maintained, Sanitized Vehicles</span></li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem;"><i data-lucide="check-circle" class="text-gold" size="20"></i> <span data-i18n="about_f3">Flexible Custom Travel Requirements</span></li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" data-i18n="about_btn">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Section -->
+    <section class="section-padding bg-charcoal" id="fleet">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <span class="section-subtitle" data-i18n="fleet_subtitle">Our Fleet</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="fleet_title">Choose Your <span class="text-gold">Comfort</span></h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;" data-i18n="fleet_desc">Well-maintained, air-conditioned vehicles suited for every group size and travel need.</p>
+            </div>
+            
+            <div class="fleet-container reveal">
+                <div class="fleet-track" id="fleetTrack"></div>
+                <div class="fleet-nav">
+                    <button class="fleet-nav-btn" id="prevFleet" aria-label="Previous vehicle"><i data-lucide="chevron-left"></i></button>
+                    <div class="fleet-dots" id="fleetDots"></div>
+                    <button class="fleet-nav-btn" id="nextFleet" aria-label="Next vehicle"><i data-lucide="chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Modal -->
+    <div class="modal" id="fleetModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal" aria-label="Close modal"><i data-lucide="x"></i></button>
+            <img src="" alt="" class="modal-img" id="modalImg">
+            <div class="modal-body">
+                <h3 id="modalName" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--navy);"></h3>
+                <div class="fleet-features" id="modalFeatures" style="margin-bottom: 1rem;"></div>
+                <p id="modalDesc" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+                <a href="#booking" class="btn btn-primary" id="modalBookBtn" style="width: 100%; justify-content: center;" data-i18n="modal_book_btn">Book This Vehicle</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explore Destinations -->
+    <section class="section-padding bg-navy" id="destinations">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <span class="section-subtitle" data-i18n="dest_subtitle">Destinations</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="dest_title">Explore <span class="text-gold">Tamil Nadu & Kerala</span></h2>
+            </div>
+            <div class="destinations-track reveal" id="destTrack"></div>
+        </div>
+    </section>
+
+    <!-- Map Experience (With Kerala & Tamil Nadu) -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="map-container reveal">
+                <span class="section-subtitle" data-i18n="network_subtitle">Our Network</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="network_title">Starting from <span class="text-gold">Tenkasi</span>,<br>Connecting Tamil Nadu & Kerala</h2>
+                <div class="map-visual">
+                    <!-- Central Hub -->
+                    <div class="map-node tenkasi" title="Tenkasi (Main Hub)"><span class="map-label">Tenkasi</span></div>
+                    
+                    <!-- Tamil Nadu Nodes -->
+                    <div class="map-node madurai" title="Madurai"><span class="map-label">Madurai</span></div>
+                    <div class="map-node kodaikanal" title="Kodaikanal"><span class="map-label">Kodaikanal</span></div>
+                    <div class="map-node ooty" title="Ooty"><span class="map-label">Ooty</span></div>
+                    <div class="map-node chennai" title="Chennai"><span class="map-label">Chennai</span></div>
+                    <div class="map-node kanyakumari" title="Kanyakumari"><span class="map-label">Kanyakumari</span></div>
+                    
+                    <!-- Kerala Nodes -->
+                    <div class="map-node kerala-hub" title="Kerala Network"><span class="map-label kerala-tag">Kerala</span></div>
+                    <div class="map-node trivandrum" title="Trivandrum (Kerala)"><span class="map-label">Trivandrum</span></div>
+                    <div class="map-node munnar" title="Munnar (Kerala)"><span class="map-label">Munnar</span></div>
+                    <div class="map-node kochi" title="Kochi (Kerala)"><span class="map-label">Kochi</span></div>
+                    
+                    <!-- SVG Connecting Routes -->
+                    <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+                        <!-- Routes to Tamil Nadu Destinations -->
+                        <line x1="52%" y1="62%" x2="66%" y2="46%" stroke="#D4AF37" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                        <line x1="52%" y1="62%" x2="58%" y2="35%" stroke="#D4AF37" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                        <line x1="52%" y1="62%" x2="45%" y2="22%" stroke="#D4AF37" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+                        <line x1="52%" y1="62%" x2="82%" y2="14%" stroke="#D4AF37" stroke-width="2" stroke-dasharray="5,5" opacity="0.4"/>
+                        <line x1="52%" y1="62%" x2="55%" y2="88%" stroke="#D4AF37" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                        
+                        <!-- Routes to Kerala Destinations -->
+                        <line x1="52%" y1="62%" x2="24%" y2="40%" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,5" opacity="0.8"/>
+                        <line x1="52%" y1="62%" x2="34%" y2="72%" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                        <line x1="52%" y1="62%" x2="34%" y2="30%" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                        <line x1="24%" y1="40%" x2="18%" y2="48%" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="section-padding" id="booking" style="background: #f1f5f9;">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <span class="section-subtitle" data-i18n="book_subtitle">Book Now</span>
+                <h2 class="section-title" data-i18n="book_title">Plan Your <span class="text-gold">Journey</span></h2>
+                <p style="color: var(--text-muted);" data-i18n="book_desc">Fill out the form below. We will redirect you to WhatsApp to send your enquiry directly to our team.</p>
+            </div>
+            
+            <form class="booking-form reveal" id="bookingForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name" data-i18n="form_name">Full Name *</label>
+                        <input type="text" id="name" required placeholder="Your name">
+                        <span class="error-msg" data-i18n="form_err_name">Please enter your name</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" data-i18n="form_phone">Phone Number *</label>
+                        <input type="tel" id="phone" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+                        <span class="error-msg" data-i18n="form_err_phone">Please enter a valid 10-digit phone number</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickup" data-i18n="form_pickup">Pickup Location *</label>
+                        <input type="text" id="pickup" required placeholder="e.g., Tenkasi">
+                        <span class="error-msg" data-i18n="form_err_pickup">Please enter pickup location</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination" data-i18n="form_dest">Destination *</label>
+                        <input type="text" id="destination" required placeholder="e.g., Madurai / Kerala / Munnar">
+                        <span class="error-msg" data-i18n="form_err_dest">Please enter destination</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelDate" data-i18n="form_date">Travel Date *</label>
+                        <input type="date" id="travelDate" required>
+                        <span class="error-msg" data-i18n="form_err_date">Please select a travel date</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="returnDate" data-i18n="form_return">Return Date (Optional)</label>
+                        <input type="date" id="returnDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="passengers" data-i18n="form_passengers">Number of Passengers *</label>
+                        <input type="number" id="passengers" required min="1" placeholder="e.g., 4">
+                        <span class="error-msg" data-i18n="form_err_passengers">Please enter valid passenger count</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle" data-i18n="form_vehicle">Preferred Vehicle</label>
+                        <select id="vehicle">
+                            <option value="Not specified" data-i18n="form_vehicle_opt">Select a vehicle (Optional)</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="requirements" data-i18n="form_notes">Additional Requirements</label>
+                        <textarea id="requirements" rows="4" placeholder="Pickup time, multiple destinations, extra luggage, special needs, etc."></textarea>
+                    </div>
+                    <div class="form-full text-center">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 400px; justify-content: center; padding: 1rem;" data-i18n="form_submit_btn">
+                            Send Booking Request via WhatsApp <i data-lucide="send" size="18"></i>
+                        </button>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;" data-i18n="form_note">
+                            <i data-lucide="info" size="14" style="vertical-align: middle;"></i> 
+                            This is an enquiry request. Your booking will be confirmed by our team after review.
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section-padding bg-navy">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <h2 class="section-title" style="color: var(--white);" data-i18n="why_title">Why Choose <span class="text-gold">SKT Travels</span></h2>
+            </div>
+            <div class="stats-grid reveal">
+                <div class="stat-item">
+                    <h3>5+</h3>
+                    <p data-i18n="stat_1">Premium Vehicles</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p data-i18n="stat_2">TN & Kerala Coverage</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p data-i18n="stat_3">Customer Support</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5★</h3>
+                    <p data-i18n="stat_4">Comfort Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section-padding" id="gallery">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <span class="section-subtitle" data-i18n="gallery_subtitle">Gallery</span>
+                <h2 class="section-title" data-i18n="gallery_title">Travel <span class="text-gold">Moments</span></h2>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=800" alt="Travel" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800" alt="Road Trip" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800" alt="Vehicle" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&q=80&w=800" alt="Destination" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800" alt="Scenic" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" aria-label="Close lightbox"><i data-lucide="x" size="32"></i></button>
+        <img src="" alt="Gallery Image" id="lightboxImg">
+    </div>
+
+    <!-- REVIEWS SECTION -->
+    <section class="section-padding reviews-section" id="reviews">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-subtitle" data-i18n="rev_subtitle">Traveler Testimonials</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="rev_title">Customer <span class="text-gold">Reviews</span></h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;" data-i18n="rev_desc">Read stories from our travelers or share your quick feedback riding with SKT Travels.</p>
+            </div>
+
+            <div class="reviews-wrapper reveal">
+                <!-- Form to Add Review -->
+                <div class="review-form-card">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--gold);" data-i18n="rev_form_title">Leave a Review</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;" data-i18n="rev_form_sub">Rate your ride and share your quick feedback.</p>
+                    <form id="reviewForm">
+                        <label style="font-size: 0.85rem; font-weight: 600;" data-i18n="rev_route_label">Trip Route (Optional)</label>
+                        <input type="text" id="reviewRoute" placeholder="e.g. Tenkasi to Munnar, Kerala">
+
+                        <label style="font-size: 0.85rem; font-weight: 600;" data-i18n="rev_rating_label">Your Rating</label>
+                        <div class="star-rating-select" id="starSelector">
+                            <i data-lucide="star" data-rating="1"></i>
+                            <i data-lucide="star" data-rating="2"></i>
+                            <i data-lucide="star" data-rating="3"></i>
+                            <i data-lucide="star" data-rating="4"></i>
+                            <i data-lucide="star" data-rating="5" class="selected"></i>
+                        </div>
+                        <input type="hidden" id="reviewRating" value="5">
+
+                        <label style="font-size: 0.85rem; font-weight: 600;" data-i18n="rev_comment_label">Your Feedback / Review *</label>
+                        <textarea id="reviewComment" rows="4" required placeholder="How was the journey, driver punctuality, and vehicle comfort?"></textarea>
+
+                        <button type="submit" class="btn btn-primary" id="reviewSubmitBtn" style="width: 100%; justify-content: center;" data-i18n="rev_post_btn">
+                            Post Review
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Reviews Feed -->
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--white);" data-i18n="rev_recent_title">Recent Traveler Feedback</h3>
+                    <div class="reviews-feed" id="reviewsFeed"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section-padding bg-charcoal" id="contact">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-subtitle" data-i18n="cnt_subtitle">Contact Us</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="cnt_title">Ready for Your Next <span class="text-gold">Journey?</span></h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 1rem auto 2rem;" data-i18n="cnt_desc">Contact SKT Travels and plan your trip across Tamil Nadu and Kerala. We are here to assist you.</p>
+            </div>
+            <div class="contact-cards reveal">
+                <div class="contact-card">
+                    <i data-lucide="phone" size="32"></i>
+                    <h3 data-i18n="cnt_card_call">Call Us</h3>
+                    <a href="tel:9840708760">98407 08760</a>
+                </div>
+                <div class="contact-card">
+                    <i data-lucide="message-circle" size="32"></i>
+                    <h3 data-i18n="cnt_card_wa">WhatsApp</h3>
+                    <a href="https://wa.me/919840708760" target="_blank" data-i18n="cnt_card_wa_link">Chat on WhatsApp</a>
+                </div>
+                <div class="contact-card">
+                    <i data-lucide="map-pin" size="32"></i>
+                    <h3 data-i18n="cnt_card_loc">Location</h3>
+                    <a href="#" style="cursor: default;" data-i18n="cnt_card_loc_val">Tenkasi, Tamil Nadu</a>
+                </div>
+            </div>
+            <div class="text-center reveal" style="margin-top: 3rem;">
+                <a href="#booking" class="btn btn-primary" data-i18n="cnt_btn">Book Your Trip Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Minimal Clean Footer -->
+    <footer>
+        <div class="container">
+            <p data-i18n="footer_rights">&copy; 2026 SKT Travels. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Mobile Actions -->
+    <div class="floating-actions" id="floatingActions">
+        <a href="tel:9840708760" class="float-btn float-call">
+            <i data-lucide="phone" size="18"></i> <span data-i18n="float_call">Call</span>
+        </a>
+        <a href="https://wa.me/919840708760" target="_blank" class="float-btn float-wa">
+            <i data-lucide="message-circle" size="18"></i> <span data-i18n="float_wa">WhatsApp</span>
+        </a>
+        <a href="#booking" class="float-btn float-book">
+            <i data-lucide="calendar" size="18"></i> <span data-i18n="float_book">Book</span>
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // =========================================
+        // 1. CONFIGURATION
+        // =========================================
+        const SKT_CONFIG = {
+            companyName: "SKT Travels",
+            location: "Tenkasi, Tamil Nadu",
+            phone: "9840708760",
+            whatsapp: "919840708760",
+            instagram: "https://instagram.com/skttravels",
+            serviceArea: "Tamil Nadu & Kerala"
+        };
+
+        const SUPABASE_URL = "https://yeoguwaqbedfqrjikqjx.supabase.co";
+        const SUPABASE_ANON_KEY = "EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inllb2d1d2FxYnFkZnFyamlrcWp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0MjQ2OTcsImV4cCI6MjEwNjAwMDY5N30.abQu5I78-GuJkAKbwr63UQ9GhAPzNt59zHuijZ-twlg";
+
+        let supabaseClient = null;
+        if (window.supabase) {
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        // =========================================
+        // 2. TRANSLATION SYSTEM (TAMIL / ENGLISH)
+        // =========================================
+        let currentLang = localStorage.getItem('skt_lang') || 'en';
+
+        const translations = {
+            en: {
+                lang_toggle: "தமிழ்",
+                nav_home: "Home",
+                nav_about: "About",
+                nav_fleet: "Fleet",
+                nav_destinations: "Destinations",
+                nav_reviews: "Reviews",
+                nav_contact: "Contact",
+                nav_book: "Book Your Trip",
+                hero_location: "Tenkasi • Tamil Nadu & Kerala",
+                hero_title: 'Your Journey.<br>Our <span class="text-gold">Drive.</span>',
+                hero_desc: "Comfortable, reliable, and premium travel services across Tamil Nadu and Kerala, starting from the heart of Tenkasi.",
+                hero_book_btn: 'Book Your Trip <i data-lucide="arrow-right" size="18"></i>',
+                hero_fleet_btn: "Explore Our Fleet",
+                qc_call_label: "Call Now",
+                qc_wa_label: "WhatsApp",
+                qc_wa_val: "Chat with Us",
+                qc_insta_label: "Instagram",
+                qc_insta_val: "Follow Us",
+                about_subtitle: "About Us",
+                about_title: 'Travel Across Tamil Nadu & Kerala With <span class="text-gold">SKT Travels</span>',
+                about_desc: "Based in the scenic town of Tenkasi, SKT Travels provides comfortable, reliable, and premium transportation services throughout Tamil Nadu and Kerala. Whether it's a family pilgrimage, an outstation corporate trip, or a custom tourist itinerary, we ensure your journey is as memorable as the destination.",
+                about_f1: "Experienced & Professional Drivers",
+                about_f2: "Well-Maintained, Sanitized Vehicles",
+                about_f3: "Flexible Custom Travel Requirements",
+                about_btn: "Get in Touch",
+                fleet_subtitle: "Our Fleet",
+                fleet_title: 'Choose Your <span class="text-gold">Comfort</span>',
+                fleet_desc: "Well-maintained, air-conditioned vehicles suited for every group size and travel need.",
+                modal_book_btn: "Book This Vehicle",
+                dest_subtitle: "Destinations",
+                dest_title: 'Explore <span class="text-gold">Tamil Nadu & Kerala</span>',
+                network_subtitle: "Our Network",
+                network_title: 'Starting from <span class="text-gold">Tenkasi</span>,<br>Connecting Tamil Nadu & Kerala',
+                book_subtitle: "Book Now",
+                book_title: 'Plan Your <span class="text-gold">Journey</span>',
+                book_desc: "Fill out the form below. We will redirect you to WhatsApp to send your enquiry directly to our team.",
+                form_name: "Full Name *",
+                form_phone: "Phone Number *",
+                form_pickup: "Pickup Location *",
+                form_dest: "Destination *",
+                form_date: "Travel Date *",
+                form_return: "Return Date (Optional)",
+                form_passengers: "Number of Passengers *",
+                form_vehicle: "Preferred Vehicle",
+                form_vehicle_opt: "Select a vehicle (Optional)",
+                form_notes: "Additional Requirements",
+                form_submit_btn: 'Send Booking Request via WhatsApp <i data-lucide="send" size="18"></i>',
+                form_note: '<i data-lucide="info" size="14" style="vertical-align: middle;"></i> This is an enquiry request. Your booking will be confirmed by our team after review.',
+                form_err_name: "Please enter your name",
+                form_err_phone: "Please enter a valid 10-digit phone number",
+                form_err_pickup: "Please enter pickup location",
+                form_err_dest: "Please enter destination",
+                form_err_date: "Please select a travel date",
+                form_err_passengers: "Please enter valid passenger count",
+                why_title: 'Why Choose <span class="text-gold">SKT Travels</span>',
+                stat_1: "Premium Vehicles",
+                stat_2: "TN & Kerala Coverage",
+                stat_3: "Customer Support",
+                stat_4: "Comfort Rating",
+                gallery_subtitle: "Gallery",
+                gallery_title: 'Travel <span class="text-gold">Moments</span>',
+                rev_subtitle: "Traveler Testimonials",
+                rev_title: 'Customer <span class="text-gold">Reviews</span>',
+                rev_desc: "Read stories from our travelers or share your quick feedback riding with SKT Travels.",
+                rev_form_title: "Leave a Review",
+                rev_form_sub: "Rate your ride and share your quick feedback.",
+                rev_route_label: "Trip Route (Optional)",
+                rev_rating_label: "Your Rating",
+                rev_comment_label: "Your Feedback / Review *",
+                rev_post_btn: "Post Review",
+                rev_recent_title: "Recent Traveler Feedback",
+                cnt_subtitle: "Contact Us",
+                cnt_title: 'Ready for Your Next <span class="text-gold">Journey?</span>',
+                cnt_desc: "Contact SKT Travels and plan your trip across Tamil Nadu and Kerala. We are here to assist you.",
+                cnt_card_call: "Call Us",
+                cnt_card_wa: "WhatsApp",
+                cnt_card_wa_link: "Chat on WhatsApp",
+                cnt_card_loc: "Location",
+                cnt_card_loc_val: "Tenkasi, Tamil Nadu",
+                cnt_btn: "Book Your Trip Now",
+                footer_rights: "© 2026 SKT Travels. All rights reserved.",
+                float_call: "Call",
+                float_wa: "WhatsApp",
+                float_book: "Book"
+            },
+            ta: {
+                lang_toggle: "English",
+                nav_home: "முகப்பு",
+                nav_about: "எங்களை பற்றி",
+                nav_fleet: "வாகனங்கள்",
+                nav_destinations: "இடங்கள்",
+                nav_reviews: "கருத்துகள்",
+                nav_contact: "தொடர்புக்கு",
+                nav_book: "முன்பதிவு",
+                hero_location: "தென்காசி • தமிழ்நாடு & கேரளா",
+                hero_title: 'உங்கள் பயணம்.<br>எங்கள் <span class="text-gold">சேவை.</span>',
+                hero_desc: "தென்காசியில் இருந்து தமிழ்நாடு மற்றும் கேரளா முழுவதும் பாதுகாப்பான, சௌகரியமான மற்றும் நம்பகமான பயண சேவை.",
+                hero_book_btn: 'முன்பதிவு செய்ய <i data-lucide="arrow-right" size="18"></i>',
+                hero_fleet_btn: "வாகனங்களை பார்க்க",
+                qc_call_label: "அழைக்க",
+                qc_wa_label: "வாட்ஸ்அப்",
+                qc_wa_val: "மெசேஜ் செய்க",
+                qc_insta_label: "இன்ஸ்டாகிராம்",
+                qc_insta_val: "பின்தொடரவும்",
+                about_subtitle: "எங்களை பற்றி",
+                about_title: 'தமிழ்நாடு & கேரளா முழுவதும் <span class="text-gold">SKT டிராவல்ஸ்</span> உடன் பயணியுங்கள்',
+                about_desc: "தென்காசியை தலைமையிடமாகக் கொண்டு, தமிழ்நாடு மற்றும் கேரளா முழுவதும் குடும்பச் சுற்றுலா, ஆன்மீகக் கோவில் யாத்திரைகள் மற்றும் வெளியூர் பயணங்களுக்கு பாதுகாப்பான சிறந்த வாகன சேவைகளை வழங்குகிறோம்.",
+                about_f1: "அனுபவம் வாய்ந்த ஓட்டுநர்கள்",
+                about_f2: "சுத்தமான மற்றும் பராமரிக்கப்பட்ட வாகனங்கள்",
+                about_f3: "உங்கள் தேவைக்கேற்ப பயணத் திட்டம்",
+                about_btn: "தொடர்பு கொள்ள",
+                fleet_subtitle: "எங்கள் வாகனங்கள்",
+                fleet_title: 'உங்கள் <span class="text-gold">வாகனத்தை</span> தேர்வு செய்க',
+                fleet_desc: "குடும்பத்தினர் மற்றும் குழுக்களுக்கு ஏற்ற வகையில் குளிரூட்டப்பட்ட சொகுசு கார்கள் மற்றும் வேன்கள்.",
+                modal_book_btn: "இந்த வாகனத்தை தேர்வு செய்க",
+                dest_subtitle: "சுற்றுலா இடங்கள்",
+                dest_title: 'தமிழ்நாடு & கேரளா <span class="text-gold">சுற்றுலா</span>',
+                network_subtitle: "எங்கள் நெட்வொர்க்",
+                network_title: '<span class="text-gold">தென்காசியில்</span> தொடங்கி,<br>தமிழ்நாடு & கேரளாவை இணைக்கிறோம்',
+                book_subtitle: "முன்பதிவு",
+                book_title: 'பயணத்தை <span class="text-gold">திட்டமிடுங்கள்</span>',
+                book_desc: "கீழே உள்ள படிவத்தைப் பூர்த்தி செய்யவும். வாட்ஸ்அப் வழியாக எங்கள் குழு உங்களுக்கு உடனடியாக கட்டண விவரங்களை அனுப்பும்.",
+                form_name: "முழு பெயர் *",
+                form_phone: "தொலைபேசி எண் *",
+                form_pickup: "புறப்படும் இடம் *",
+                form_dest: "செல்ல வேண்டிய இடம் *",
+                form_date: "பயண தேதி *",
+                form_return: "திரும்பும் தேதி (விருப்பப்பட்டால்)",
+                form_passengers: "பயணிகள் எண்ணிக்கை *",
+                form_vehicle: "விருப்பமான வாகனம்",
+                form_vehicle_opt: "வாகனத்தை தேர்வு செய்யவும் (விருப்பப்பட்டால்)",
+                form_notes: "கூடுதல் தேவைகள்",
+                form_submit_btn: 'வாட்ஸ்அப் வழியாக அனுப்பவும் <i data-lucide="send" size="18"></i>',
+                form_note: '<i data-lucide="info" size="14" style="vertical-align: middle;"></i> இது முன்பதிவு கோரிக்கை மட்டுமே. எங்கள் குழு சரிபார்த்து கட்டணத்தை உறுதி செய்யும்.',
+                form_err_name: "தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்",
+                form_err_phone: "சரியான 10 இலக்க எண்ணை உள்ளிடவும்",
+                form_err_pickup: "புறப்படும் இடத்தை உள்ளிடவும்",
+                form_err_dest: "செல்ல வேண்டிய இடத்தை உள்ளிடவும்",
+                form_err_date: "பயண தேதியை தேர்வு செய்யவும்",
+                form_err_passengers: "பயணிகள் எண்ணிக்கையை உள்ளிடவும்",
+                why_title: 'ஏன் <span class="text-gold">SKT டிராவல்ஸ்?</span>',
+                stat_1: "சொகுசு வாகனங்கள்",
+                stat_2: "TN & கேரளா சேவை",
+                stat_3: "24/7 வாடிக்கையாளர் சேவை",
+                stat_4: "5★ தர மதிப்பீடு",
+                gallery_subtitle: "புகைப்படங்கள்",
+                gallery_title: 'பயண <span class="text-gold">நினைவுகள்</span>',
+                rev_subtitle: "பயணிகள் கருத்துகள்",
+                rev_title: 'வாடிக்கையாளர் <span class="text-gold">விமர்சனங்கள்</span>',
+                rev_desc: "எங்களோடு பயணித்த பயணிகளின் கருத்துக்களைப் படியுங்கள் அல்லது உங்கள் அனுபவத்தை பகிர்ந்துகொள்ளுங்கள்.",
+                rev_form_title: "கருத்து தெரிவிக்க",
+                rev_form_sub: "உங்கள் பயண அனுபவத்தை மதிப்பிட்டு பதிவு செய்யுங்கள்.",
+                rev_route_label: "பயண வழி (விருப்பப்பட்டால்)",
+                rev_rating_label: "உங்கள் மதிப்பீடு",
+                rev_comment_label: "உங்கள் கருத்து *",
+                rev_post_btn: "கருத்தை பதிவு செய்க",
+                rev_recent_title: "சமீபத்திய கருத்துகள்",
+                cnt_subtitle: "தொடர்புக்கு",
+                cnt_title: 'உங்கள் அடுத்த <span class="text-gold">பயணத்திற்கு தயாரா?</span>',
+                cnt_desc: "SKT டிராவல்ஸை தொடர்பு கொண்டு உங்கள் பயணத்தை உடனடியாக திட்டமிடுங்கள்.",
+                cnt_card_call: "அழைக்க",
+                cnt_card_wa: "வாட்ஸ்அப்",
+                cnt_card_wa_link: "வாட்ஸ்அப்பில் பேச",
+                cnt_card_loc: "இடம்",
+                cnt_card_loc_val: "தென்காசி, தமிழ்நாடு",
+                cnt_btn: "இப்போதே பதிவு செய்யுங்கள்",
+                footer_rights: "© 2026 SKT டிராவல்ஸ். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+                float_call: "அழைக்க",
+                float_wa: "வாட்ஸ்அப்",
+                float_book: "பதிவு"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ta' : 'en';
+            localStorage.setItem('skt_lang', currentLang);
+            applyLanguage(currentLang);
+        }
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            
+            document.getElementById('langLabelDesktop').textContent = t.lang_toggle;
+            document.getElementById('langLabelMobile').textContent = t.lang_toggle;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.innerHTML = t[key];
+                }
+            });
+
+            if (lang === 'ta') {
+                document.getElementById('name').placeholder = "உங்கள் பெயர்";
+                document.getElementById('phone').placeholder = "10 இலக்க செல்போன் எண்";
+                document.getElementById('pickup').placeholder = "எ.கா: தென்காசி";
+                document.getElementById('destination').placeholder = "எ.கா: மதுரை / கேரளா / மூணாறு";
+                document.getElementById('passengers').placeholder = "எ.கா: 4";
+                document.getElementById('requirements').placeholder = "புறப்படும் நேரம், கூடுதல் லக்கேஜ் மற்றும் பிற தகவல்கள்...";
+                document.getElementById('reviewRoute').placeholder = "எ.கா: தென்காசி to மூணாறு, கேரளா";
+                document.getElementById('reviewComment').placeholder = "வாகனம், ஓட்டுநரின் சேவை எவ்வாறு இருந்தது?";
+            } else {
+                document.getElementById('name').placeholder = "Your name";
+                document.getElementById('phone').placeholder = "10-digit mobile number";
+                document.getElementById('pickup').placeholder = "e.g., Tenkasi";
+                document.getElementById('destination').placeholder = "e.g., Madurai / Kerala / Munnar";
+                document.getElementById('passengers').placeholder = "e.g., 4";
+                document.getElementById('requirements').placeholder = "Pickup time, multiple destinations, extra luggage, special needs, etc.";
+                document.getElementById('reviewRoute').placeholder = "e.g. Tenkasi to Munnar, Kerala";
+                document.getElementById('reviewComment').placeholder = "How was the journey, driver punctuality, and vehicle comfort?";
+            }
+
+            lucide.createIcons();
+        }
+
+        const fleetData = [
+            {
+                id: 1,
+                name: "Premium Sedan",
+                image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=600",
+                seats: "4+1",
+                features: ["AC", "Comfortable", "Ideal for Couples"],
+                description: "Perfect for small families or couples seeking a comfortable and premium outstation travel experience across TN & Kerala."
+            },
+            {
+                id: 2,
+                name: "Luxury SUV",
+                image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=600",
+                seats: "6+1",
+                features: ["AC", "Spacious", "Premium Interior"],
+                description: "Spacious and powerful, ideal for family trips to hill stations like Munnar, Kodaikanal, and Ooty."
+            },
+            {
+                id: 3,
+                name: "Innova Crysta",
+                image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=600",
+                seats: "7+1",
+                features: ["AC", "Captain Seats", "High Comfort"],
+                description: "The ultimate choice for comfortable long-distance travel and premium family vacations."
+            },
+            {
+                id: 4,
+                name: "Traveller 12-Seater",
+                image: "https://images.unsplash.com/photo-1566008885218-90abf9200ddb?auto=format&fit=crop&q=80&w=600",
+                seats: "12",
+                features: ["AC", "Pushback Seats", "Group Travel"],
+                description: "Perfect for medium-sized groups, corporate outings, and temple pilgrimage trips."
+            },
+            {
+                id: 5,
+                name: "Traveller 17-Seater",
+                image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&q=80&w=600",
+                seats: "17",
+                features: ["AC", "Spacious", "Luggage Space"],
+                description: "Designed for larger groups requiring comfortable seating and ample luggage capacity."
+            },
+            {
+                id: 6,
+                name: "Premium Mini Bus",
+                image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=600",
+                seats: "20+",
+                features: ["AC", "Recliner Seats", "Large Groups"],
+                description: "Ideal for large family gatherings, school trips, and corporate events across Tamil Nadu and Kerala."
+            }
+        ];
+
+        const destinations = [
+            { name: "Tenkasi", desc: "Gateway to Western Ghats & Waterfalls", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=400" },
+            { name: "Munnar, Kerala", desc: "Tea Gardens & Misty Mountains", img: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&q=80&w=400" },
+            { name: "Kodaikanal", desc: "Princess of Hill Stations", img: "https://images.unsplash.com/photo-1598010963480-22c2b8c65039?auto=format&fit=crop&q=80&w=400" },
+            { name: "Alleppey, Kerala", desc: "Venice of the East & Backwaters", img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=400" },
+            { name: "Madurai", desc: "The Sacred Temple City", img: "https://images.unsplash.com/photo-1565622871630-8e453c4b6ed9?auto=format&fit=crop&q=80&w=400" },
+            { name: "Ooty", desc: "Queen of Hill Stations", img: "https://images.unsplash.com/photo-1589139257616-1b4a4b6b1f6d?auto=format&fit=crop&q=80&w=400" },
+            { name: "Kanyakumari", desc: "Land's End of India", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=400" }
+        ];
+
+        const initialReviews = [
+            {
+                name: "Happy Traveler",
+                route: "Tenkasi to Munnar, Kerala",
+                rating: 5,
+                comment: "Driver arrived 15 minutes before pickup time. Very safe driving through the Kerala ghat sections. Outstanding service!"
+            },
+            {
+                name: "Verified Traveler",
+                route: "Family Trip to Trivandrum & Kanyakumari",
+                rating: 5,
+                comment: "We booked the Innova Crysta for a 3-day trip across the border. Very gentle driving and patient driver. Highly recommended."
+            },
+            {
+                name: "Happy Traveler",
+                route: "Tenkasi to Madurai Airport",
+                rating: 5,
+                comment: "Great experience driving. The vehicle was spotlessly clean and sanitized. Will definitely book again!"
+            }
+        ];
+
+        // =========================================
+        // 3. INITIALIZATION
+        // =========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initConfig();
+            initFleet();
+            initDestinations();
+            initScrollAnimations();
+            initNavbar();
+            initCustomCursor();
+            initFloatingActions();
+            setMinDate();
+            initReviews();
+            applyLanguage(currentLang);
+        });
+
+        function initConfig() {
+            document.getElementById('instagramLink').href = SKT_CONFIG.instagram;
+            
+            const select = document.getElementById('vehicle');
+            fleetData.forEach(v => {
+                const option = document.createElement('option');
+                option.value = v.name;
+                option.textContent = v.name;
+                select.appendChild(option);
+            });
+        }
+
+        // =========================================
+        // 4. FLEET CAROUSEL
+        // =========================================
+        function initFleet() {
+            const track = document.getElementById('fleetTrack');
+            const dotsContainer = document.getElementById('fleetDots');
+            
+            fleetData.forEach((vehicle, index) => {
+                const card = document.createElement('div');
+                card.className = 'fleet-card';
+                card.innerHTML = `
+                    <img src="${vehicle.image}" alt="${vehicle.name}" class="fleet-img" loading="lazy">
+                    <div class="fleet-info">
+                        <h3 class="fleet-name">${vehicle.name}</h3>
+                        <div class="fleet-features">
+                            ${vehicle.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+                        <div class="fleet-actions">
+                            <span style="font-weight: 600; color: var(--navy);">${vehicle.seats} Seats</span>
+                            <button class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.85rem;" onclick="openFleetModal(${index})">View Details</button>
+                        </div>
+                    </div>
+                `;
+                track.appendChild(card);
+
+                const dot = document.createElement('div');
+                dot.className = `dot ${index === 0 ? 'active' : ''}`;
+                dot.onclick = () => scrollToCard(index);
+                dotsContainer.appendChild(dot);
+            });
+
+            document.getElementById('prevFleet').onclick = () => scrollTrack(-1);
+            document.getElementById('nextFleet').onclick = () => scrollTrack(1);
+
+            track.addEventListener('scroll', () => {
+                const scrollLeft = track.scrollLeft;
+                const cardWidth = track.querySelector('.fleet-card').offsetWidth + 24;
+                const activeIndex = Math.round(scrollLeft / cardWidth);
+                updateDots(activeIndex);
+            });
+        }
+
+        function scrollTrack(direction) {
+            const track = document.getElementById('fleetTrack');
+            const cardWidth = track.querySelector('.fleet-card').offsetWidth + 24;
+            track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+        }
+
+        function scrollToCard(index) {
+            const track = document.getElementById('fleetTrack');
+            const cardWidth = track.querySelector('.fleet-card').offsetWidth + 24;
+            track.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+        }
+
+        function updateDots(activeIndex) {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        }
+
+        function openFleetModal(index) {
+            const vehicle = fleetData[index];
+            document.getElementById('modalImg').src = vehicle.image;
+            document.getElementById('modalName').textContent = vehicle.name;
+            document.getElementById('modalDesc').textContent = vehicle.description;
+            document.getElementById('modalFeatures').innerHTML = vehicle.features.map(f => `<span class="feature-tag">${f}</span>`).join('');
+            
+            const bookBtn = document.getElementById('modalBookBtn');
+            bookBtn.onclick = () => {
+                closeFleetModal();
+                document.getElementById('vehicle').value = vehicle.name;
+                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+            };
+            
+            document.getElementById('fleetModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFleetModal() {
+            document.getElementById('fleetModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('closeModal').onclick = closeFleetModal;
+        document.getElementById('fleetModal').onclick = (e) => {
+            if (e.target.id === 'fleetModal') closeFleetModal();
+        };
+
+        // =========================================
+        // 5. DESTINATIONS
+        // =========================================
+        function initDestinations() {
+            const track = document.getElementById('destTrack');
+            destinations.forEach(dest => {
+                const card = document.createElement('div');
+                card.className = 'dest-card';
+                card.innerHTML = `
+                    <img src="${dest.img}" alt="${dest.name}" loading="lazy">
+                    <div class="dest-overlay">
+                        <h3 style="font-size: 1.25rem; font-weight: 700;">${dest.name}</h3>
+                        <p style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.75rem;">${dest.desc}</p>
+                        <a href="#booking" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem; width: fit-content;">Explore</a>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
+        }
+
+        // =========================================
+        // 6. BOOKING FORM & WHATSAPP
+        // =========================================
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('travelDate').min = today;
+            document.getElementById('returnDate').min = today;
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            const requiredFields = ['name', 'phone', 'pickup', 'destination', 'travelDate', 'passengers'];
+            
+            requiredFields.forEach(id => {
+                const field = document.getElementById(id);
+                const group = field.parentElement;
+                if (!field.value.trim()) {
+                    group.classList.add('error');
+                    isValid = false;
+                } else {
+                    group.classList.remove('error');
+                }
+            });
+
+            const phone = document.getElementById('phone').value;
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById('phone').parentElement.classList.add('error');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            const name = document.getElementById('name').value;
+            const phoneVal = document.getElementById('phone').value;
+            const pickup = document.getElementById('pickup').value;
+            const destination = document.getElementById('destination').value;
+            const travelDate = document.getElementById('travelDate').value;
+            const returnDate = document.getElementById('returnDate').value || 'Not specified';
+            const passengers = document.getElementById('passengers').value;
+            const vehicle = document.getElementById('vehicle').value;
+            const requirements = document.getElementById('requirements').value || 'None';
+
+            const message = currentLang === 'ta'
+                ? `வணக்கம் SKT டிராவல்ஸ்,%0A%0Aநான் ஒரு பயணம் குறித்து விசாரிக்க விரும்புகிறேன்.%0A%0A*பெயர்:* ${name}%0A*தொலைபேசி:* ${phoneVal}%0A*புறப்படும் இடம்:* ${pickup}%0A*செல்லுமிடம்:* ${destination}%0A*பயண தேதி:* ${travelDate}%0A*திரும்பும் தேதி:* ${returnDate}%0A*பயணிகள்:* ${passengers}%0A*வாகனம்:* ${vehicle}%0A*கூடுதல் தகவல்கள்:*%0A${requirements}%0A%0Aநன்றி.`
+                : `Hello SKT Travels,%0A%0AI would like to enquire about a trip.%0A%0A*Name:* ${name}%0A*Phone:* ${phoneVal}%0A*Pickup Location:* ${pickup}%0A*Destination:* ${destination}%0A*Travel Date:* ${travelDate}%0A*Return Date:* ${returnDate}%0A*Passengers:* ${passengers}%0A*Vehicle:* ${vehicle}%0A*Additional Requirements:*%0A${requirements}%0A%0AThank you.`;
+
+            const waUrl = `https://wa.me/${SKT_CONFIG.whatsapp}?text=${message}`;
+            window.open(waUrl, '_blank');
+            this.reset();
+            alert(currentLang === 'ta' ? 'உங்கள் பயண விவரங்கள் தயாராக உள்ளன. வாட்ஸ்அப் திறக்கப்படும்.' : 'Your booking details are ready. WhatsApp will open now.');
+        });
+
+        document.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                this.parentElement.classList.remove('error');
+            });
+        });
+
+        // =========================================
+        // 7. REVIEWS & COMMENTS (SUPABASE BACKEND)
+        // =========================================
+        function initReviews() {
+            setupStarSelector();
+            fetchAndRenderReviews();
+
+            document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const defaultName = currentLang === 'ta' ? "பயணி" : "Verified Traveler";
+                const defaultRoute = currentLang === 'ta' ? "தமிழ்நாடு & கேரளா பயணம்" : "TN & Kerala Tour";
+                
+                const route = document.getElementById('reviewRoute').value.trim() || defaultRoute;
+                const rating = parseInt(document.getElementById('reviewRating').value) || 5;
+                const comment = document.getElementById('reviewComment').value.trim();
+
+                const submitBtn = document.getElementById('reviewSubmitBtn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = currentLang === 'ta' ? 'பதிவாகிறது...' : 'Posting...';
+
+                try {
+                    if (supabaseClient) {
+                        const { error } = await supabaseClient
+                            .from('reviews')
+                            .insert([{ name: defaultName, route, rating, comment }]);
+                        if (error) throw error;
+                    } else {
+                        const stored = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
+                        stored.unshift({ name: defaultName, route, rating, comment, created_at: new Date().toISOString() });
+                        localStorage.setItem('skt_reviews', JSON.stringify(stored));
+                    }
+
+                    document.getElementById('reviewForm').reset();
+                    document.getElementById('reviewRating').value = 5;
+                    updateStarsUI(5);
+                    await fetchAndRenderReviews();
+                    alert(currentLang === 'ta' ? 'உங்கள் கருத்துக்கு மிக்க நன்றி!' : 'Thank you for sharing your feedback!');
+                } catch (err) {
+                    console.error('Error posting review:', err);
+                    alert(currentLang === 'ta' ? 'கருத்தை பதிவிட முடியவில்லை. மீண்டும் முயற்சிக்கவும்.' : 'Failed to post review. Please try again.');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentLang === 'ta' ? 'கருத்தை பதிவு செய்க' : 'Post Review';
+                }
+            });
+        }
+
+        function setupStarSelector() {
+            const stars = document.querySelectorAll('#starSelector svg');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const r = parseInt(this.getAttribute('data-rating'));
+                    document.getElementById('reviewRating').value = r;
+                    updateStarsUI(r);
+                });
+            });
+            updateStarsUI(5);
+        }
+
+        function updateStarsUI(rating) {
+            const stars = document.querySelectorAll('#starSelector svg');
+            stars.forEach(star => {
+                const r = parseInt(star.getAttribute('data-rating'));
+                if (r <= rating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+
+        async function fetchAndRenderReviews() {
+            const feed = document.getElementById('reviewsFeed');
+            let reviewsList = [];
+
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('reviews')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    if (!error && data && data.length > 0) {
+                        reviewsList = data;
+                    }
+                } catch (err) {
+                    console.warn('Could not read from Supabase', err);
+                }
+            }
+
+            if (reviewsList.length === 0) {
+                const stored = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
+                reviewsList = stored.length ? stored : initialReviews;
+            }
+
+            feed.innerHTML = '';
+            reviewsList.forEach(r => {
+                const item = document.createElement('div');
+                item.className = 'review-item';
+                const starsMarkup = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+                item.innerHTML = `
+                    <div class="review-header">
+                        <div>
+                            <span class="reviewer-meta">${escapeHtml(r.name || 'Verified Traveler')}</span>
+                            <span class="reviewer-route">${escapeHtml(r.route || 'Outstation Trip')}</span>
+                        </div>
+                        <span class="stars-display">${starsMarkup}</span>
+                    </div>
+                    <p class="review-comment">"${escapeHtml(r.comment)}"</p>
+                `;
+                feed.appendChild(item);
+            });
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/[&<>"']/g, m => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            })[m]);
+        }
+
+        // =========================================
+        // 8. UI INTERACTIONS
+        // =========================================
+        function initNavbar() {
+            const navbar = document.getElementById('navbar');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMenu = document.getElementById('closeMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            }
+
+            mobileMenuBtn.onclick = toggleMenu;
+            closeMenu.onclick = toggleMenu;
+            overlay.onclick = toggleMenu;
+            mobileLinks.forEach(link => link.onclick = toggleMenu);
+        }
+
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                const heroBg = document.getElementById('heroBg');
+                if (scrolled < window.innerHeight) {
+                    heroBg.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
+                }
+            });
+        }
+
+        function initCustomCursor() {
+            if (window.matchMedia("(hover: none)").matches) return;
+            
+            const dot = document.querySelector('.cursor-dot');
+            const outline = document.querySelector('.cursor-outline');
+
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                dot.style.left = `${posX}px`;
+                dot.style.top = `${posY}px`;
+
+                outline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+
+            const hoverables = document.querySelectorAll('a, button, .fleet-card, .gallery-item');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => outline.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => outline.classList.remove('hovered'));
+            });
+        }
+
+        function initFloatingActions() {
+            const floatingActions = document.getElementById('floatingActions');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    floatingActions.classList.add('visible');
+                } else {
+                    floatingActions.classList.remove('visible');
+                }
+            });
+        }
+
+        // =========================================
+        // 9. LIGHTBOX
+        // =========================================
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
