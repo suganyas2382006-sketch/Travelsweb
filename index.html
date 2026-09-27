@@ -42,7 +42,7 @@
             -webkit-tap-highlight-color: transparent !important;
         }
 
-        a, button, input, select, textarea, .fleet-card, .dest-card, .qc-item, .float-btn {
+        a, button, input, select, textarea, .fleet-card, .dest-card, .qc-item {
             -webkit-tap-highlight-color: transparent !important;
             outline: none;
         }
@@ -600,7 +600,6 @@
         .section-subtitle:hover::before,
         .section-subtitle:hover::after { width: 45px; }
 
-        /* About check items */
         .about-box ul li {
             transition: var(--transition-smooth);
             padding: 0.3rem 0.5rem;
@@ -738,7 +737,7 @@
         .modal-body { padding: 1.5rem; }
 
         /* =========================================
-           7. WHY CHOOSE US (In Between Fleet & Destinations)
+           7. WHY CHOOSE US
            ========================================= */
         .stats-row {
             display: grid;
@@ -775,7 +774,7 @@
         }
 
         /* =========================================
-           8. DESTINATIONS (Dest1.jpg to Dest13.png)
+           8. DESTINATIONS
            ========================================= */
         .destinations-track {
             display: flex;
@@ -848,7 +847,7 @@
            ========================================= */
         #booking {
             background: #f1f5f9;
-            padding-bottom: 6rem;
+            padding-bottom: 4rem;
         }
         .booking-form {
             background: var(--white);
@@ -923,7 +922,7 @@
         .form-group.error .error-msg { display: block; }
 
         /* =========================================
-           10. GALLERY (Travel1.jpg to Travel6.jpg)
+           10. GALLERY
            ========================================= */
         .gallery-grid {
             display: grid;
@@ -1028,7 +1027,7 @@
         .lightbox-close:hover { background: #ef4444; transform: rotate(90deg); }
 
         /* =========================================
-           11. REVIEWS SECTION & ACCORDION (Centered)
+           11. REVIEWS SECTION & ACCORDION
            ========================================= */
         .reviews-section {
             background: #0d1b2e;
@@ -1078,7 +1077,6 @@
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.08);
         }
         
-        /* Proportional Pill Trigger Button */
         .review-toggle-btn {
             width: auto;
             min-width: 200px;
@@ -1281,58 +1279,15 @@
 
         footer {
             background: #050d1a;
-            padding: 2rem 0 6rem;
+            padding: 2.5rem 0;
             color: var(--text-muted);
             font-size: 0.85rem;
             border-top: 1px solid rgba(255,255,255,0.08);
             text-align: center;
         }
-        @media (min-width: 768px) {
-            footer { padding: 2rem 0; }
-        }
 
         /* =========================================
-           13. FLOATING MOBILE ACTIONS
-           ========================================= */
-        .floating-actions {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            background: var(--white);
-            padding: 0.6rem 0.8rem;
-            display: flex;
-            gap: 0.5rem;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-            z-index: 999;
-            backdrop-filter: blur(8px);
-        }
-        .float-btn {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
-            padding: 0.7rem 0.4rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            transition: var(--transition-smooth);
-        }
-        .float-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .float-call { background: var(--navy); color: var(--white); }
-        .float-wa { background: #25D366; color: var(--white); }
-        .float-book { background: var(--gold); color: var(--navy); }
-
-        @media (min-width: 768px) {
-            .floating-actions { display: none; }
-        }
-
-        /* =========================================
-           14. SCROLL REVEAL ANIMATIONS
+           13. SCROLL REVEAL ANIMATIONS
            ========================================= */
         .reveal {
             opacity: 0;
@@ -1371,7 +1326,6 @@
             transform: scale(1);
         }
         
-        /* Stagger children */
         .stagger-children > * {
             opacity: 0;
             transform: translateY(20px);
@@ -1385,7 +1339,7 @@
         .stagger-children.visible > *:nth-child(6) { transition-delay: 0.55s; opacity: 1; transform: translateY(0); }
 
         /* =========================================
-           15. MISC ENHANCEMENTS
+           14. MISC ENHANCEMENTS
            ========================================= */
         @keyframes pulseGlow {
             0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
@@ -1393,7 +1347,6 @@
         }
         .pulse-glow { animation: pulseGlow 2.5s ease-out infinite; }
 
-        /* Smooth scrollbar */
         ::-webkit-scrollbar { width: 10px; height: 10px; }
         ::-webkit-scrollbar-track { background: #0A192F; }
         ::-webkit-scrollbar-thumb { 
@@ -1402,13 +1355,11 @@
         }
         ::-webkit-scrollbar-thumb:hover { background: #B5952F; }
 
-        /* Selection color */
         ::selection {
             background: var(--gold);
             color: var(--navy);
         }
 
-        /* Language change smooth font transition */
         [data-i18n] {
             transition: opacity 0.35s ease, color 0.3s ease;
         }
@@ -1484,7 +1435,7 @@
         </div>
     </section>
 
-    <!-- Quick Contact Bar (Centered & Snug Box) -->
+    <!-- Quick Contact Bar -->
     <div class="quick-contact-wrapper">
         <div class="quick-contact">
             <a href="tel:9840708764" class="qc-item">
@@ -1517,7 +1468,7 @@
         </div>
     </div>
 
-    <!-- About Section (Centered Intro, No Button) -->
+    <!-- About Section -->
     <section class="section-padding" id="about">
         <div class="container">
             <div class="about-box">
@@ -1533,7 +1484,7 @@
         </div>
     </section>
 
-    <!-- 1. FLEET SECTION (Car1.png to Car4.png - Clean Cards) -->
+    <!-- Fleet Section -->
     <section class="section-padding bg-charcoal" id="fleet">
         <div class="container">
             <div class="text-center reveal" style="margin-bottom: 2.5rem;">
@@ -1562,7 +1513,7 @@
         </div>
     </div>
 
-    <!-- 2. WHY CHOOSE US (In Between Fleet & Destinations) -->
+    <!-- Why Choose Us -->
     <section class="section-padding bg-navy" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
         <div class="container">
             <div class="text-center reveal" style="margin-bottom: 2rem;">
@@ -1589,7 +1540,7 @@
         </div>
     </section>
 
-    <!-- 3. DESTINATIONS (Dest1.jpg to Dest13.png) -->
+    <!-- Destinations -->
     <section class="section-padding bg-charcoal" id="destinations">
         <div class="container">
             <div class="text-center reveal" style="margin-bottom: 2.5rem;">
@@ -1669,7 +1620,7 @@
         </div>
     </section>
 
-    <!-- Gallery (Travel1.jpg to Travel6.jpg) -->
+    <!-- Gallery -->
     <section class="section-padding" id="gallery">
         <div class="container">
             <div class="text-center reveal" style="margin-bottom: 2.25rem;">
@@ -1705,7 +1656,7 @@
         <img src="" alt="Gallery Image" id="lightboxImg">
     </div>
 
-    <!-- REVIEWS SECTION -->
+    <!-- Reviews Section -->
     <section class="section-padding reviews-section" id="reviews">
         <div class="container">
             <div class="text-center reveal">
@@ -1716,14 +1667,12 @@
 
             <div class="reviews-wrapper">
                 <div class="review-form-card reveal">
-                    <!-- Compact Pill Button Trigger -->
                     <button type="button" class="review-toggle-btn" id="reviewToggleBtn">
                         <i data-lucide="edit-3" size="18"></i> 
                         <span data-i18n="rev_form_title">Write a Review</span>
                         <i data-lucide="chevron-down" size="18" class="toggle-icon"></i>
                     </button>
 
-                    <!-- Collapsible Container (Appears when toggled) -->
                     <div class="review-collapsible-content" id="reviewCollapsibleContent">
                         <form id="reviewForm">
                             <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_name_label">Your Name *</label>
@@ -1815,19 +1764,6 @@
             <p data-i18n="footer_rights">&copy; 2026 SKT Travels. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- Floating Mobile Actions -->
-    <div class="floating-actions" id="floatingActions">
-        <a href="tel:9840708764" class="float-btn float-call">
-            <i data-lucide="phone" size="16"></i> <span data-i18n="float_call">Call</span>
-        </a>
-        <a href="https://wa.me/919840708764" target="_blank" class="float-btn float-wa">
-            <i data-lucide="message-circle" size="16"></i> <span data-i18n="float_wa">WhatsApp</span>
-        </a>
-        <a href="#booking" class="float-btn float-book">
-            <i data-lucide="calendar" size="16"></i> <span data-i18n="float_book">Book</span>
-        </a>
-    </div>
 
     <!-- JavaScript -->
     <script>
@@ -1933,10 +1869,7 @@
                 cnt_card_wa: "WhatsApp",
                 cnt_card_loc: "Tenkasi",
                 cnt_btn: "Book Your Trip Now",
-                footer_rights: "© 2026 SKT Travels. All rights reserved.",
-                float_call: "Call",
-                float_wa: "WhatsApp",
-                float_book: "Book"
+                footer_rights: "© 2026 SKT Travels. All rights reserved."
             },
             ta: {
                 lang_toggle: "English",
@@ -2014,10 +1947,7 @@
                 cnt_card_wa: "வாட்ஸ்அப்",
                 cnt_card_loc: "தென்காசி",
                 cnt_btn: "இப்போதே பதிவு செய்யுங்கள்",
-                footer_rights: "© 2026 SKT டிராவல்ஸ். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
-                float_call: "அழைக்க",
-                float_wa: "வாட்ஸ்அப்",
-                float_book: "பதிவு"
+                footer_rights: "© 2026 SKT டிராவல்ஸ். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."
             }
         };
 
@@ -2036,7 +1966,6 @@
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (t[key]) {
-                    // Smooth font transition during language swap
                     el.style.opacity = '0.4';
                     setTimeout(() => {
                         el.innerHTML = t[key];
@@ -2069,7 +1998,7 @@
         }
 
         // =========================================
-        // 3. FLEET DATA (4 VEHICLES: Swift, Force, Innova, Crysta)
+        // 3. FLEET DATA
         // =========================================
         const fleetData = [
             {
@@ -2107,7 +2036,7 @@
         ];
 
         // =========================================
-        // 4. DESTINATIONS (Exact Local Filenames)
+        // 4. DESTINATIONS
         // =========================================
         const destinations = [
             { name: "Tenkasi", desc: "Kasi Viswanathar Temple & Courtallam Falls", img: "Dest1.jpg" },
@@ -2477,7 +2406,6 @@
             overlay.onclick = toggleMenu;
             mobileLinks.forEach(link => link.onclick = toggleMenu);
 
-            // Scroll-triggered navbar enhancement
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
@@ -2509,7 +2437,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // Re-trigger lucide icons for newly revealed content
                         setTimeout(() => lucide.createIcons(), 100);
                     }
                 });
