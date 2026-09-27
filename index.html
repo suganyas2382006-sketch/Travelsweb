@@ -250,7 +250,7 @@
         .overlay.active { opacity: 1; pointer-events: all; }
 
         /* =========================================
-           3. HERO SECTION (banner1.png)
+           3. HERO SECTION (banner1.png Robust Fallback)
            ========================================= */
         .hero {
             position: relative;
@@ -261,14 +261,19 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: var(--navy);
+            background-color: var(--navy);
         }
         .hero-bg {
             position: absolute;
             inset: 0;
-            background: linear-gradient(rgba(10, 25, 47, 0.78), rgba(10, 25, 47, 0.88)), 
-                        url('banner1.png') center/cover no-repeat;
-            transform: scale(1.05);
+            background-color: var(--navy);
+            background-image: linear-gradient(rgba(10, 25, 47, 0.65), rgba(10, 25, 47, 0.75)), 
+                              url('./banner1.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transform: scale(1.02);
+            z-index: 1;
         }
         .hero-content {
             position: relative;
@@ -906,7 +911,7 @@
         <a href="#booking" class="btn btn-primary mobile-link" style="width: 100%; text-align: center;" data-i18n="nav_book">Book Your Trip</a>
     </div>
 
-    <!-- Hero Section (Banner1.png) -->
+    <!-- Hero Section (banner1.png) -->
     <section class="hero" id="home">
         <div class="hero-bg"></div>
         <div class="hero-content">
@@ -1004,7 +1009,7 @@
         </div>
     </div>
 
-    <!-- 2. WHY CHOOSE US (Relocated in Between Fleet & Destinations) -->
+    <!-- 2. WHY CHOOSE US (In Between Fleet & Destinations) -->
     <section class="section-padding bg-navy" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2rem;">
