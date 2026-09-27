@@ -250,7 +250,7 @@
         .overlay.active { opacity: 1; pointer-events: all; }
 
         /* =========================================
-           3. HERO SECTION
+           3. HERO SECTION (Banner1.png)
            ========================================= */
         .hero {
             position: relative;
@@ -267,7 +267,7 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(rgba(10, 25, 47, 0.78), rgba(10, 25, 47, 0.88)), 
-                        url('Car1.png') center/cover no-repeat;
+                        url('Banner1.png') center/cover no-repeat;
             transform: scale(1.05);
         }
         .hero-content {
@@ -361,25 +361,10 @@
         /* =========================================
            5. ABOUT SECTION
            ========================================= */
-        .about-grid {
-            display: grid;
-            gap: 2.5rem;
-            align-items: center;
-        }
-        @media (min-width: 768px) {
-            .about-grid { grid-template-columns: 1fr 1fr; }
-        }
-        .about-image {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            max-height: 400px;
-        }
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .about-box {
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
         }
         .section-title {
             font-size: clamp(1.6rem, 3.5vw, 2.3rem);
@@ -399,7 +384,7 @@
         }
 
         /* =========================================
-           6. FLEET SECTION (4 CARS)
+           6. FLEET SECTION (Car1.png to Car4.png)
            ========================================= */
         .fleet-container {
             position: relative;
@@ -503,7 +488,35 @@
         .modal-body { padding: 1.5rem; }
 
         /* =========================================
-           7. DESTINATIONS
+           7. WHY CHOOSE US (Positioned in Between)
+           ========================================= */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .stat-item {
+            padding: 0.5rem 0.25rem;
+        }
+        .stat-item h3 {
+            font-size: clamp(1.25rem, 3.5vw, 2.2rem);
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+            line-height: 1;
+        }
+        .stat-item p {
+            color: var(--text-muted);
+            font-size: clamp(0.7rem, 1.8vw, 0.88rem);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* =========================================
+           8. DESTINATIONS (13 SPOTS)
            ========================================= */
         .destinations-track {
             display: flex;
@@ -541,7 +554,7 @@
         }
 
         /* =========================================
-           8. BOOKING FORM
+           9. BOOKING FORM
            ========================================= */
         #booking {
             background: #f1f5f9;
@@ -591,34 +604,6 @@
         }
         .form-group.error input, .form-group.error select { border-color: #ef4444; }
         .form-group.error .error-msg { display: block; }
-
-        /* =========================================
-           9. WHY CHOOSE US
-           ========================================= */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .stat-item {
-            padding: 0.5rem 0.25rem;
-        }
-        .stat-item h3 {
-            font-size: clamp(1.25rem, 3.5vw, 2.2rem);
-            font-weight: 800;
-            color: var(--gold);
-            margin-bottom: 0.25rem;
-            line-height: 1;
-        }
-        .stat-item p {
-            color: var(--text-muted);
-            font-size: clamp(0.7rem, 1.8vw, 0.88rem);
-            font-weight: 600;
-            line-height: 1.2;
-        }
 
         /* =========================================
            10. GALLERY (Travel1.png to Travel6.png)
@@ -921,7 +906,7 @@
         <a href="#booking" class="btn btn-primary mobile-link" style="width: 100%; text-align: center;" data-i18n="nav_book">Book Your Trip</a>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Banner1.png) -->
     <section class="hero" id="home">
         <div class="hero-bg"></div>
         <div class="hero-content">
@@ -971,29 +956,26 @@
         </div>
     </div>
 
-    <!-- About Section (About.png) -->
+    <!-- About Section (No Image, Centered) -->
     <section class="section-padding" id="about">
         <div class="container">
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="About.png" alt="SKT Travels Vehicle" loading="lazy">
-                </div>
+            <div class="about-box">
+                <span class="section-subtitle" data-i18n="about_subtitle">About Us</span>
+                <h2 class="section-title" data-i18n="about_title">Travel Across Tamil Nadu & Kerala With <span class="text-gold">SKT Travels</span></h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1rem;" data-i18n="about_desc">Based in the scenic town of Tenkasi, SKT Travels provides comfortable, reliable, and premium transportation services throughout Tamil Nadu and Kerala. Whether it's a family pilgrimage, an outstation trip, or a custom tourist itinerary, we ensure a smooth and safe drive.</p>
+                <ul style="list-style: none; display: inline-flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; text-align: left;">
+                    <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f1">Experienced & Professional Drivers</span></li>
+                    <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f2">Well-Maintained, Sanitized Vehicles</span></li>
+                    <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f3">Flexible Custom Travel Requirements</span></li>
+                </ul>
                 <div>
-                    <span class="section-subtitle" data-i18n="about_subtitle">About Us</span>
-                    <h2 class="section-title" data-i18n="about_title">Travel Across Tamil Nadu & Kerala With <span class="text-gold">SKT Travels</span></h2>
-                    <p style="margin-bottom: 1.25rem; color: var(--text-muted);" data-i18n="about_desc">Based in the scenic town of Tenkasi, SKT Travels provides comfortable, reliable, and premium transportation services throughout Tamil Nadu and Kerala. Whether it's a family pilgrimage, an outstation trip, or a custom tourist itinerary, we ensure a smooth and safe drive.</p>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.75rem;">
-                        <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f1">Experienced & Professional Drivers</span></li>
-                        <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f2">Well-Maintained, Sanitized Vehicles</span></li>
-                        <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f3">Flexible Custom Travel Requirements</span></li>
-                    </ul>
                     <a href="#contact" class="btn btn-primary" data-i18n="about_btn">Get in Touch</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Fleet Section (Car1.png to Car4.png) -->
+    <!-- 1. FLEET SECTION (Car1.png to Car4.png) -->
     <section class="section-padding bg-charcoal" id="fleet">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2.5rem;">
@@ -1022,8 +1004,35 @@
         </div>
     </div>
 
-    <!-- Destinations -->
-    <section class="section-padding bg-navy" id="destinations">
+    <!-- 2. WHY CHOOSE US (Relocated in Between Fleet & Destinations) -->
+    <section class="section-padding bg-navy" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 2rem;">
+                <h2 class="section-title" style="color: var(--white); font-size: clamp(1.4rem, 3vw, 2rem);" data-i18n="why_title">Why Choose <span class="text-gold">SKT Travels</span></h2>
+            </div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <h3>4+</h3>
+                    <p data-i18n="stat_1">Premium Vehicles</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p data-i18n="stat_2">TN & Kerala</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p data-i18n="stat_3">Call Support</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5★</h3>
+                    <p data-i18n="stat_4">Top Rated</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. DESTINATIONS (13 SPOTS) -->
+    <section class="section-padding bg-charcoal" id="destinations">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2.5rem;">
                 <span class="section-subtitle" data-i18n="dest_subtitle">Destinations</span>
@@ -1102,34 +1111,7 @@
         </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="section-padding bg-navy">
-        <div class="container">
-            <div class="text-center" style="margin-bottom: 2rem;">
-                <h2 class="section-title" style="color: var(--white); font-size: clamp(1.4rem, 3vw, 2rem);" data-i18n="why_title">Why Choose <span class="text-gold">SKT Travels</span></h2>
-            </div>
-            <div class="stats-row">
-                <div class="stat-item">
-                    <h3>4+</h3>
-                    <p data-i18n="stat_1">Premium Vehicles</p>
-                </div>
-                <div class="stat-item">
-                    <h3>100%</h3>
-                    <p data-i18n="stat_2">TN & Kerala</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p data-i18n="stat_3">Call Support</p>
-                </div>
-                <div class="stat-item">
-                    <h3>5★</h3>
-                    <p data-i18n="stat_4">Top Rated</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery (Travel1.png to Travel6.png in order) -->
+    <!-- Gallery (Travel1.png to Travel6.png) -->
     <section class="section-padding" id="gallery">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2.25rem;">
@@ -1342,6 +1324,11 @@
                 fleet_title: 'Choose Your <span class="text-gold">Comfort</span>',
                 fleet_desc: "Air-conditioned, clean, and reliable vehicles suited for every group size.",
                 modal_book_btn: "Book This Vehicle",
+                why_title: 'Why Choose <span class="text-gold">SKT Travels</span>',
+                stat_1: "Premium Vehicles",
+                stat_2: "TN & Kerala",
+                stat_3: "Call Support",
+                stat_4: "Top Rated",
                 dest_subtitle: "Destinations",
                 dest_title: 'Explore <span class="text-gold">Tamil Nadu, Kerala & Beyond</span>',
                 book_subtitle: "Book Now",
@@ -1365,11 +1352,6 @@
                 form_err_dest: "Please enter destination",
                 form_err_date: "Please select a travel date",
                 form_err_passengers: "Please enter valid passenger count",
-                why_title: 'Why Choose <span class="text-gold">SKT Travels</span>',
-                stat_1: "Premium Vehicles",
-                stat_2: "TN & Kerala",
-                stat_3: "Call Support",
-                stat_4: "Top Rated",
                 gallery_subtitle: "Gallery",
                 gallery_title: 'Travel <span class="text-gold">Moments</span>',
                 rev_subtitle: "Traveler Testimonials",
@@ -1425,6 +1407,11 @@
                 fleet_title: 'உங்கள் <span class="text-gold">வாகனத்தை</span> தேர்வு செய்க',
                 fleet_desc: "குடும்பத்தினர் மற்றும் குழுக்களுக்கு ஏற்ற வகையில் குளிரூட்டப்பட்ட சொகுசு கார்கள் மற்றும் வேன்கள்.",
                 modal_book_btn: "இந்த வாகனத்தை தேர்வு செய்க",
+                why_title: 'ஏன் <span class="text-gold">SKT டிராவல்ஸ்?</span>',
+                stat_1: "சொகுசு வாகனங்கள்",
+                stat_2: "TN & கேரளா",
+                stat_3: "தொலைபேசி உதவி",
+                stat_4: "சிறந்த சேவை",
                 dest_subtitle: "சுற்றுலா இடங்கள்",
                 dest_title: 'தமிழ்நாடு, கேரளா & பிற <span class="text-gold">இடங்கள்</span>',
                 book_subtitle: "முன்பதிவு",
@@ -1448,11 +1435,6 @@
                 form_err_dest: "செல்ல வேண்டிய இடத்தை உள்ளிடவும்",
                 form_err_date: "பயண தேதியை தேர்வு செய்யவும்",
                 form_err_passengers: "பயணிகள் எண்ணிக்கையை உள்ளிடவும்",
-                why_title: 'ஏன் <span class="text-gold">SKT டிராவல்ஸ்?</span>',
-                stat_1: "சொகுசு வாகனங்கள்",
-                stat_2: "TN & கேரளா",
-                stat_3: "தொலைபேசி உதவி",
-                stat_4: "சிறந்த சேவை",
                 gallery_subtitle: "புகைப்படங்கள்",
                 gallery_title: 'பயண <span class="text-gold">நினைவுகள்</span>',
                 rev_subtitle: "பயணிகள் கருத்துகள்",
