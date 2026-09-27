@@ -28,12 +28,11 @@
             --gold: #D4AF37;
             --gold-hover: #B5952F;
             --gold-light: rgba(212, 175, 55, 0.1);
-            --gold-glow: rgba(212, 175, 55, 0.25);
             --text-muted: #94A3B8;
             --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+            --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
             --shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
-            --shadow-hover: 0 20px 40px -10px rgba(2, 12, 27, 0.15);
             --radius: 12px;
         }
 
@@ -77,33 +76,23 @@
             margin: 0 auto;
             padding: 0 1.25rem;
         }
-        .section-padding { padding: 5rem 0; }
+        .section-padding { padding: 4rem 0; }
         .text-center { text-align: center; }
         .text-gold { color: var(--gold); }
         
+        /* Enhanced Background Graphics */
         .bg-navy { 
             background-color: var(--navy); 
             color: var(--white); 
-            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 40%);
         }
         .bg-charcoal { 
             background-color: var(--charcoal); 
             color: var(--white); 
-            position: relative;
-        }
-        /* Premium subtle dot grid texture for dark sections */
-        .bg-navy::before, .bg-charcoal::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
-            background-size: 32px 32px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .bg-navy .container, .bg-charcoal .container {
-            position: relative;
-            z-index: 1;
+            background-image: 
+                radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.03) 0%, transparent 30%);
         }
         
         .btn {
@@ -111,7 +100,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            padding: 0.7rem 1.4rem;
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
@@ -137,27 +126,27 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.6s ease;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
         }
         .btn-primary:hover::after {
             left: 100%;
         }
         .btn-primary:hover {
             background-color: var(--gold-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px var(--gold-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.5);
         }
         .btn-outline {
-            border-color: rgba(255,255,255,0.3);
-            color: var(--white);
+            border-color: var(--gold);
+            color: var(--gold);
             background: transparent;
         }
         .btn-outline:hover {
-            background-color: var(--white);
+            background-color: var(--gold);
             color: var(--navy);
-            border-color: var(--white);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.3);
         }
 
         .lang-btn {
@@ -181,7 +170,7 @@
             background: var(--gold);
             color: var(--navy);
             border-color: var(--gold);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
         /* =========================================
@@ -203,7 +192,7 @@
         .navbar.scrolled {
             padding: 0.6rem 0;
             background: rgba(10, 25, 47, 0.95);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         .nav-container {
             display: flex;
@@ -212,7 +201,7 @@
             gap: 1rem;
         }
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 800;
             color: var(--white);
             text-decoration: none;
@@ -246,7 +235,7 @@
             width: 0;
             height: 2px;
             background: var(--gold);
-            transition: width 0.3s var(--anim-ease);
+            transition: width 0.3s var(--ease-out);
         }
         .nav-links a:not(.btn):hover { color: var(--gold); }
         .nav-links a:not(.btn):hover::after { width: 100%; }
@@ -267,9 +256,9 @@
             align-items: center;
             justify-content: center;
             padding: 0.25rem;
-            transition: transform 0.2s ease;
+            transition: var(--transition);
         }
-        .mobile-menu-btn:active { transform: scale(0.9); }
+        .mobile-menu-btn:hover { transform: scale(1.1); color: var(--gold); }
 
         @media (min-width: 992px) {
             .nav-links { display: flex; }
@@ -288,8 +277,8 @@
             background: var(--navy);
             z-index: 1001;
             padding: 4.5rem 1.75rem 2rem;
-            transition: right 0.4s var(--anim-ease);
-            box-shadow: -10px 0 40px rgba(0,0,0,0.6);
+            transition: right 0.4s var(--ease-out);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -306,47 +295,39 @@
             text-decoration: none;
             font-size: 1.15rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             transition: var(--transition);
+            display: inline-block;
         }
-        .mobile-menu-links a:hover { color: var(--gold); transform: translateX(4px); }
+        .mobile-menu-links a:hover { color: var(--gold); transform: translateX(5px); }
         .close-menu {
             position: absolute;
             top: 1.25rem;
             right: 1.25rem;
-            background: rgba(255,255,255,0.05);
+            background: none;
             border: none;
             color: var(--white);
             cursor: pointer;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: var(--transition);
         }
-        .close-menu:hover { background: rgba(255,255,255,0.1); }
+        .close-menu:hover { color: var(--gold); transform: rotate(90deg); }
         .overlay {
             position: fixed;
             inset: 0;
-            background: rgba(10, 25, 47, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.6);
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s var(--anim-ease);
+            transition: opacity 0.4s var(--ease-out);
+            backdrop-filter: blur(4px);
         }
         .overlay.active { opacity: 1; pointer-events: all; }
 
         /* =========================================
-           3. HERO SECTION
+           3. HERO SECTION (banner1.png)
            ========================================= */
         .hero {
             position: relative;
-            min-height: 90vh;
+            min-height: 85vh;
             padding-top: 5rem;
             padding-bottom: 4rem;
             display: flex;
@@ -359,34 +340,18 @@
             position: absolute;
             inset: 0;
             background-color: var(--navy);
-            background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.85)), 
+            background-image: linear-gradient(rgba(10, 25, 47, 0.65), rgba(10, 25, 47, 0.85)), 
                               url('./banner1.png');
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
+            transform: scale(1.05);
             z-index: 1;
             animation: slowZoom 25s ease-in-out infinite alternate;
         }
         @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: 1;
-            pointer-events: none;
-            animation: pulse-glow 8s ease-in-out infinite alternate;
-        }
-        @keyframes pulse-glow {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.15); opacity: 0.8; }
+            from { transform: scale(1.05); }
+            to { transform: scale(1.12); }
         }
         .hero-content {
             position: relative;
@@ -400,106 +365,46 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(8px);
-            padding: 0.5rem 1.2rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.45rem 1rem;
             border-radius: 50px;
             font-size: 0.85rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             border: 1px solid rgba(255,255,255,0.15);
-            animation: fadeInDown 0.8s var(--anim-ease) forwards;
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            backdrop-filter: blur(8px);
+            animation: fadeInUp 0.8s var(--ease-out) 0.2s both;
         }
         .hero h1 {
-            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-size: clamp(2rem, 6vw, 3.8rem);
             font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 1.25rem;
-            animation: fadeInUp 0.8s var(--anim-ease) 0.2s forwards;
-            opacity: 0;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s var(--ease-out) 0.4s both;
         }
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
             color: var(--text-muted);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 0.8s var(--anim-ease) 0.4s forwards;
-            opacity: 0;
+            margin-bottom: 1.75rem;
+            animation: fadeInUp 0.8s var(--ease-out) 0.6s both;
         }
         .hero-buttons {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.85rem;
             align-items: center;
-            animation: fadeInUp 0.8s var(--anim-ease) 0.6s forwards;
-            opacity: 0;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            animation: fadeInUp 0.8s var(--ease-out) 0.8s both;
         }
         @media (min-width: 640px) {
             .hero-buttons { flex-direction: row; justify-content: center; }
         }
 
-        .hero-scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--white);
-            opacity: 0.6;
-            z-index: 2;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        }
-        .mouse {
-            width: 24px;
-            height: 38px;
-            border: 2px solid rgba(255,255,255,0.4);
-            border-radius: 12px;
-            position: relative;
-        }
-        .wheel {
-            width: 3px;
-            height: 6px;
-            background: var(--gold);
-            border-radius: 2px;
-            position: absolute;
-            top: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: scroll-wheel 1.5s infinite;
-        }
-        @keyframes scroll-wheel {
-            0% { opacity: 1; top: 6px; }
-            100% { opacity: 0; top: 20px; }
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-8px); }
-            60% { transform: translateX(-50%) translateY(-4px); }
-        }
-        @media (max-width: 768px) {
-            .hero-scroll-indicator { display: none; }
-        }
-
         /* =========================================
-           4. QUICK CONTACT BAR
+           4. QUICK CONTACT BAR (Centered & Compact)
            ========================================= */
         .quick-contact-wrapper {
             position: relative;
             z-index: 10;
-            margin-top: -3rem;
+            margin-top: -2.5rem;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -508,25 +413,22 @@
         }
 
         .quick-contact {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-top: 3px solid var(--gold);
+            background: var(--white);
             border-radius: 16px;
-            box-shadow: 0 20px 40px -10px rgba(2, 12, 27, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.05);
-            padding: 0.75rem;
+            box-shadow: 0 12px 35px -5px rgba(2, 12, 27, 0.16), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+            padding: 0.65rem 0.75rem;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.45rem;
             width: fit-content;
-            min-width: 260px;
-            max-width: 340px;
+            min-width: 250px;
+            max-width: 320px;
             margin: 0 auto;
-            transition: transform 0.3s var(--anim-ease), box-shadow 0.3s var(--anim-ease);
+            animation: float 6s ease-in-out infinite;
         }
-        .quick-contact:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 25px 50px -12px rgba(2, 12, 27, 0.2);
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         @media (min-width: 768px) {
@@ -534,30 +436,31 @@
                 flex-direction: row;
                 max-width: none;
                 min-width: unset;
-                padding: 0.85rem 1.5rem;
-                gap: 1.25rem;
+                padding: 0.75rem 1.25rem;
+                gap: 1rem;
             }
         }
 
         .qc-item {
             display: flex;
             align-items: center;
-            gap: 0.85rem;
+            gap: 0.75rem;
             text-decoration: none;
             color: var(--charcoal);
-            padding: 0.6rem 1rem;
+            padding: 0.5rem 0.85rem;
             border-radius: 10px;
             background: #F8FAFC;
             transition: var(--transition);
         }
         .qc-item:hover { 
             background: var(--gold-light); 
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
         }
 
         .qc-icon {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             background: var(--navy);
             color: var(--gold);
             border-radius: 50%;
@@ -565,7 +468,11 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        .qc-item:hover .qc-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .qc-text {
@@ -576,145 +483,131 @@
             text-align: left;
         }
         .qc-label { 
-            font-size: 0.7rem; 
+            font-size: 0.68rem; 
             color: var(--text-muted); 
             font-weight: 700; 
             text-transform: uppercase; 
-            letter-spacing: 0.8px;
-            margin-bottom: 2px;
+            letter-spacing: 0.6px;
+            margin-bottom: 1px;
         }
         .qc-value { 
-            font-size: 0.95rem; 
+            font-size: 0.9rem; 
             font-weight: 700; 
             color: var(--navy);
             white-space: nowrap;
         }
 
         /* =========================================
-           5. ABOUT SECTION
+           5. ABOUT SECTION (Centered Intro, No Button)
            ========================================= */
         .about-box {
             max-width: 820px;
             margin: 0 auto;
             text-align: center;
-            position: relative;
-            padding-top: 2rem;
-        }
-        .about-box::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 8rem;
-            color: var(--gold);
-            opacity: 0.08;
-            font-family: serif;
-            line-height: 1;
-            pointer-events: none;
         }
         .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: clamp(1.6rem, 3.5vw, 2.3rem);
             font-weight: 800;
             color: var(--navy);
-            margin-bottom: 1rem;
-            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
         }
         .section-subtitle {
             color: var(--gold);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            font-size: 0.82rem;
+            margin-bottom: 0.4rem;
             display: block;
         }
 
         /* =========================================
-           6. FLEET SECTION
+           6. FLEET SECTION (Car1.png to Car4.png)
            ========================================= */
         .fleet-container {
             position: relative;
-            overflow: hidden;
-            padding: 0.5rem;
+            overflow: visible;
+            padding: 1rem 0;
         }
         .fleet-track {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            padding: 1rem 0.5rem 2rem 0.5rem;
+            padding: 0.5rem 0 1.5rem 0;
             scrollbar-width: none;
         }
         .fleet-track::-webkit-scrollbar { display: none; }
         .fleet-card {
             flex: 0 0 88%;
-            max-width: 340px;
+            max-width: 320px;
             scroll-snap-align: center;
             background: var(--white);
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
-            transition: transform 0.4s var(--anim-ease), box-shadow 0.4s var(--anim-ease);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s ease;
         }
         .fleet-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
         @media (min-width: 768px) {
-            .fleet-card { flex: 0 0 calc(50% - 1rem); max-width: 400px; }
+            .fleet-card { flex: 0 0 calc(50% - 1rem); max-width: 380px; }
         }
         @media (min-width: 1024px) {
-            .fleet-card { flex: 0 0 calc(25% - 1.2rem); max-width: 320px; }
+            .fleet-card { flex: 0 0 calc(25% - 1rem); max-width: 300px; }
         }
         .fleet-img-wrapper {
-            position: relative;
             overflow: hidden;
-            height: 200px;
+            height: 190px;
         }
         .fleet-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             background: #e2e8f0;
-            transition: transform 0.6s var(--anim-ease);
+            transition: transform 0.6s var(--ease-out);
         }
         .fleet-card:hover .fleet-img {
             transform: scale(1.08);
         }
-        .fleet-info { padding: 1.5rem; }
+        .fleet-info { padding: 1.25rem; }
         .fleet-name { 
-            font-size: 1.2rem; 
+            font-size: 1.15rem; 
             font-weight: 700; 
             color: var(--navy); 
-            margin-bottom: 0.75rem; 
+            margin-bottom: 0.6rem; 
         }
         .fleet-features {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            gap: 0.4rem;
+            margin-bottom: 0.85rem;
         }
         .feature-tag {
             background: var(--gold-light);
             color: var(--navy);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.65rem;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
-            letter-spacing: 0.3px;
+            transition: var(--transition);
+        }
+        .fleet-card:hover .feature-tag {
+            background: var(--navy);
+            color: var(--gold);
         }
         .fleet-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 0.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
         /* Fleet Modal */
@@ -729,7 +622,7 @@
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s var(--anim-ease);
+            transition: opacity 0.4s var(--ease-out);
             padding: 1.25rem;
         }
         .modal.active { opacity: 1; pointer-events: all; }
@@ -741,18 +634,20 @@
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            transform: scale(0.95);
-            transition: transform 0.3s var(--anim-ease);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s var(--ease-elastic);
         }
-        .modal.active .modal-content { transform: scale(1); }
+        .modal.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
         .modal-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255,255,255,0.9);
+            top: 0.85rem;
+            right: 0.85rem;
+            background: var(--white);
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
             z-index: 10;
@@ -760,100 +655,92 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .modal-close:hover { background: var(--white); transform: rotate(90deg); }
+        .modal-close:hover { background: var(--gold); color: var(--navy); transform: rotate(90deg); }
         .modal-img { width: 100%; height: 260px; object-fit: cover; }
-        .modal-body { padding: 1.75rem; }
+        .modal-body { padding: 1.5rem; }
 
         /* =========================================
-           7. WHY CHOOSE US
+           7. WHY CHOOSE US (In Between Fleet & Destinations)
            ========================================= */
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
             text-align: center;
             max-width: 900px;
             margin: 0 auto;
         }
-        @media (min-width: 768px) {
-            .stats-row { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        }
         .stat-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--radius);
-            padding: 1.5rem 1rem;
-            transition: transform 0.3s var(--anim-ease), background 0.3s ease;
+            padding: 0.5rem 0.25rem;
+            transition: var(--transition);
         }
         .stat-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-4px);
+            transform: translateY(-5px);
         }
         .stat-item h3 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.25rem, 3.5vw, 2.2rem);
             font-weight: 800;
             color: var(--gold);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.25rem;
             line-height: 1;
         }
         .stat-item p {
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: clamp(0.7rem, 1.8vw, 0.88rem);
             font-weight: 600;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         /* =========================================
-           8. DESTINATIONS
+           8. DESTINATIONS (Dest1.jpg to Dest13.png)
            ========================================= */
         .destinations-track {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            padding: 1rem 0.5rem 2rem 0.5rem;
+            padding: 0.5rem 0 1.5rem 0;
             scrollbar-width: none;
         }
         .destinations-track::-webkit-scrollbar { display: none; }
         .dest-card {
-            flex: 0 0 260px;
+            flex: 0 0 240px;
             scroll-snap-align: start;
             border-radius: var(--radius);
             overflow: hidden;
             position: relative;
-            height: 340px;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.05);
+            height: 320px;
+            transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s ease;
         }
-        .dest-img-wrapper {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
+        .dest-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            z-index: 2;
         }
         .dest-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.7s var(--anim-ease);
+            transition: transform 0.7s var(--ease-out);
         }
-        .dest-card:hover img { transform: scale(1.1); }
+        .dest-card:hover img { transform: scale(1.12); }
         .dest-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(10,25,47,0.95) 0%, rgba(10,25,47,0.5) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(10,25,47,0.95) 10%, rgba(10,25,47,0.4) 50%, transparent 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 1.5rem;
+            padding: 1.25rem;
             color: var(--white);
-            transition: background 0.3s ease;
+            transition: var(--transition);
         }
         .dest-card:hover .dest-overlay {
-            background: linear-gradient(to top, rgba(10,25,47,0.98) 0%, rgba(10,25,47,0.7) 60%, rgba(10,25,47,0.2) 100%);
+            background: linear-gradient(to top, rgba(10,25,47,0.98) 20%, rgba(10,25,47,0.6) 60%, transparent 100%);
         }
 
         /* =========================================
@@ -862,15 +749,20 @@
         #booking {
             background: #f1f5f9;
             padding-bottom: 6rem;
+            background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
         }
         .booking-form {
             background: var(--white);
-            padding: 2rem 1.5rem;
+            padding: 1.75rem 1.25rem;
             border-radius: var(--radius);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            max-width: 780px;
             margin: 0 auto;
-            border-top: 4px solid var(--gold);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+        .booking-form:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
         .form-grid {
             display: grid;
@@ -879,108 +771,87 @@
         @media (min-width: 768px) {
             .form-grid { grid-template-columns: 1fr 1fr; }
             .form-full { grid-column: 1 / -1; }
-            .booking-form { padding: 2.5rem; }
+            .booking-form { padding: 2.25rem; }
         }
-        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
         .form-group label {
             font-size: 0.85rem;
             font-weight: 600;
             color: var(--charcoal);
         }
         .form-group input, .form-group select, .form-group textarea {
-            padding: 0.9rem 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             font-family: inherit;
-            font-size: 0.95rem;
-            background: #ffffff;
+            font-size: 0.92rem;
+            background: var(--white);
             width: 100%;
-            transition: all 0.3s var(--anim-ease);
+            transition: var(--transition);
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--gold);
-            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.12);
+            box-shadow: 0 0 0 4px var(--gold-light);
             transform: translateY(-1px);
         }
         .error-msg {
             color: #ef4444;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             display: none;
-            align-items: center;
-            gap: 0.3rem;
-            font-weight: 500;
         }
-        .form-group.error input, .form-group.error select, .form-group.error textarea { 
-            border-color: #ef4444; 
-            background-color: rgba(239, 68, 68, 0.03);
-        }
-        .form-group.error .error-msg { 
-            display: flex; 
-            animation: shake 0.4s ease-in-out;
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-4px); }
-            75% { transform: translateX(4px); }
-        }
+        .form-group.error input, .form-group.error select { border-color: #ef4444; }
+        .form-group.error .error-msg { display: block; }
 
         /* =========================================
-           10. GALLERY
+           10. GALLERY (Travel1.jpg to Travel6.jpg)
            ========================================= */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 0.75rem;
         }
         @media (min-width: 768px) {
-            .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
         }
         .gallery-item {
-            border-radius: var(--radius);
+            border-radius: 8px;
             overflow: hidden;
-            height: 200px;
+            height: 180px;
             cursor: pointer;
             position: relative;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: border-color 0.3s ease, transform 0.3s var(--anim-ease);
-        }
-        .gallery-item:hover {
-            border-color: var(--gold);
-            transform: translateY(-4px);
         }
         @media (min-width: 768px) {
-            .gallery-item { height: 240px; }
+            .gallery-item { height: 220px; }
         }
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s var(--anim-ease);
+            transition: transform 0.6s var(--ease-out);
         }
-        .gallery-item:hover img { transform: scale(1.08); }
         .gallery-item::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(10, 25, 47, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            background: rgba(10, 25, 47, 0);
+            transition: background 0.3s ease;
         }
-        .gallery-item:hover::after { opacity: 1; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover::after { background: rgba(10, 25, 47, 0.2); }
 
         .lightbox {
             position: fixed;
             inset: 0;
-            background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
             z-index: 3000;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s var(--anim-ease);
+            transition: opacity 0.4s var(--ease-out);
         }
         .lightbox.active { opacity: 1; pointer-events: all; }
         .lightbox img { 
@@ -988,7 +859,7 @@
             max-height: 85vh; 
             border-radius: 8px; 
             transform: scale(0.9);
-            transition: transform 0.4s var(--anim-ease);
+            transition: transform 0.4s var(--ease-elastic);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
         .lightbox.active img { transform: scale(1); }
@@ -999,68 +870,77 @@
             color: var(--white);
             background: rgba(255,255,255,0.1);
             border: none;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s ease;
+            transition: var(--transition);
         }
-        .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+        .lightbox-close:hover { background: var(--gold); color: var(--navy); transform: rotate(90deg); }
 
         /* =========================================
-           11. REVIEWS SECTION
+           11. REVIEWS SECTION & ACCORDION (Centered)
            ========================================= */
         .reviews-section {
             background: #0d1b2e;
             color: var(--white);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
         }
         .reviews-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 2rem;
             max-width: 650px;
-            margin: 2.5rem auto 0 auto;
+            margin: 2rem auto 0 auto;
         }
         
         .review-form-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: var(--radius);
-            padding: 1.5rem;
+            padding: 1.25rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: var(--transition);
+        }
+        .review-form-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
+        /* Proportional Pill Trigger Button */
         .review-toggle-btn {
             width: auto;
-            min-width: 220px;
-            max-width: 300px;
+            min-width: 200px;
+            max-width: 280px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
-            padding: 0.85rem 1.5rem;
+            padding: 0.75rem 1.4rem;
             background: var(--gold);
             color: var(--navy);
             border: none;
             border-radius: 50px;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
-            transition: all 0.3s var(--anim-ease);
+            transition: var(--transition);
         }
         .review-toggle-btn:hover {
             background: var(--gold-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
         }
         .review-toggle-btn .toggle-icon {
-            transition: transform 0.3s var(--anim-ease);
+            transition: transform 0.3s var(--ease-out);
         }
         .review-toggle-btn.active .toggle-icon {
             transform: rotate(180deg);
@@ -1071,38 +951,38 @@
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: max-height 0.5s var(--anim-ease), opacity 0.4s ease-out, margin-top 0.4s ease-out;
+            transition: max-height 0.5s var(--ease-out), opacity 0.4s ease-out;
             margin-top: 0;
         }
         .review-collapsible-content.expanded {
-            max-height: 900px;
+            max-height: 850px;
             opacity: 1;
-            margin-top: 1.5rem;
+            margin-top: 1.25rem;
         }
 
         .review-collapsible-content input, .review-collapsible-content textarea {
             width: 100%;
-            padding: 0.85rem 1rem;
+            padding: 0.75rem 0.9rem;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
             color: var(--white);
-            margin-top: 0.4rem;
+            margin-top: 0.35rem;
             margin-bottom: 1rem;
             font-family: inherit;
-            font-size: 0.95rem;
             transition: var(--transition);
         }
         .review-collapsible-content input:focus, .review-collapsible-content textarea:focus {
             outline: none;
             border-color: var(--gold);
             background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
         }
 
         .star-rating-select {
             display: flex;
-            gap: 0.4rem;
-            margin: 0.5rem 0 1.25rem;
+            gap: 0.35rem;
+            margin: 0.4rem 0 1rem;
         }
         .star-btn {
             background: none;
@@ -1112,11 +992,15 @@
             line-height: 1;
             padding: 0 0.15rem;
             color: #475569;
-            transition: transform 0.15s ease, color 0.15s ease;
+            transition: transform 0.2s var(--ease-elastic), color 0.2s ease;
             user-select: none;
         }
-        .star-btn.active { color: var(--gold); }
-        .star-btn:hover { transform: scale(1.2); }
+        .star-btn.active {
+            color: var(--gold);
+        }
+        .star-btn:hover {
+            transform: scale(1.3);
+        }
 
         .reviews-feed {
             display: flex;
@@ -1124,83 +1008,105 @@
             gap: 1rem;
             max-height: 520px;
             overflow-y: auto;
-            padding-right: 0.5rem;
+            padding-right: 0.35rem;
         }
         .reviews-feed::-webkit-scrollbar { width: 4px; }
-        .reviews-feed::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        .reviews-feed::-webkit-scrollbar-track { background: transparent; }
+        .reviews-feed::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.3); border-radius: 4px; }
         
         .review-item {
             background: rgba(255, 255, 255, 0.03);
             border-left: 3px solid var(--gold);
             border-radius: 0 var(--radius) var(--radius) 0;
-            padding: 1.25rem;
-            transition: background 0.3s ease;
+            padding: 1rem 1.25rem;
+            transition: var(--transition);
         }
-        .review-item:hover { background: rgba(255, 255, 255, 0.05); }
+        .review-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px);
+        }
         .reviewer-meta { font-weight: 700; color: var(--white); font-size: 0.95rem; }
-        .reviewer-route { font-size: 0.8rem; color: var(--gold); display: block; margin-top: 2px; }
-        .stars-display { color: var(--gold); font-size: 0.9rem; letter-spacing: 1px; }
-        .review-comment { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.6rem; line-height: 1.5; }
+        .reviewer-route { font-size: 0.78rem; color: var(--gold); display: block; }
+        .stars-display { color: var(--gold); font-size: 0.9rem; }
+        .review-comment { color: var(--text-muted); font-size: 0.88rem; margin-top: 0.4rem; }
 
         /* =========================================
-           12. CONTACT ICONS & FOOTER
+           12. COLORFUL BRAND ICONS ROW
            ========================================= */
         .contact-icons-row {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
-            margin-top: 2.5rem;
+            gap: 1.75rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
         }
         .contact-icon-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
             text-decoration: none;
             color: var(--white);
             transition: var(--transition);
         }
+        .contact-icon-btn:hover {
+            transform: translateY(-6px);
+        }
         .contact-icon-circle {
-            width: 60px;
-            height: 60px;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s var(--anim-ease), box-shadow 0.3s var(--anim-ease);
+            transition: transform 0.3s var(--ease-elastic), box-shadow 0.3s ease;
         }
         .contact-icon-btn:hover .contact-icon-circle {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.15);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
-        .contact-icon-btn:hover .contact-icon-label { color: var(--white); }
 
-        .icon-call { background: #0A192F; color: #D4AF37; border: 2px solid rgba(212, 175, 55, 0.4); }
-        .icon-wa { background: #25D366; color: #FFFFFF; }
-        .icon-insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: #FFFFFF; }
-        .icon-map { background: #ef4444; color: #FFFFFF; }
+        .icon-call {
+            background: #0A192F;
+            color: #D4AF37;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+        }
+        .icon-wa {
+            background: #25D366;
+            color: #FFFFFF;
+        }
+        .icon-insta {
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            color: #FFFFFF;
+        }
+        .icon-map {
+            background: #ef4444;
+            color: #FFFFFF;
+        }
 
         .contact-icon-label {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--text-muted);
             letter-spacing: 0.5px;
             transition: color 0.2s ease;
         }
+        .contact-icon-btn:hover .contact-icon-label {
+            color: var(--white);
+        }
 
         footer {
             background: #050d1a;
-            padding: 2.5rem 0 6rem;
+            padding: 2rem 0 6rem;
             color: var(--text-muted);
             font-size: 0.85rem;
             border-top: 1px solid rgba(255,255,255,0.08);
             text-align: center;
         }
         @media (min-width: 768px) {
-            footer { padding: 2.5rem 0; }
+            footer { padding: 2rem 0; }
         }
 
         /* =========================================
@@ -1213,18 +1119,13 @@
             right: 0;
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 0.75rem 1rem;
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 0.8rem;
             display: flex;
-            gap: 0.6rem;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            gap: 0.5rem;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
             z-index: 999;
             border-top: 1px solid rgba(0,0,0,0.05);
-            animation: slideUp 0.6s var(--anim-ease) forwards;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
         }
         .float-btn {
             flex: 1;
@@ -1232,15 +1133,15 @@
             align-items: center;
             justify-content: center;
             gap: 0.4rem;
-            padding: 0.8rem 0.4rem;
-            border-radius: 10px;
+            padding: 0.7rem 0.4rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.85rem;
             white-space: nowrap;
-            transition: transform 0.2s ease;
+            transition: var(--transition);
         }
-        .float-btn:active { transform: scale(0.96); }
+        .float-btn:active { transform: scale(0.95); }
         .float-call { background: var(--navy); color: var(--white); }
         .float-wa { background: #25D366; color: var(--white); }
         .float-book { background: var(--gold); color: var(--navy); }
@@ -1252,28 +1153,25 @@
         /* =========================================
            14. SCROLL REVEAL ANIMATIONS
            ========================================= */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .reveal {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s var(--anim-ease), transform 0.8s var(--anim-ease);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s var(--anim-ease), transform 0.8s var(--anim-ease);
-        }
-        .reveal-left.active { opacity: 1; transform: translateX(0); }
-        
-        .reveal-scale {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.8s var(--anim-ease), transform 0.8s var(--anim-ease);
-        }
-        .reveal-scale.active { opacity: 1; transform: scale(1); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
     </style>
 </head>
 <body>
@@ -1315,24 +1213,24 @@
     <div class="overlay" id="overlay"></div>
     <div class="mobile-menu" id="mobileMenu">
         <div>
-            <button class="close-menu" id="closeMenu" aria-label="Close menu"><i data-lucide="x" size="20"></i></button>
-            <div class="logo" style="margin-bottom: 2rem; font-size: 1.5rem;">SKT <span>TRAVELS</span></div>
+            <button class="close-menu" id="closeMenu" aria-label="Close menu"><i data-lucide="x" size="24"></i></button>
+            <div class="logo" style="margin-bottom: 2rem;">SKT <span>TRAVELS</span></div>
             <ul class="mobile-menu-links">
-                <li><a href="#home" class="mobile-link" data-i18n="nav_home"><i data-lucide="home" size="18"></i> Home</a></li>
-                <li><a href="#about" class="mobile-link" data-i18n="nav_about"><i data-lucide="info" size="18"></i> About</a></li>
-                <li><a href="#fleet" class="mobile-link" data-i18n="nav_fleet"><i data-lucide="car" size="18"></i> Fleet</a></li>
-                <li><a href="#destinations" class="mobile-link" data-i18n="nav_destinations"><i data-lucide="map" size="18"></i> Destinations</a></li>
-                <li><a href="#reviews" class="mobile-link" data-i18n="nav_reviews"><i data-lucide="star" size="18"></i> Reviews</a></li>
-                <li><a href="#contact" class="mobile-link" data-i18n="nav_contact"><i data-lucide="phone" size="18"></i> Contact</a></li>
+                <li><a href="#home" class="mobile-link" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" class="mobile-link" data-i18n="nav_about">About</a></li>
+                <li><a href="#fleet" class="mobile-link" data-i18n="nav_fleet">Fleet</a></li>
+                <li><a href="#destinations" class="mobile-link" data-i18n="nav_destinations">Destinations</a></li>
+                <li><a href="#reviews" class="mobile-link" data-i18n="nav_reviews">Reviews</a></li>
+                <li><a href="#contact" class="mobile-link" data-i18n="nav_contact">Contact</a></li>
             </ul>
         </div>
-        <a href="#booking" class="btn btn-primary mobile-link" style="width: 100%; text-align: center; justify-content: center;" data-i18n="nav_book">Book Your Trip</a>
+        <a href="#booking" class="btn btn-primary mobile-link" style="width: 100%; text-align: center;" data-i18n="nav_book">Book Your Trip</a>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (banner1.png) -->
     <section class="hero" id="home">
         <div class="hero-bg"></div>
-        <div class="hero-content">
+        <div class="hero-content reveal">
             <div class="hero-location">
                 <i data-lucide="map-pin" size="15"></i>
                 <span data-i18n="hero_location">Tenkasi • Tamil Nadu & Kerala</span>
@@ -1341,16 +1239,12 @@
             <p data-i18n="hero_desc">Comfortable, reliable, and premium travel services across Tamil Nadu and Kerala, starting from the heart of Tenkasi.</p>
             <div class="hero-buttons">
                 <a href="#booking" class="btn btn-primary" data-i18n="hero_book_btn">Book Your Trip <i data-lucide="arrow-right" size="16"></i></a>
-                <a href="#fleet" class="btn btn-outline" data-i18n="hero_fleet_btn">Explore Our Fleet</a>
+                <a href="#fleet" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.4);" data-i18n="hero_fleet_btn">Explore Our Fleet</a>
             </div>
-        </div>
-        <div class="hero-scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
-            <div class="mouse"><div class="wheel"></div></div>
-            <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;" data-i18n="hero_scroll">Scroll Down</span>
         </div>
     </section>
 
-    <!-- Quick Contact Bar -->
+    <!-- Quick Contact Bar (Centered & Snug Box) -->
     <div class="quick-contact-wrapper reveal">
         <div class="quick-contact">
             <a href="tel:9840708764" class="qc-item">
@@ -1383,29 +1277,29 @@
         </div>
     </div>
 
-    <!-- About Section -->
+    <!-- About Section (Centered Intro, No Button) -->
     <section class="section-padding" id="about">
         <div class="container">
             <div class="about-box reveal">
                 <span class="section-subtitle" data-i18n="about_subtitle">About Us</span>
                 <h2 class="section-title" data-i18n="about_title">Travel Across Tamil Nadu & Kerala With <span class="text-gold">SKT Travels</span></h2>
-                <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;" data-i18n="about_desc">Based in the scenic town of Tenkasi, SKT Travels provides comfortable, reliable, and premium transportation services throughout Tamil Nadu and Kerala. Whether it's a family pilgrimage, an outstation trip, or a custom tourist itinerary, we ensure a smooth and safe drive.</p>
-                <ul style="list-style: none; display: inline-flex; flex-direction: column; gap: 0.85rem; text-align: left; margin-top: 1rem;">
-                    <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 500;"><i data-lucide="check-circle" class="text-gold" size="20"></i> <span data-i18n="about_f1">Experienced & Professional Drivers</span></li>
-                    <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 500;"><i data-lucide="check-circle" class="text-gold" size="20"></i> <span data-i18n="about_f2">Well-Maintained, Sanitized Vehicles</span></li>
-                    <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 500;"><i data-lucide="check-circle" class="text-gold" size="20"></i> <span data-i18n="about_f3">Flexible Custom Travel Requirements</span></li>
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1rem;" data-i18n="about_desc">Based in the scenic town of Tenkasi, SKT Travels provides comfortable, reliable, and premium transportation services throughout Tamil Nadu and Kerala. Whether it's a family pilgrimage, an outstation trip, or a custom tourist itinerary, we ensure a smooth and safe drive.</p>
+                <ul style="list-style: none; display: inline-flex; flex-direction: column; gap: 0.75rem; text-align: left;">
+                    <li class="reveal reveal-delay-1" style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f1">Experienced & Professional Drivers</span></li>
+                    <li class="reveal reveal-delay-2" style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f2">Well-Maintained, Sanitized Vehicles</span></li>
+                    <li class="reveal reveal-delay-3" style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f3">Flexible Custom Travel Requirements</span></li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Fleet Section -->
+    <!-- 1. FLEET SECTION (Car1.png to Car4.png - Clean Cards) -->
     <section class="section-padding bg-charcoal" id="fleet">
         <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 3rem;">
+            <div class="text-center reveal" style="margin-bottom: 2.5rem;">
                 <span class="section-subtitle" data-i18n="fleet_subtitle">Our Fleet</span>
                 <h2 class="section-title" style="color: var(--white);" data-i18n="fleet_title">Choose Your <span class="text-gold">Comfort</span></h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1rem;" data-i18n="fleet_desc">Air-conditioned, clean, and reliable vehicles suited for every group size.</p>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem;" data-i18n="fleet_desc">Air-conditioned, clean, and reliable vehicles suited for every group size.</p>
             </div>
             
             <div class="fleet-container">
@@ -1420,34 +1314,34 @@
             <button class="modal-close" id="closeModal" aria-label="Close modal"><i data-lucide="x" size="20"></i></button>
             <img src="" alt="" class="modal-img" id="modalImg">
             <div class="modal-body">
-                <h3 id="modalName" style="font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--navy);"></h3>
-                <div class="fleet-features" id="modalFeatures" style="margin-bottom: 1rem;"></div>
-                <p id="modalDesc" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;"></p>
+                <h3 id="modalName" style="font-size: 1.35rem; margin-bottom: 0.4rem; color: var(--navy);"></h3>
+                <div class="fleet-features" id="modalFeatures" style="margin-bottom: 0.85rem;"></div>
+                <p id="modalDesc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;"></p>
                 <a href="#booking" class="btn btn-primary" id="modalBookBtn" style="width: 100%; justify-content: center;" data-i18n="modal_book_btn">Book This Vehicle</a>
             </div>
         </div>
     </div>
 
-    <!-- Why Choose Us -->
+    <!-- 2. WHY CHOOSE US (In Between Fleet & Destinations) -->
     <section class="section-padding bg-navy" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
         <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 2.5rem;">
-                <h2 class="section-title" style="color: var(--white); font-size: clamp(1.5rem, 3.5vw, 2.2rem);" data-i18n="why_title">Why Choose <span class="text-gold">SKT Travels</span></h2>
+            <div class="text-center reveal" style="margin-bottom: 2rem;">
+                <h2 class="section-title" style="color: var(--white); font-size: clamp(1.4rem, 3vw, 2rem);" data-i18n="why_title">Why Choose <span class="text-gold">SKT Travels</span></h2>
             </div>
-            <div class="stats-row">
-                <div class="stat-item reveal" style="transition-delay: 0ms;">
+            <div class="stats-row reveal">
+                <div class="stat-item">
                     <h3>4+</h3>
                     <p data-i18n="stat_1">Premium Vehicles</p>
                 </div>
-                <div class="stat-item reveal" style="transition-delay: 100ms;">
+                <div class="stat-item">
                     <h3>100%</h3>
                     <p data-i18n="stat_2">TN & Kerala</p>
                 </div>
-                <div class="stat-item reveal" style="transition-delay: 200ms;">
+                <div class="stat-item">
                     <h3>24/7</h3>
                     <p data-i18n="stat_3">Call Support</p>
                 </div>
-                <div class="stat-item reveal" style="transition-delay: 300ms;">
+                <div class="stat-item">
                     <h3>5★</h3>
                     <p data-i18n="stat_4">Top Rated</p>
                 </div>
@@ -1455,10 +1349,10 @@
         </div>
     </section>
 
-    <!-- Destinations -->
+    <!-- 3. DESTINATIONS (Dest1.jpg to Dest13.png) -->
     <section class="section-padding bg-charcoal" id="destinations">
         <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 3rem;">
+            <div class="text-center reveal" style="margin-bottom: 2.5rem;">
                 <span class="section-subtitle" data-i18n="dest_subtitle">Destinations</span>
                 <h2 class="section-title" style="color: var(--white);" data-i18n="dest_title">Explore <span class="text-gold">Tamil Nadu, Kerala & Beyond</span></h2>
             </div>
@@ -1469,64 +1363,64 @@
     <!-- Booking Section -->
     <section class="section-padding" id="booking">
         <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 2.5rem;">
+            <div class="text-center reveal" style="margin-bottom: 2.25rem;">
                 <span class="section-subtitle" data-i18n="book_subtitle">Book Now</span>
                 <h2 class="section-title" data-i18n="book_title">Plan Your <span class="text-gold">Journey</span></h2>
-                <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto;" data-i18n="book_desc">Fill out the details below. We will open WhatsApp directly to send your travel enquiry to SKT Travels.</p>
+                <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="book_desc">Fill out the details below. We will open WhatsApp directly to send your travel enquiry to SKT Travels.</p>
             </div>
             
-            <form class="booking-form reveal-scale" id="bookingForm">
+            <form class="booking-form reveal" id="bookingForm">
                 <div class="form-grid">
-                    <div class="form-group">
+                    <div class="form-group reveal reveal-delay-1">
                         <label for="name" data-i18n="form_name">Full Name *</label>
                         <input type="text" id="name" required placeholder="Your name">
                         <span class="error-msg" data-i18n="form_err_name">Please enter your name</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group reveal reveal-delay-2">
                         <label for="phone" data-i18n="form_phone">Phone Number *</label>
                         <input type="tel" id="phone" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
                         <span class="error-msg" data-i18n="form_err_phone">Please enter a valid 10-digit phone number</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group reveal reveal-delay-1">
                         <label for="pickup" data-i18n="form_pickup">Pickup Location *</label>
                         <input type="text" id="pickup" required placeholder="e.g., Tenkasi">
                         <span class="error-msg" data-i18n="form_err_pickup">Please enter pickup location</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group reveal reveal-delay-2">
                         <label for="destination" data-i18n="form_dest">Destination *</label>
                         <input type="text" id="destination" required placeholder="e.g., Munnar / Sabarimala / Madurai">
                         <span class="error-msg" data-i18n="form_err_dest">Please enter destination</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group reveal reveal-delay-1">
                         <label for="travelDate" data-i18n="form_date">Travel Date *</label>
                         <input type="date" id="travelDate" required>
                         <span class="error-msg" data-i18n="form_err_date">Please select a travel date</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group reveal reveal-delay-2">
                         <label for="returnDate" data-i18n="form_return">Return Date (Optional)</label>
                         <input type="date" id="returnDate">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group reveal reveal-delay-1">
                         <label for="passengers" data-i18n="form_passengers">Number of Passengers *</label>
                         <input type="number" id="passengers" required min="1" placeholder="e.g., 4">
                         <span class="error-msg" data-i18n="form_err_passengers">Please enter valid passenger count</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group reveal reveal-delay-2">
                         <label for="vehicle" data-i18n="form_vehicle">Preferred Vehicle</label>
                         <select id="vehicle">
                             <option value="Not specified" data-i18n="form_vehicle_opt">Select a vehicle (Optional)</option>
                         </select>
                     </div>
-                    <div class="form-group form-full">
+                    <div class="form-group form-full reveal reveal-delay-3">
                         <label for="requirements" data-i18n="form_notes">Additional Requirements</label>
                         <textarea id="requirements" rows="3" placeholder="Pickup time, multiple destinations, luggage, etc."></textarea>
                     </div>
-                    <div class="form-full text-center" style="margin-top: 0.5rem;">
-                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 420px; justify-content: center; padding: 1rem;" data-i18n="form_submit_btn">
+                    <div class="form-full text-center reveal reveal-delay-4" style="margin-top: 0.5rem;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 420px; justify-content: center; padding: 0.85rem;" data-i18n="form_submit_btn">
                             Send Booking Request via WhatsApp <i data-lucide="send" size="16"></i>
                         </button>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.4rem;" data-i18n="form_note">
-                            <i data-lucide="info" size="14"></i> 
+                        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem;" data-i18n="form_note">
+                            <i data-lucide="info" size="13" style="vertical-align: middle;"></i> 
                             This is an enquiry request. Your booking will be confirmed by our team after review.
                         </p>
                     </div>
@@ -1535,30 +1429,30 @@
         </div>
     </section>
 
-    <!-- Gallery -->
+    <!-- Gallery (Travel1.jpg to Travel6.jpg) -->
     <section class="section-padding" id="gallery">
         <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 2.5rem;">
+            <div class="text-center reveal" style="margin-bottom: 2.25rem;">
                 <span class="section-subtitle" data-i18n="gallery_subtitle">Gallery</span>
                 <h2 class="section-title" data-i18n="gallery_title">Travel <span class="text-gold">Moments</span></h2>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item reveal" style="transition-delay: 0ms;" onclick="openLightbox(this)" title="Travel Moment 1">
+                <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(this)" title="Travel Moment 1">
                     <img src="Travel1.jpg" alt="Travel Moment 1" loading="lazy">
                 </div>
-                <div class="gallery-item reveal" style="transition-delay: 100ms;" onclick="openLightbox(this)" title="Travel Moment 2">
+                <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox(this)" title="Travel Moment 2">
                     <img src="Travel2.jpg" alt="Travel Moment 2" loading="lazy">
                 </div>
-                <div class="gallery-item reveal" style="transition-delay: 200ms;" onclick="openLightbox(this)" title="Travel Moment 3">
+                <div class="gallery-item reveal reveal-delay-3" onclick="openLightbox(this)" title="Travel Moment 3">
                     <img src="Travel3.jpg" alt="Travel Moment 3" loading="lazy">
                 </div>
-                <div class="gallery-item reveal" style="transition-delay: 300ms;" onclick="openLightbox(this)" title="Travel Moment 4">
+                <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(this)" title="Travel Moment 4">
                     <img src="Travel4.jpg" alt="Travel Moment 4" loading="lazy">
                 </div>
-                <div class="gallery-item reveal" style="transition-delay: 400ms;" onclick="openLightbox(this)" title="Travel Moment 5">
+                <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox(this)" title="Travel Moment 5">
                     <img src="Travel5.jpg" alt="Travel Moment 5" loading="lazy">
                 </div>
-                <div class="gallery-item reveal" style="transition-delay: 500ms;" onclick="openLightbox(this)" title="Travel Moment 6">
+                <div class="gallery-item reveal reveal-delay-3" onclick="openLightbox(this)" title="Travel Moment 6">
                     <img src="Travel6.jpg" alt="Travel Moment 6" loading="lazy">
                 </div>
             </div>
@@ -1567,36 +1461,38 @@
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <button class="lightbox-close" aria-label="Close lightbox"><i data-lucide="x" size="24"></i></button>
+        <button class="lightbox-close" aria-label="Close lightbox"><i data-lucide="x" size="30"></i></button>
         <img src="" alt="Gallery Image" id="lightboxImg">
     </div>
 
-    <!-- Reviews Section -->
+    <!-- REVIEWS SECTION -->
     <section class="section-padding reviews-section" id="reviews">
         <div class="container">
             <div class="text-center reveal">
                 <span class="section-subtitle" data-i18n="rev_subtitle">Traveler Testimonials</span>
                 <h2 class="section-title" style="color: var(--white);" data-i18n="rev_title">Customer <span class="text-gold">Reviews</span></h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem;" data-i18n="rev_desc">Share your experience riding with SKT Travels or read real customer feedback.</p>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.92rem;" data-i18n="rev_desc">Share your experience riding with SKT Travels or read real customer feedback.</p>
             </div>
 
-            <div class="reviews-wrapper">
-                <div class="review-form-card reveal">
+            <div class="reviews-wrapper reveal">
+                <div class="review-form-card">
+                    <!-- Compact Pill Button Trigger -->
                     <button type="button" class="review-toggle-btn" id="reviewToggleBtn">
                         <i data-lucide="edit-3" size="18"></i> 
                         <span data-i18n="rev_form_title">Write a Review</span>
                         <i data-lucide="chevron-down" size="18" class="toggle-icon"></i>
                     </button>
 
+                    <!-- Collapsible Container (Appears when toggled) -->
                     <div class="review-collapsible-content" id="reviewCollapsibleContent">
                         <form id="reviewForm">
-                            <label style="font-size: 0.85rem; font-weight: 600;" data-i18n="rev_name_label">Your Name *</label>
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_name_label">Your Name *</label>
                             <input type="text" id="reviewName" required placeholder="e.g. Ramesh Kumar">
 
-                            <label style="font-size: 0.85rem; font-weight: 600;" data-i18n="rev_route_label">Trip Route (Optional)</label>
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_route_label">Trip Route (Optional)</label>
                             <input type="text" id="reviewRoute" placeholder="e.g. Tenkasi to Munnar / Sabarimala">
 
-                            <label style="font-size: 0.85rem; font-weight: 600;" data-i18n="rev_rating_label">Your Rating</label>
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_rating_label">Your Rating</label>
                             <div class="star-rating-select" id="starSelector">
                                 <button type="button" class="star-btn active" data-rating="1" aria-label="1 star">★</button>
                                 <button type="button" class="star-btn active" data-rating="2" aria-label="2 stars">★</button>
@@ -1606,7 +1502,7 @@
                             </div>
                             <input type="hidden" id="reviewRating" value="5">
 
-                            <label style="font-size: 0.85rem; font-weight: 600;" data-i18n="rev_comment_label">Your Feedback / Review *</label>
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_comment_label">Your Feedback / Review *</label>
                             <textarea id="reviewComment" rows="3" required placeholder="How was the journey, driver punctuality, and vehicle comfort?"></textarea>
 
                             <button type="submit" class="btn btn-primary" id="reviewSubmitBtn" style="width: 100%; justify-content: center;" data-i18n="rev_post_btn">
@@ -1616,8 +1512,8 @@
                     </div>
                 </div>
 
-                <div class="reveal">
-                    <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--white); text-align: center;" data-i18n="rev_recent_title">Recent Traveler Feedback</h3>
+                <div>
+                    <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: var(--white); text-align: center;" data-i18n="rev_recent_title">Recent Traveler Feedback</h3>
                     <div class="reviews-feed" id="reviewsFeed"></div>
                 </div>
             </div>
@@ -1630,7 +1526,7 @@
             <div class="text-center reveal">
                 <span class="section-subtitle" data-i18n="cnt_subtitle">Contact Us</span>
                 <h2 class="section-title" style="color: var(--white);" data-i18n="cnt_title">Ready for Your Next <span class="text-gold">Journey?</span></h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 0.75rem auto 1.5rem; font-size: 0.95rem;" data-i18n="cnt_desc">Contact SKT Travels and plan your trip across Tamil Nadu and Kerala.</p>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0.75rem auto 1.5rem; font-size: 0.92rem;" data-i18n="cnt_desc">Contact SKT Travels and plan your trip across Tamil Nadu and Kerala.</p>
             </div>
             
             <div class="contact-icons-row reveal">
@@ -1667,8 +1563,8 @@
                 </a>
             </div>
 
-            <div class="text-center reveal" style="margin-top: 3rem;">
-                <a href="#booking" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1rem;" data-i18n="cnt_btn">Book Your Trip Now</a>
+            <div class="text-center reveal" style="margin-top: 2.25rem;">
+                <a href="#booking" class="btn btn-primary" data-i18n="cnt_btn">Book Your Trip Now</a>
             </div>
         </div>
     </section>
@@ -1735,7 +1631,6 @@
                 hero_desc: "Comfortable, reliable, and premium travel services across Tamil Nadu and Kerala, starting from the heart of Tenkasi.",
                 hero_book_btn: 'Book Your Trip <i data-lucide="arrow-right" size="16"></i>',
                 hero_fleet_btn: "Explore Our Fleet",
-                hero_scroll: "Scroll Down",
                 qc_call_label: "Call Now",
                 qc_wa_label: "WhatsApp",
                 qc_wa_val: "Chat with Us",
@@ -1772,7 +1667,7 @@
                 form_vehicle_opt: "Select a vehicle (Optional)",
                 form_notes: "Additional Requirements",
                 form_submit_btn: 'Send Booking Request via WhatsApp <i data-lucide="send" size="16"></i>',
-                form_note: '<i data-lucide="info" size="14"></i> This is an enquiry request. Your booking will be confirmed by our team after review.',
+                form_note: '<i data-lucide="info" size="13" style="vertical-align: middle;"></i> This is an enquiry request. Your booking will be confirmed by our team after review.',
                 form_err_name: "Please enter your name",
                 form_err_phone: "Please enter a valid 10-digit phone number",
                 form_err_pickup: "Please enter pickup location",
@@ -1817,7 +1712,6 @@
                 hero_desc: "தென்காசியில் இருந்து தமிழ்நாடு மற்றும் கேரளா முழுவதும் பாதுகாப்பான, சௌகரியமான மற்றும் நம்பகமான பயண சேவை.",
                 hero_book_btn: 'முன்பதிவு செய்ய <i data-lucide="arrow-right" size="16"></i>',
                 hero_fleet_btn: "வாகனங்களை பார்க்க",
-                hero_scroll: "கீழே உருட்டவும்",
                 qc_call_label: "அழைக்க",
                 qc_wa_label: "வாட்ஸ்அப்",
                 qc_wa_val: "மெசேஜ் செய்க",
@@ -1854,7 +1748,7 @@
                 form_vehicle_opt: "வாகனத்தை தேர்வு செய்யவும் (விருப்பப்பட்டால்)",
                 form_notes: "கூடுதல் தகவல்கள்",
                 form_submit_btn: 'வாட்ஸ்அப் வழியாக அனுப்பவும் <i data-lucide="send" size="16"></i>',
-                form_note: '<i data-lucide="info" size="14"></i> இது முன்பதிவு கோரிக்கை மட்டுமே. எங்கள் குழு சரிபார்த்து உறுதி செய்யும்.',
+                form_note: '<i data-lucide="info" size="13" style="vertical-align: middle;"></i> இது முன்பதிவு கோரிக்கை மட்டுமே. எங்கள் குழு சரிபார்த்து உறுதி செய்யும்.',
                 form_err_name: "தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்",
                 form_err_phone: "சரியான 10 இலக்க எண்ணை உள்ளிடவும்",
                 form_err_pickup: "புறப்படும் இடத்தை உள்ளிடவும்",
@@ -1930,7 +1824,7 @@
         }
 
         // =========================================
-        // 3. FLEET DATA
+        // 3. FLEET DATA (4 VEHICLES: Swift, Force, Innova, Crysta)
         // =========================================
         const fleetData = [
             {
@@ -1968,7 +1862,7 @@
         ];
 
         // =========================================
-        // 4. DESTINATIONS
+        // 4. DESTINATIONS (Exact Local Filenames)
         // =========================================
         const destinations = [
             { name: "Tenkasi", desc: "Kasi Viswanathar Temple & Courtallam Falls", img: "Dest1.jpg" },
@@ -1987,7 +1881,7 @@
         ];
 
         // =========================================
-        // 5. INITIALIZATION
+        // 5. INITIALIZATION & REVIEWS
         // =========================================
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
@@ -1997,11 +1891,11 @@
             setMinDate();
             initReviews();
             applyLanguage(currentLang);
-            initScrollReveal();
-            initNavbarScroll();
+            initScrollAnimations();
         });
 
-        function initNavbarScroll() {
+        function initScrollAnimations() {
+            // Navbar scroll effect
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
@@ -2010,25 +1904,23 @@
                     navbar.classList.remove('scrolled');
                 }
             });
-        }
 
-        function initScrollReveal() {
+            // Intersection Observer for reveal animations
             const observerOptions = {
                 threshold: 0.1,
-                rootMargin: '0px 0px -40px 0px'
+                rootMargin: '0px 0px -50px 0px'
             };
 
-            const observer = new IntersectionObserver((entries) => {
+            const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target); // Animate only once
                     }
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-                observer.observe(el);
+            document.querySelectorAll('.reveal').forEach(el => {
+                revealObserver.observe(el);
             });
         }
 
@@ -2044,30 +1936,34 @@
 
                 const card = document.createElement('div');
                 card.className = 'fleet-card reveal';
-                card.style.transitionDelay = `${index * 100}ms`; // Staggered animation
+                card.style.transitionDelay = `${index * 0.1}s`;
                 card.innerHTML = `
                     <div class="fleet-img-wrapper">
                         <img src="${vehicle.image}" alt="${vehicle.name}" class="fleet-img" loading="lazy">
                     </div>
                     <div class="fleet-info">
                         <h3 class="fleet-name">${vehicle.name}</h3>
-                        <div class="fleet-features">
-                            ${vehicle.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
-                        </div>
                         <div class="fleet-actions">
                             <span style="font-weight: 700; color: var(--navy); font-size: 0.85rem;">${vehicle.seats}</span>
-                            <button class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.8rem; border-color: var(--navy); color: var(--navy);" onclick="openFleetModal(${index})">Details</button>
+                            <button class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="openFleetModal(${index})">Details</button>
                         </div>
                     </div>
                 `;
                 track.appendChild(card);
             });
+            
             // Re-observe newly added elements
             setTimeout(() => {
-                document.querySelectorAll('.fleet-card.reveal').forEach(el => {
-                    // They will be picked up if we re-run observer, but since DOMContentLoaded already ran, 
-                    // we manually trigger or just let CSS handle it if we add 'active' later. 
-                    // Better to re-observe:
+                document.querySelectorAll('.reveal').forEach(el => {
+                    if (!el.classList.contains('active')) {
+                        // Observer will catch it if we re-run, but let's just trigger manually for dynamic content
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) entry.target.classList.add('active');
+                            });
+                        }, { threshold: 0.1 });
+                        observer.observe(card);
+                    }
                 });
             }, 100);
         }
@@ -2104,15 +2000,13 @@
             destinations.forEach((dest, index) => {
                 const card = document.createElement('div');
                 card.className = 'dest-card reveal';
-                card.style.transitionDelay = `${index * 60}ms`;
+                card.style.transitionDelay = `${index * 0.05}s`;
                 card.innerHTML = `
-                    <div class="dest-img-wrapper">
-                        <img src="${dest.img}" alt="${dest.name}" loading="lazy">
-                    </div>
+                    <img src="${dest.img}" alt="${dest.name}" loading="lazy">
                     <div class="dest-overlay">
-                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem;">${dest.name}</h3>
-                        <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.8rem; line-height: 1.4;">${dest.desc}</p>
-                        <button type="button" class="btn btn-primary" onclick="selectDestination('${escapeJs(dest.name)}')" style="padding: 0.45rem 1rem; font-size: 0.8rem; width: fit-content; border: none;">Plan Trip</button>
+                        <h3 style="font-size: 1.15rem; font-weight: 700;">${dest.name}</h3>
+                        <p style="font-size: 0.8rem; opacity: 0.9; margin-bottom: 0.6rem;">${dest.desc}</p>
+                        <button type="button" class="btn btn-primary" onclick="selectDestination('${escapeJs(dest.name)}')" style="padding: 0.4rem 0.85rem; font-size: 0.78rem; width: fit-content; border: none;">Plan Trip</button>
                     </div>
                 `;
                 track.appendChild(card);
@@ -2224,7 +2118,7 @@
 
                 const submitBtn = document.getElementById('reviewSubmitBtn');
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = currentLang === 'ta' ? 'பதிவாகிறது...' : 'Posting...';
+                submitBtn.textContent = currentLang === 'ta' ? 'பதிவாகிறது...' : 'Posting...';
 
                 const newReview = { name, route, rating, comment, created_at: new Date().toISOString() };
 
@@ -2269,7 +2163,7 @@
                     alert(currentLang === 'ta' ? 'உங்கள் கருத்து வெற்றிகரமாக பதிவு செய்யப்பட்டது!' : 'Review posted successfully!');
                 } finally {
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = currentLang === 'ta' ? 'கருத்தை பதிவு செய்க' : 'Post Review';
+                    submitBtn.textContent = currentLang === 'ta' ? 'கருத்தை பதிவு செய்க' : 'Post Review';
                 }
             });
         }
@@ -2334,13 +2228,12 @@
                 return;
             }
 
-            reviewsList.forEach((r, index) => {
+            reviewsList.forEach(r => {
                 const item = document.createElement('div');
-                item.className = 'review-item reveal';
-                item.style.transitionDelay = `${index * 100}ms`;
+                item.className = 'review-item';
                 const starsMarkup = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
                 item.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <span class="reviewer-meta">${escapeHtml(r.name || 'Verified Traveler')}</span>
                             <span class="reviewer-route">${escapeHtml(r.route || 'Outstation Trip')}</span>
@@ -2351,14 +2244,6 @@
                 `;
                 feed.appendChild(item);
             });
-            
-            // Re-observe new review items
-            setTimeout(() => {
-                document.querySelectorAll('.review-item.reveal').forEach(el => {
-                    // Trigger animation manually for new items
-                    el.classList.add('active');
-                });
-            }, 50);
         }
 
         function escapeHtml(str) {
