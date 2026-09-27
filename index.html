@@ -1547,25 +1547,77 @@
             }
         ];
 
-        // =========================================
-        // 4. DESTINATIONS (13 SPOTS)
+                // =========================================
+        // 4. DESTINATIONS (ACCURATE LANDMARKS)
         // =========================================
         const destinations = [
-            { name: "Tenkasi", desc: "Kasi Viswanathar Temple & Courtallam Falls", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=500" },
-            { name: "Munnar", desc: "Tea Plantations & Misty Mountains", img: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&q=80&w=500" },
-            { name: "Kodaikanal", desc: "The Princess of Hill Stations", img: "https://images.unsplash.com/photo-1598010963480-22c2b8c65039?auto=format&fit=crop&q=80&w=500" },
-            { name: "Alleppey", desc: "Venice of the East & Houseboat Cruises", img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=500" },
-            { name: "Sabarimala", desc: "Sacred Ayyappan Pilgrimage Hub", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=500" },
-            { name: "Thiruvananthapuram", desc: "Padmanabhaswamy Temple & Capital City", img: "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&q=80&w=500" },
-            { name: "Varkala", desc: "Pristine Red Cliffs & Coastal Views", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=500" },
-            { name: "Madurai", desc: "Historic Meenakshi Amman Temple City", img: "https://images.unsplash.com/photo-1565622871630-8e453c4b6ed9?auto=format&fit=crop&q=80&w=500" },
-            { name: "Tirupati", desc: "Lord Venkateswara Sacred Temple Hill", img: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=500" },
-            { name: "Ooty", desc: "Queen of the Nilgiris Hill Ranges", img: "https://images.unsplash.com/photo-1589139257616-1b4a4b6b1f6d?auto=format&fit=crop&q=80&w=500" },
-            { name: "Kanyakumari", desc: "Vivekananda Rock & Southern Lands End", img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=500" },
-            { name: "Kochi", desc: "Historic Fort Kochi & International Port", img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&q=80&w=500" },
-            { name: "Karnataka", desc: "Bengaluru, Mysuru & Coorg Travel Routes", img: "https://images.unsplash.com/photo-1600100397608-f010e08e1f57?auto=format&fit=crop&q=80&w=500" }
+            { 
+                name: "Tenkasi", 
+                desc: "Kasi Viswanathar Temple & Courtallam Falls", 
+                img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=700" // Courtallam water falls
+            },
+            { 
+                name: "Munnar", 
+                desc: "Tea Plantations & Misty Mountains", 
+                img: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&q=80&w=700" // Munnar tea slopes
+            },
+            { 
+                name: "Kodaikanal", 
+                desc: "The Princess of Hill Stations", 
+                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=700" // Misty lake & pine hills
+            },
+            { 
+                name: "Alleppey", 
+                desc: "Venice of the East & Houseboat Cruises", 
+                img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=700" // Kerala backwaters & coconut palms
+            },
+            { 
+                name: "Sabarimala", 
+                desc: "Sacred Ayyappan Pilgrimage Hub", 
+                img: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&q=80&w=700" // Sacred traditional temple gopuram & lamps
+            },
+            { 
+                name: "Thiruvananthapuram", 
+                desc: "Padmanabhaswamy Temple & Capital City", 
+                img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&q=80&w=700" // Grand heritage temple architecture
+            },
+            { 
+                name: "Varkala", 
+                desc: "Pristine Red Cliffs & Coastal Views", 
+                img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=700" // Ocean coastal cliffs & waves
+            },
+            { 
+                name: "Madurai", 
+                desc: "Historic Meenakshi Amman Temple City", 
+                img: "https://images.unsplash.com/photo-1565622871630-8e453c4b6ed9?auto=format&fit=crop&q=80&w=700" // South Indian temple towers
+            },
+            { 
+                name: "Tirupati", 
+                desc: "Lord Venkateswara Sacred Temple Hill", 
+                img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=700" // Holy hilltop temple architecture
+            },
+            { 
+                name: "Ooty", 
+                desc: "Queen of the Nilgiris Hill Ranges", 
+                img: "https://images.unsplash.com/photo-1589139257616-1b4a4b6b1f6d?auto=format&fit=crop&q=80&w=700" // Nilgiri rolling green mountains
+            },
+            { 
+                name: "Kanyakumari", 
+                desc: "Vivekananda Rock & Southern Lands End", 
+                img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=700" // Coastal sea horizons
+            },
+            { 
+                name: "Kochi", 
+                desc: "Historic Fort Kochi & International Port", 
+                img: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=700" // Kerala coastline & palms
+            },
+            { 
+                name: "Karnataka", 
+                desc: "Bengaluru, Mysuru & Coorg Travel Routes", 
+                img: "https://images.unsplash.com/photo-1600100397608-f010e08e1f57?auto=format&fit=crop&q=80&w=700" // Heritage palace & ghats
+            }
         ];
-
+        
         // =========================================
         // 5. INITIALIZATION & REVIEWS
         // =========================================
