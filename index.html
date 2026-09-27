@@ -56,7 +56,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Utilities */
         .container {
             width: 100%;
             max-width: 1280px;
@@ -69,7 +68,6 @@
         .bg-navy { background-color: var(--navy); color: var(--white); }
         .bg-charcoal { background-color: var(--charcoal); color: var(--white); }
         
-        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -106,7 +104,6 @@
             color: var(--navy);
         }
 
-        /* Language Toggle Button */
         .lang-btn {
             background: rgba(255, 255, 255, 0.08);
             color: var(--white);
@@ -127,17 +124,6 @@
             background: var(--gold);
             color: var(--navy);
             border-color: var(--gold);
-        }
-
-        /* Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* =========================================
@@ -281,7 +267,7 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(rgba(10, 25, 47, 0.78), rgba(10, 25, 47, 0.88)), 
-                        url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1800') center/cover no-repeat;
+                        url('Car1.png') center/cover no-repeat;
             transform: scale(1.05);
         }
         .hero-content {
@@ -325,7 +311,7 @@
         }
 
         /* =========================================
-           4. QUICK CONTACT BAR (Fixed Overlap & Edge Overflow)
+           4. QUICK CONTACT BAR
            ========================================= */
         .quick-contact-wrapper {
             position: relative;
@@ -413,7 +399,7 @@
         }
 
         /* =========================================
-           6. FLEET SECTION (4 VEHICLES)
+           6. FLEET SECTION (4 CARS)
            ========================================= */
         .fleet-container {
             position: relative;
@@ -555,11 +541,11 @@
         }
 
         /* =========================================
-           8. BOOKING FORM (Fixed Overlap & Cutoff)
+           8. BOOKING FORM
            ========================================= */
         #booking {
             background: #f1f5f9;
-            padding-bottom: 5.5rem; /* Leaves space above the floating action bar */
+            padding-bottom: 6rem;
         }
         .booking-form {
             background: var(--white);
@@ -607,7 +593,7 @@
         .form-group.error .error-msg { display: block; }
 
         /* =========================================
-           9. WHY CHOOSE US (4 IN 1 CLEAN ROW)
+           9. WHY CHOOSE US
            ========================================= */
         .stats-row {
             display: grid;
@@ -635,7 +621,7 @@
         }
 
         /* =========================================
-           10. GALLERY (6 PHOTOS)
+           10. GALLERY (Travel1.png to Travel6.png)
            ========================================= */
         .gallery-grid {
             display: grid;
@@ -723,19 +709,28 @@
             outline: none;
             border-color: var(--gold);
         }
+
         .star-rating-select {
             display: flex;
-            gap: 0.4rem;
+            gap: 0.35rem;
             margin: 0.4rem 0 1rem;
+        }
+        .star-btn {
+            background: none;
+            border: none;
             cursor: pointer;
-        }
-        .star-rating-select svg {
+            font-size: 1.85rem;
+            line-height: 1;
+            padding: 0 0.15rem;
             color: #475569;
-            transition: color 0.2s;
+            transition: transform 0.15s ease, color 0.15s ease;
+            user-select: none;
         }
-        .star-rating-select svg.selected {
+        .star-btn.active {
             color: var(--gold);
-            fill: var(--gold);
+        }
+        .star-btn:hover {
+            transform: scale(1.2);
         }
 
         .reviews-feed {
@@ -758,30 +753,74 @@
         .review-comment { color: var(--text-muted); font-size: 0.88rem; margin-top: 0.4rem; }
 
         /* =========================================
-           12. CONTACT & FOOTER
+           12. COLORFUL BRAND ICONS ROW
            ========================================= */
-        .contact-cards {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        .contact-icons-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.75rem;
             margin-top: 2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            flex-wrap: wrap;
         }
-        .contact-card {
-            background: rgba(255,255,255,0.05);
-            padding: 1.75rem 1.25rem;
-            border-radius: var(--radius);
-            border: 1px solid rgba(255,255,255,0.08);
-            text-align: center;
+        .contact-icon-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--white);
+            transition: var(--transition);
         }
-        .contact-card i { color: var(--gold); margin-bottom: 0.75rem; }
-        .contact-card a { color: var(--white); text-decoration: none; font-weight: 600; display: block; margin-top: 0.4rem; }
+        .contact-icon-btn:hover {
+            transform: translateY(-4px);
+        }
+        .contact-icon-circle {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .contact-icon-btn:hover .contact-icon-circle {
+            transform: scale(1.08);
+        }
+
+        .icon-call {
+            background: #0A192F;
+            color: #D4AF37;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+        }
+        .icon-wa {
+            background: #25D366;
+            color: #FFFFFF;
+        }
+        .icon-insta {
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            color: #FFFFFF;
+        }
+        .icon-map {
+            background: #ef4444;
+            color: #FFFFFF;
+        }
+
+        .contact-icon-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+        }
+        .contact-icon-btn:hover .contact-icon-label {
+            color: var(--white);
+        }
 
         footer {
             background: #050d1a;
-            padding: 2rem 0 6rem; /* Extra bottom padding so floating bar doesn't cover copyright */
+            padding: 2rem 0 6rem;
             color: var(--text-muted);
             font-size: 0.85rem;
             border-top: 1px solid rgba(255,255,255,0.08);
@@ -792,7 +831,7 @@
         }
 
         /* =========================================
-           13. FLOATING MOBILE ACTIONS (Fixed Viewport Clamping)
+           13. FLOATING MOBILE ACTIONS
            ========================================= */
         .floating-actions {
             position: fixed;
@@ -836,7 +875,6 @@
         <div class="container nav-container">
             <a href="#" class="logo">SKT <span>TRAVELS</span></a>
             
-            <!-- Desktop Links -->
             <ul class="nav-links">
                 <li><a href="#home" data-i18n="nav_home">Home</a></li>
                 <li><a href="#about" data-i18n="nav_about">About</a></li>
@@ -853,7 +891,6 @@
                 </li>
             </ul>
 
-            <!-- Mobile Actions -->
             <div class="mobile-actions">
                 <button class="lang-btn" onclick="toggleLanguage()" aria-label="Toggle language">
                     <i data-lucide="globe" size="14"></i>
@@ -901,7 +938,7 @@
         </div>
     </section>
 
-    <!-- Quick Contact Bar (Cleanly Contained) -->
+    <!-- Quick Contact Bar -->
     <div class="quick-contact-wrapper container">
         <div class="quick-contact">
             <a href="tel:9840708764" class="qc-item">
@@ -919,7 +956,13 @@
                 </div>
             </a>
             <a href="https://www.instagram.com/shenbagakumar_m?stkn=NnplanZ0djJlMDdu" target="_blank" class="qc-item">
-                <div class="qc-icon" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white;"><i data-lucide="instagram" size="18"></i></div>
+                <div class="qc-icon" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                    </svg>
+                </div>
                 <div>
                     <div class="qc-label" data-i18n="qc_insta_label">Instagram</div>
                     <div class="qc-value" data-i18n="qc_insta_val">Follow Us</div>
@@ -928,12 +971,12 @@
         </div>
     </div>
 
-    <!-- About Section -->
+    <!-- About Section (About.png) -->
     <section class="section-padding" id="about">
         <div class="container">
             <div class="about-grid">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000" alt="SKT Travels Vehicle" loading="lazy">
+                    <img src="About.png" alt="SKT Travels Vehicle" loading="lazy">
                 </div>
                 <div>
                     <span class="section-subtitle" data-i18n="about_subtitle">About Us</span>
@@ -950,7 +993,7 @@
         </div>
     </section>
 
-    <!-- Fleet Section (4 Exact Cars) -->
+    <!-- Fleet Section (Car1.png to Car4.png) -->
     <section class="section-padding bg-charcoal" id="fleet">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2.5rem;">
@@ -979,7 +1022,7 @@
         </div>
     </div>
 
-    <!-- Explore Destinations (13 Locations) -->
+    <!-- Destinations -->
     <section class="section-padding bg-navy" id="destinations">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2.5rem;">
@@ -990,7 +1033,7 @@
         </div>
     </section>
 
-    <!-- Booking Section (Fixed Cutoff & Overlap) -->
+    <!-- Booking Section -->
     <section class="section-padding" id="booking">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2.25rem;">
@@ -1059,7 +1102,7 @@
         </div>
     </section>
 
-    <!-- Why Choose Us (Compact 4-In-1 Line) -->
+    <!-- Why Choose Us -->
     <section class="section-padding bg-navy">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2rem;">
@@ -1086,7 +1129,7 @@
         </div>
     </section>
 
-    <!-- Gallery (6 Real Relevant Places) -->
+    <!-- Gallery (Travel1.png to Travel6.png in order) -->
     <section class="section-padding" id="gallery">
         <div class="container">
             <div class="text-center" style="margin-bottom: 2.25rem;">
@@ -1094,23 +1137,23 @@
                 <h2 class="section-title" data-i18n="gallery_title">Travel <span class="text-gold">Moments</span></h2>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox(this)" title="Courtallam Waterfalls, Tenkasi">
-                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=700" alt="Tenkasi Trip" loading="lazy">
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 1">
+                    <img src="Travel1.png" alt="Travel Moment 1" loading="lazy">
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" title="Munnar Tea Hills">
-                    <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&q=80&w=700" alt="Munnar Hills" loading="lazy">
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 2">
+                    <img src="Travel2.png" alt="Travel Moment 2" loading="lazy">
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" title="Alleppey Backwaters">
-                    <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=700" alt="Alleppey" loading="lazy">
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 3">
+                    <img src="Travel3.png" alt="Travel Moment 3" loading="lazy">
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" title="Madurai Meenakshi Temple">
-                    <img src="https://images.unsplash.com/photo-1565622871630-8e453c4b6ed9?auto=format&fit=crop&q=80&w=700" alt="Madurai" loading="lazy">
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 4">
+                    <img src="Travel4.png" alt="Travel Moment 4" loading="lazy">
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" title="Ooty Hills">
-                    <img src="https://images.unsplash.com/photo-1589139257616-1b4a4b6b1f6d?auto=format&fit=crop&q=80&w=700" alt="Ooty Nilgiris" loading="lazy">
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 5">
+                    <img src="Travel5.png" alt="Travel Moment 5" loading="lazy">
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" title="Kanyakumari Coast">
-                    <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=700" alt="Kanyakumari" loading="lazy">
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 6">
+                    <img src="Travel6.png" alt="Travel Moment 6" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1132,21 +1175,26 @@
             </div>
 
             <div class="reviews-wrapper">
-                <!-- Form to Add Review -->
                 <div class="review-form-card">
                     <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--gold);" data-i18n="rev_form_title">Leave a Review</h3>
                     <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;" data-i18n="rev_form_sub">Rate your journey with us.</p>
+
                     <form id="reviewForm">
+                        <div id="nameInputWrapper">
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_name_label">Your Name *</label>
+                            <input type="text" id="reviewName" required placeholder="e.g. Ramesh Kumar">
+                        </div>
+
                         <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_route_label">Trip Route (Optional)</label>
                         <input type="text" id="reviewRoute" placeholder="e.g. Tenkasi to Munnar / Sabarimala">
 
                         <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_rating_label">Your Rating</label>
                         <div class="star-rating-select" id="starSelector">
-                            <i data-lucide="star" data-rating="1"></i>
-                            <i data-lucide="star" data-rating="2"></i>
-                            <i data-lucide="star" data-rating="3"></i>
-                            <i data-lucide="star" data-rating="4"></i>
-                            <i data-lucide="star" data-rating="5" class="selected"></i>
+                            <button type="button" class="star-btn active" data-rating="1" aria-label="1 star">★</button>
+                            <button type="button" class="star-btn active" data-rating="2" aria-label="2 stars">★</button>
+                            <button type="button" class="star-btn active" data-rating="3" aria-label="3 stars">★</button>
+                            <button type="button" class="star-btn active" data-rating="4" aria-label="4 stars">★</button>
+                            <button type="button" class="star-btn active" data-rating="5" aria-label="5 stars">★</button>
                         </div>
                         <input type="hidden" id="reviewRating" value="5">
 
@@ -1159,7 +1207,6 @@
                     </form>
                 </div>
 
-                <!-- Reviews Feed -->
                 <div>
                     <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: var(--white);" data-i18n="rev_recent_title">Recent Traveler Feedback</h3>
                     <div class="reviews-feed" id="reviewsFeed"></div>
@@ -1176,23 +1223,41 @@
                 <h2 class="section-title" style="color: var(--white);" data-i18n="cnt_title">Ready for Your Next <span class="text-gold">Journey?</span></h2>
                 <p style="color: var(--text-muted); max-width: 600px; margin: 0.75rem auto 1.5rem; font-size: 0.92rem;" data-i18n="cnt_desc">Contact SKT Travels and plan your trip across Tamil Nadu and Kerala.</p>
             </div>
-            <div class="contact-cards">
-                <div class="contact-card">
-                    <i data-lucide="phone" size="28"></i>
-                    <h3 data-i18n="cnt_card_call">Call Us</h3>
-                    <a href="tel:9840708764">9840708764</a>
-                </div>
-                <div class="contact-card">
-                    <i data-lucide="message-circle" size="28"></i>
-                    <h3 data-i18n="cnt_card_wa">WhatsApp</h3>
-                    <a href="https://wa.me/919840708764" target="_blank" data-i18n="cnt_card_wa_link">Chat on WhatsApp</a>
-                </div>
-                <div class="contact-card">
-                    <i data-lucide="map-pin" size="28"></i>
-                    <h3 data-i18n="cnt_card_loc">Location</h3>
-                    <a href="#" style="cursor: default;" data-i18n="cnt_card_loc_val">Tenkasi, Tamil Nadu</a>
-                </div>
+            
+            <div class="contact-icons-row">
+                <a href="tel:9840708764" class="contact-icon-btn" title="Call 9840708764">
+                    <div class="contact-icon-circle icon-call">
+                        <i data-lucide="phone" size="24"></i>
+                    </div>
+                    <span class="contact-icon-label" data-i18n="cnt_card_call">Call Us</span>
+                </a>
+
+                <a href="https://wa.me/919840708764" target="_blank" class="contact-icon-btn" title="Chat on WhatsApp">
+                    <div class="contact-icon-circle icon-wa">
+                        <i data-lucide="message-circle" size="24"></i>
+                    </div>
+                    <span class="contact-icon-label" data-i18n="cnt_card_wa">WhatsApp</span>
+                </a>
+
+                <a href="https://www.instagram.com/shenbagakumar_m?stkn=NnplanZ0djJlMDdu" target="_blank" class="contact-icon-btn" title="Follow on Instagram">
+                    <div class="contact-icon-circle icon-insta">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                        </svg>
+                    </div>
+                    <span class="contact-icon-label">Instagram</span>
+                </a>
+
+                <a href="https://maps.google.com/?q=Tenkasi,Tamil+Nadu" target="_blank" class="contact-icon-btn" title="View Tenkasi on Google Maps">
+                    <div class="contact-icon-circle icon-map">
+                        <i data-lucide="map-pin" size="24"></i>
+                    </div>
+                    <span class="contact-icon-label" data-i18n="cnt_card_loc">Tenkasi</span>
+                </a>
             </div>
+
             <div class="text-center" style="margin-top: 2.25rem;">
                 <a href="#booking" class="btn btn-primary" data-i18n="cnt_btn">Book Your Trip Now</a>
             </div>
@@ -1312,6 +1377,7 @@
                 rev_desc: "Share your experience riding with SKT Travels or read real customer feedback.",
                 rev_form_title: "Leave a Review",
                 rev_form_sub: "Rate your journey with us.",
+                rev_name_label: "Your Name *",
                 rev_route_label: "Trip Route (Optional)",
                 rev_rating_label: "Your Rating",
                 rev_comment_label: "Your Feedback / Review *",
@@ -1322,9 +1388,7 @@
                 cnt_desc: "Contact SKT Travels and plan your trip across Tamil Nadu and Kerala.",
                 cnt_card_call: "Call Us",
                 cnt_card_wa: "WhatsApp",
-                cnt_card_wa_link: "Chat on WhatsApp",
-                cnt_card_loc: "Location",
-                cnt_card_loc_val: "Tenkasi, Tamil Nadu",
+                cnt_card_loc: "Tenkasi",
                 cnt_btn: "Book Your Trip Now",
                 footer_rights: "© 2026 SKT Travels. All rights reserved.",
                 float_call: "Call",
@@ -1396,6 +1460,7 @@
                 rev_desc: "எங்களோடு பயணித்த பயணிகளின் கருத்துக்களைப் படியுங்கள் அல்லது உங்கள் அனுபவத்தை பதிவு செய்யுங்கள்.",
                 rev_form_title: "கருத்து தெரிவிக்க",
                 rev_form_sub: "உங்கள் பயண அனுபவத்தை மதிப்பிட்டு பதிவு செய்யுங்கள்.",
+                rev_name_label: "உங்கள் பெயர் *",
                 rev_route_label: "பயண வழி (விருப்பப்பட்டால்)",
                 rev_rating_label: "உங்கள் மதிப்பீடு",
                 rev_comment_label: "உங்கள் கருத்து *",
@@ -1406,9 +1471,7 @@
                 cnt_desc: "SKT டிராவல்ஸை தொடர்பு கொண்டு உங்கள் பயணத்தை உடனடியாக திட்டமிடுங்கள்.",
                 cnt_card_call: "அழைக்க",
                 cnt_card_wa: "வாட்ஸ்அப்",
-                cnt_card_wa_link: "வாட்ஸ்அப்பில் பேச",
-                cnt_card_loc: "இடம்",
-                cnt_card_loc_val: "தென்காசி, தமிழ்நாடு",
+                cnt_card_loc: "தென்காசி",
                 cnt_btn: "இப்போதே பதிவு செய்யுங்கள்",
                 footer_rights: "© 2026 SKT டிராவல்ஸ். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
                 float_call: "அழைக்க",
@@ -1460,13 +1523,13 @@
         }
 
         // =========================================
-        // 3. FLEET DATA (4 EXACT VEHICLES)
+        // 3. FLEET DATA (Car1.png to Car4.png)
         // =========================================
         const fleetData = [
             {
                 id: 1,
                 name: "4 Passengers Toyota Innova Car",
-                image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=700",
+                image: "Car1.png",
                 seats: "4 Passengers",
                 features: ["AC", "Captain Seats", "Luxury Comfort"],
                 description: "Spacious and comfortable premium Toyota Innova setup ideal for couples and small families."
@@ -1474,7 +1537,7 @@
             {
                 id: 2,
                 name: "Force Traveler Van",
-                image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&q=80&w=700",
+                image: "Car2.png",
                 seats: "12-17 Seats",
                 features: ["AC", "Pushback Seats", "Group Travel"],
                 description: "Ideal for family temple pilgrimages, Sabarimala trips, and group tours across TN & Kerala."
@@ -1482,7 +1545,7 @@
             {
                 id: 3,
                 name: "Toyota Innova Crysta",
-                image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=700",
+                image: "Car3.png",
                 seats: "7 Passengers",
                 features: ["Dual AC", "Premium Audio", "Hill Specialist"],
                 description: "The gold standard in outstation highway and ghat road travel with smooth power and comfort."
@@ -1490,7 +1553,7 @@
             {
                 id: 4,
                 name: "Toyota Innova 2.5G",
-                image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=700",
+                image: "Car4.png",
                 seats: "7 Passengers",
                 features: ["AC", "Spacious Boot", "Budget Friendly"],
                 description: "Reliable, robust, and cost-effective workhorse for all long-distance outstation routes."
@@ -1498,7 +1561,7 @@
         ];
 
         // =========================================
-        // 4. DESTINATIONS (13 EXACT LOCATIONS)
+        // 4. DESTINATIONS (13 SPOTS)
         // =========================================
         const destinations = [
             { name: "Tenkasi", desc: "Kasi Viswanathar Temple & Courtallam Falls", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=500" },
@@ -1517,7 +1580,7 @@
         ];
 
         // =========================================
-        // 5. INITIALIZATION
+        // 5. INITIALIZATION & REVIEWS
         // =========================================
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
@@ -1534,13 +1597,11 @@
             const select = document.getElementById('vehicle');
             
             fleetData.forEach((vehicle, index) => {
-                // Populate Dropdown
                 const option = document.createElement('option');
                 option.value = vehicle.name;
                 option.textContent = vehicle.name;
                 select.appendChild(option);
 
-                // Populate Cards
                 const card = document.createElement('div');
                 card.className = 'fleet-card';
                 card.innerHTML = `
@@ -1611,7 +1672,7 @@
         }
 
         // =========================================
-        // 6. WHATSAPP BOOKING SCRIPT (Fixed)
+        // 6. BOOKING VIA WHATSAPP
         // =========================================
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1662,7 +1723,7 @@
         });
 
         // =========================================
-        // 7. REVIEWS (FIXED POSTING & PERSISTENCE)
+        // 7. REVIEW POSTING (HTML STAR BUTTONS)
         // =========================================
         function initReviews() {
             setupStarSelector();
@@ -1671,31 +1732,31 @@
             document.getElementById('reviewForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
-                const defaultName = currentLang === 'ta' ? "பயணி" : "Verified Traveler";
+                const name = document.getElementById('reviewName').value.trim() || (currentLang === 'ta' ? "பயணி" : "Verified Traveler");
                 const route = document.getElementById('reviewRoute').value.trim() || (currentLang === 'ta' ? "சுற்றுலா பயணம்" : "Outstation Trip");
-                const rating = parseInt(document.getElementById('reviewRating').value) || 5;
+                const rating = parseInt(document.getElementById('reviewRating').value, 10) || 5;
                 const comment = document.getElementById('reviewComment').value.trim();
 
                 const submitBtn = document.getElementById('reviewSubmitBtn');
                 submitBtn.disabled = true;
                 submitBtn.textContent = currentLang === 'ta' ? 'பதிவாகிறது...' : 'Posting...';
 
-                const newReview = { name: defaultName, route, rating, comment, created_at: new Date().toISOString() };
+                const newReview = { name, route, rating, comment, created_at: new Date().toISOString() };
 
                 try {
                     if (supabaseClient) {
                         const { error } = await supabaseClient
                             .from('reviews')
-                            .insert([{ name: defaultName, route, rating, comment }]);
+                            .insert([{ name, route, rating, comment }]);
                         if (error) throw error;
                     }
-                    
-                    // Always cache to local browser state for immediate display
+
                     const stored = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
                     stored.unshift(newReview);
                     localStorage.setItem('skt_reviews', JSON.stringify(stored));
 
-                    document.getElementById('reviewForm').reset();
+                    document.getElementById('reviewComment').value = '';
+                    document.getElementById('reviewRoute').value = '';
                     document.getElementById('reviewRating').value = 5;
                     updateStarsUI(5);
                     await fetchAndRenderReviews();
@@ -1703,12 +1764,12 @@
                 } catch (err) {
                     console.error('Error posting review:', err);
                     
-                    // Client fallback if Supabase RLS is misconfigured
                     const stored = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
                     stored.unshift(newReview);
                     localStorage.setItem('skt_reviews', JSON.stringify(stored));
-                    
-                    document.getElementById('reviewForm').reset();
+
+                    document.getElementById('reviewComment').value = '';
+                    document.getElementById('reviewRoute').value = '';
                     document.getElementById('reviewRating').value = 5;
                     updateStarsUI(5);
                     await fetchAndRenderReviews();
@@ -1721,25 +1782,26 @@
         }
 
         function setupStarSelector() {
-            const stars = document.querySelectorAll('#starSelector svg');
-            stars.forEach(star => {
-                star.addEventListener('click', function() {
-                    const r = parseInt(this.getAttribute('data-rating'));
-                    document.getElementById('reviewRating').value = r;
-                    updateStarsUI(r);
+            const buttons = document.querySelectorAll('#starSelector .star-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const rating = parseInt(this.getAttribute('data-rating'), 10);
+                    document.getElementById('reviewRating').value = rating;
+                    updateStarsUI(rating);
                 });
             });
             updateStarsUI(5);
         }
 
         function updateStarsUI(rating) {
-            const stars = document.querySelectorAll('#starSelector svg');
-            stars.forEach(star => {
-                const r = parseInt(star.getAttribute('data-rating'));
-                if (r <= rating) {
-                    star.classList.add('selected');
+            const buttons = document.querySelectorAll('#starSelector .star-btn');
+            buttons.forEach(btn => {
+                const btnRating = parseInt(btn.getAttribute('data-rating'), 10);
+                if (btnRating <= rating) {
+                    btn.classList.add('active');
                 } else {
-                    star.classList.remove('selected');
+                    btn.classList.remove('active');
                 }
             });
         }
@@ -1768,7 +1830,6 @@
 
             feed.innerHTML = '';
             
-            // Pure live display - zero mock reviews
             if (reviewsList.length === 0) {
                 feed.innerHTML = `
                     <div style="text-align: center; padding: 2rem 1rem; color: var(--text-muted);">
@@ -1809,7 +1870,7 @@
         }
 
         // =========================================
-        // 8. UI NAVIGATION & LIGHTBOX
+        // 8. UI INTERACTIONS & LIGHTBOX
         // =========================================
         function initNavbar() {
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
