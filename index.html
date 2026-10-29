@@ -4,11 +4,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WLY5JXQQ3J"></script>
     <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-     gtag('config', 'G-WLY5JXQQ3J');
+      gtag('config', 'G-WLY5JXQQ3J');
     </script>
 
     <meta charset="UTF-8">
@@ -1182,4 +1182,1356 @@
             text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
         }
         .star-btn:hover {
-            transform: scale
+            transform: scale(1.3) rotate(-8deg);
+        }
+
+        .reviews-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 520px;
+            overflow-y: auto;
+            padding-right: 0.35rem;
+        }
+        .reviews-feed::-webkit-scrollbar { width: 4px; }
+        .reviews-feed::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.4); border-radius: 4px; }
+        .review-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 1rem 1.25rem;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(4px);
+        }
+        .review-item:hover {
+            background: rgba(212, 175, 55, 0.06);
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .reviewer-meta { font-weight: 700; color: var(--white); font-size: 0.95rem; }
+        .reviewer-route { font-size: 0.78rem; color: var(--gold); display: block; }
+        .stars-display { color: var(--gold); font-size: 0.9rem; text-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
+        .review-comment { color: var(--text-muted); font-size: 0.88rem; margin-top: 0.4rem; }
+
+        /* =========================================
+           12. COLORFUL BRAND ICONS ROW
+           ========================================= */
+        .contact-icons-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            justify-items: center;
+            align-items: start;
+            gap: 0.5rem;
+            max-width: 440px;
+            margin: 2rem auto 0 auto;
+            width: 100%;
+            padding: 0 0.5rem;
+        }
+        .contact-icon-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--white);
+            transition: var(--transition-smooth);
+            width: 100%;
+            text-align: center;
+        }
+        .contact-icon-btn:hover {
+            transform: translateY(-6px);
+        }
+        .contact-icon-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+            position: relative;
+        }
+        .contact-icon-circle::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .contact-icon-btn:hover .contact-icon-circle {
+            transform: scale(1.12) rotate(8deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        .contact-icon-btn:hover .contact-icon-circle::after {
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .icon-call {
+            background: #0A192F;
+            color: #D4AF37;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+        }
+        .icon-wa {
+            background: #25D366;
+            color: #FFFFFF;
+        }
+        .icon-insta {
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            color: #FFFFFF;
+        }
+        .icon-map {
+            background: #ef4444;
+            color: #FFFFFF;
+        }
+
+        .contact-icon-label {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-icon-btn:hover .contact-icon-label {
+            color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        @media (min-width: 480px) {
+            .contact-icons-row {
+                gap: 1.25rem;
+                max-width: 520px;
+            }
+            .contact-icon-circle {
+                width: 58px;
+                height: 58px;
+            }
+            .contact-icon-label {
+                font-size: 0.8rem;
+            }
+        }
+
+        footer {
+            background: #050d1a;
+            padding: 2.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            text-align: center;
+        }
+
+        /* =========================================
+           13. ORIGINAL SCROLL REVEAL ANIMATIONS (For all other sections)
+           ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.45s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.55s; opacity: 1; transform: translateY(0); }
+
+        /* =========================================
+           14. MISC ENHANCEMENTS
+           ========================================= */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+            50% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+        }
+        .pulse-glow { animation: pulseGlow 2.5s ease-out infinite; }
+
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #0A192F; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, #D4AF37, #B5952F); 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #B5952F; }
+
+        ::selection {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        [data-i18n] {
+            transition: opacity 0.35s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">SKT <span>TRAVELS</span></a>
+            
+            <ul class="nav-links">
+                <li><a href="#home" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" data-i18n="nav_about">About</a></li>
+                <li><a href="#fleet" data-i18n="nav_fleet">Fleet</a></li>
+                <li><a href="#destinations" data-i18n="nav_destinations">Destinations</a></li>
+                <li><a href="#reviews" data-i18n="nav_reviews">Reviews</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                <li><a href="#booking" class="btn btn-primary" data-i18n="nav_book">Book Your Trip</a></li>
+                <li class="desktop-lang">
+                    <button class="lang-btn" onclick="toggleLanguage()" aria-label="Toggle language">
+                        <i data-lucide="globe" size="14"></i>
+                        <span id="langLabelDesktop">தமிழ்</span>
+                    </button>
+                </li>
+            </ul>
+
+            <div class="mobile-actions">
+                <button class="lang-btn" onclick="toggleLanguage()" aria-label="Toggle language">
+                    <i data-lucide="globe" size="14"></i>
+                    <span id="langLabelMobile">தமிழ்</span>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+                    <i data-lucide="menu" size="24"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div>
+            <button class="close-menu" id="closeMenu" aria-label="Close menu"><i data-lucide="x" size="24"></i></button>
+            <div class="logo" style="margin-bottom: 2rem;">SKT <span>TRAVELS</span></div>
+            <ul class="mobile-menu-links">
+                <li><a href="#home" class="mobile-link" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" class="mobile-link" data-i18n="nav_about">About</a></li>
+                <li><a href="#fleet" class="mobile-link" data-i18n="nav_fleet">Fleet</a></li>
+                <li><a href="#destinations" class="mobile-link" data-i18n="nav_destinations">Destinations</a></li>
+                <li><a href="#reviews" class="mobile-link" data-i18n="nav_reviews">Reviews</a></li>
+                <li><a href="#contact" class="mobile-link" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+        </div>
+        <a href="#booking" class="btn btn-primary mobile-link" style="width: 100%; text-align: center;" data-i18n="nav_book">Book Your Trip</a>
+    </div>
+
+    <!-- Hero Section (banner1.png) -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-location">
+                <i data-lucide="map-pin" size="15"></i>
+                <span data-i18n="hero_location">Tenkasi • Tamil Nadu & Kerala</span>
+            </div>
+            <h1 data-i18n="hero_title">Your Journey.<br>Our <span class="text-gold">Drive.</span></h1>
+            <p data-i18n="hero_desc">Comfortable, reliable, and premium travel services across Tamil Nadu and Kerala, starting from the heart of Tenkasi.</p>
+            <div class="hero-buttons">
+                <a href="#booking" class="btn btn-primary pulse-glow" data-i18n="hero_book_btn">Book Your Trip <i data-lucide="arrow-right" size="16"></i></a>
+                <a href="#fleet" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.4);" data-i18n="hero_fleet_btn">Explore Our Fleet</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact Bar -->
+    <div class="quick-contact-wrapper">
+        <div class="quick-contact">
+            <a href="tel:9840708764" class="qc-item">
+                <div class="qc-icon"><i data-lucide="phone" size="18"></i></div>
+                <div class="qc-text">
+                    <div class="qc-label" data-i18n="qc_call_label">Call Now</div>
+                    <div class="qc-value">9840708764</div>
+                </div>
+            </a>
+            <a href="https://wa.me/919840708764" target="_blank" class="qc-item">
+                <div class="qc-icon" style="background: #25D366; color: white;"><i data-lucide="message-circle" size="18"></i></div>
+                <div class="qc-text">
+                    <div class="qc-label" data-i18n="qc_wa_label">WhatsApp</div>
+                    <div class="qc-value" data-i18n="qc_wa_val">Chat with Us</div>
+                </div>
+            </a>
+            <a href="https://www.instagram.com/shenbagakumar_m?stkn=NnplanZ0djJlMDdu" target="_blank" class="qc-item">
+                <div class="qc-icon" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                    </svg>
+                </div>
+                <div class="qc-text">
+                    <div class="qc-label" data-i18n="qc_insta_label">Instagram</div>
+                    <div class="qc-value" data-i18n="qc_insta_val">Follow Us</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section-padding" id="about">
+        <div class="container">
+            <div class="about-box" id="aboutCard">
+                <span class="section-subtitle" data-i18n="about_subtitle">About Us</span>
+                <h2 class="section-title" data-i18n="about_title">Travel Across Tamil Nadu & Kerala With <span class="text-gold">SKT Travels</span></h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1rem;" data-i18n="about_desc">Based in the scenic town of Tenkasi, SKT Travels provides comfortable, reliable, and premium transportation services throughout Tamil Nadu and Kerala. Whether it's a family pilgrimage, an outstation trip, or a custom tourist itinerary, we ensure a smooth and safe drive.</p>
+                <ul style="list-style: none; display: inline-flex; flex-direction: column; gap: 0.75rem; text-align: left;">
+                    <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f1">Experienced & Professional Drivers</span></li>
+                    <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f2">Well-Maintained, Sanitized Vehicles</span></li>
+                    <li style="display: flex; align-items: center; gap: 0.65rem;"><i data-lucide="check-circle" class="text-gold" size="18"></i> <span data-i18n="about_f3">Flexible Custom Travel Requirements</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Section -->
+    <section class="section-padding bg-charcoal" id="fleet">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 2.5rem;">
+                <span class="section-subtitle" data-i18n="fleet_subtitle">Our Fleet</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="fleet_title">Choose Your <span class="text-gold">Comfort</span></h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem;" data-i18n="fleet_desc">Air-conditioned, clean, and reliable vehicles suited for every group size.</p>
+            </div>
+            
+            <div class="fleet-container">
+                <div class="fleet-track" id="fleetTrack"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Modal -->
+    <div class="modal" id="fleetModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal" aria-label="Close modal"><i data-lucide="x" size="20"></i></button>
+            <img src="" alt="" class="modal-img" id="modalImg">
+            <div class="modal-body">
+                <h3 id="modalName" style="font-size: 1.35rem; margin-bottom: 0.4rem; color: var(--navy);"></h3>
+                <div class="fleet-features" id="modalFeatures" style="margin-bottom: 0.85rem;"></div>
+                <p id="modalDesc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;"></p>
+                <a href="#booking" class="btn btn-primary" id="modalBookBtn" style="width: 100%; justify-content: center;" data-i18n="modal_book_btn">Book This Vehicle</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <section class="section-padding bg-navy" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 2rem;">
+                <h2 class="section-title" style="color: var(--white); font-size: clamp(1.4rem, 3vw, 2rem);" data-i18n="why_title">Why Choose <span class="text-gold">SKT Travels</span></h2>
+            </div>
+            <div class="stats-row stagger-children reveal">
+                <div class="stat-item">
+                    <h3 data-count="4">4+</h3>
+                    <p data-i18n="stat_1">Premium Vehicles</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p data-i18n="stat_2">TN & Kerala</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p data-i18n="stat_3">Call Support</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5★</h3>
+                    <p data-i18n="stat_4">Top Rated</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations -->
+    <section class="section-padding bg-charcoal" id="destinations">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 2.5rem;">
+                <span class="section-subtitle" data-i18n="dest_subtitle">Destinations</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="dest_title">Explore <span class="text-gold">Tamil Nadu, Kerala & Beyond</span></h2>
+            </div>
+            <div class="destinations-track" id="destTrack"></div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="section-padding" id="booking">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 2.25rem;">
+                <span class="section-subtitle" data-i18n="book_subtitle">Book Now</span>
+                <h2 class="section-title" data-i18n="book_title">Plan Your <span class="text-gold">Journey</span></h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="book_desc">Fill out the details below. We will open WhatsApp directly to send your travel enquiry to SKT Travels.</p>
+            </div>
+            
+            <form class="booking-form reveal-scale" id="bookingForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name" data-i18n="form_name">Full Name *</label>
+                        <input type="text" id="name" required placeholder="Your name">
+                        <span class="error-msg" data-i18n="form_err_name">Please enter your name</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" data-i18n="form_phone">Phone Number *</label>
+                        <input type="tel" id="phone" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+                        <span class="error-msg" data-i18n="form_err_phone">Please enter a valid 10-digit phone number</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickup" data-i18n="form_pickup">Pickup Location *</label>
+                        <input type="text" id="pickup" required placeholder="e.g., Tenkasi">
+                        <span class="error-msg" data-i18n="form_err_pickup">Please enter pickup location</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination" data-i18n="form_dest">Destination *</label>
+                        <input type="text" id="destination" required placeholder="e.g., Munnar / Sabarimala / Madurai">
+                        <span class="error-msg" data-i18n="form_err_dest">Please enter destination</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelDate" data-i18n="form_date">Travel Date *</label>
+                        <input type="date" id="travelDate" required>
+                        <span class="error-msg" data-i18n="form_err_date">Please select a travel date</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="returnDate" data-i18n="form_return">Return Date (Optional)</label>
+                        <input type="date" id="returnDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="passengers" data-i18n="form_passengers">Number of Passengers *</label>
+                        <input type="number" id="passengers" required min="1" placeholder="e.g., 4">
+                        <span class="error-msg" data-i18n="form_err_passengers">Please enter valid passenger count</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle" data-i18n="form_vehicle">Preferred Vehicle</label>
+                        <select id="vehicle">
+                            <option value="Not specified" data-i18n="form_vehicle_opt">Select a vehicle (Optional)</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="requirements" data-i18n="form_notes">Additional Requirements</label>
+                        <textarea id="requirements" rows="3" placeholder="Pickup time, multiple destinations, luggage, etc."></textarea>
+                    </div>
+                    <div class="form-full text-center" style="margin-top: 0.5rem;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 420px; justify-content: center; padding: 0.85rem;" data-i18n="form_submit_btn">
+                            Send Booking Request via WhatsApp <i data-lucide="send" size="16"></i>
+                        </button>
+                        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem;" data-i18n="form_note">
+                            <i data-lucide="info" size="13" style="vertical-align: middle;"></i> 
+                            This is an enquiry request. Your booking will be confirmed by our team after review.
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section-padding" id="gallery">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 2.25rem;">
+                <span class="section-subtitle" data-i18n="gallery_subtitle">Gallery</span>
+                <h2 class="section-title" data-i18n="gallery_title">Travel <span class="text-gold">Moments</span></h2>
+            </div>
+            <div class="gallery-grid stagger-children reveal">
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 1">
+                    <img src="Travel1.jpg" alt="Travel Moment 1" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 2">
+                    <img src="Travel2.jpg" alt="Travel Moment 2" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 3">
+                    <img src="Travel3.jpg" alt="Travel Moment 3" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 4">
+                    <img src="Travel4.jpg" alt="Travel Moment 4" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 5">
+                    <img src="Travel5.jpg" alt="Travel Moment 5" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" title="Travel Moment 6">
+                    <img src="Travel6.jpg" alt="Travel Moment 6" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" aria-label="Close lightbox"><i data-lucide="x" size="30"></i></button>
+        <img src="" alt="Gallery Image" id="lightboxImg">
+    </div>
+
+    <!-- Reviews Section -->
+    <section class="section-padding reviews-section" id="reviews">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-subtitle" data-i18n="rev_subtitle">Traveler Testimonials</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="rev_title">Customer <span class="text-gold">Reviews</span></h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.92rem;" data-i18n="rev_desc">Share your experience riding with SKT Travels or read real customer feedback.</p>
+            </div>
+
+            <div class="reviews-wrapper">
+                <div class="review-form-card reveal">
+                    <button type="button" class="review-toggle-btn" id="reviewToggleBtn">
+                        <i data-lucide="edit-3" size="18"></i> 
+                        <span data-i18n="rev_form_title">Write a Review</span>
+                        <i data-lucide="chevron-down" size="18" class="toggle-icon"></i>
+                    </button>
+
+                    <div class="review-collapsible-content" id="reviewCollapsibleContent">
+                        <form id="reviewForm">
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_name_label">Your Name *</label>
+                            <input type="text" id="reviewName" required placeholder="e.g. Ramesh Kumar">
+
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_route_label">Trip Route (Optional)</label>
+                            <input type="text" id="reviewRoute" placeholder="e.g. Tenkasi to Munnar / Sabarimala">
+
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_rating_label">Your Rating</label>
+                            <div class="star-rating-select" id="starSelector">
+                                <button type="button" class="star-btn active" data-rating="1" aria-label="1 star">★</button>
+                                <button type="button" class="star-btn active" data-rating="2" aria-label="2 stars">★</button>
+                                <button type="button" class="star-btn active" data-rating="3" aria-label="3 stars">★</button>
+                                <button type="button" class="star-btn active" data-rating="4" aria-label="4 stars">★</button>
+                                <button type="button" class="star-btn active" data-rating="5" aria-label="5 stars">★</button>
+                            </div>
+                            <input type="hidden" id="reviewRating" value="5">
+
+                            <label style="font-size: 0.82rem; font-weight: 600;" data-i18n="rev_comment_label">Your Feedback / Review *</label>
+                            <textarea id="reviewComment" rows="3" required placeholder="How was the journey, driver punctuality, and vehicle comfort?"></textarea>
+
+                            <button type="submit" class="btn btn-primary" id="reviewSubmitBtn" style="width: 100%; justify-content: center;" data-i18n="rev_post_btn">
+                                Post Review
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: var(--white); text-align: center;" data-i18n="rev_recent_title">Recent Traveler Feedback</h3>
+                    <div class="reviews-feed" id="reviewsFeed"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section-padding bg-charcoal" id="contact">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-subtitle" data-i18n="cnt_subtitle">Contact Us</span>
+                <h2 class="section-title" style="color: var(--white);" data-i18n="cnt_title">Ready for Your Next <span class="text-gold">Journey?</span></h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0.75rem auto 1.5rem; font-size: 0.92rem;" data-i18n="cnt_desc">Contact SKT Travels and plan your trip across Tamil Nadu and Kerala.</p>
+            </div>
+            
+            <div class="contact-icons-row stagger-children reveal">
+                <a href="tel:9840708764" class="contact-icon-btn" title="Call 9840708764">
+                    <div class="contact-icon-circle icon-call">
+                        <i data-lucide="phone" size="24"></i>
+                    </div>
+                    <span class="contact-icon-label" data-i18n="cnt_card_call">Call Us</span>
+                </a>
+
+                <a href="https://wa.me/919840708764" target="_blank" class="contact-icon-btn" title="Chat on WhatsApp">
+                    <div class="contact-icon-circle icon-wa">
+                        <i data-lucide="message-circle" size="24"></i>
+                    </div>
+                    <span class="contact-icon-label" data-i18n="cnt_card_wa">WhatsApp</span>
+                </a>
+
+                <a href="https://www.instagram.com/shenbagakumar_m?stkn=NnplanZ0djJlMDdu" target="_blank" class="contact-icon-btn" title="Follow on Instagram">
+                    <div class="contact-icon-circle icon-insta">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                        </svg>
+                    </div>
+                    <span class="contact-icon-label">Instagram</span>
+                </a>
+
+                <a href="https://maps.google.com/?q=Tenkasi,Tamil+Nadu" target="_blank" class="contact-icon-btn" title="View Tenkasi on Google Maps">
+                    <div class="contact-icon-circle icon-map">
+                        <i data-lucide="map-pin" size="24"></i>
+                    </div>
+                    <span class="contact-icon-label" data-i18n="cnt_card_loc">Tenkasi</span>
+                </a>
+            </div>
+
+            <div class="text-center" style="margin-top: 2.25rem;">
+                <a href="#booking" class="btn btn-primary reveal" data-i18n="cnt_btn">Book Your Trip Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-i18n="footer_rights">&copy; 2026 SKT Travels. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // =========================================
+        // 1. CONFIGURATION
+        // =========================================
+        const SKT_CONFIG = {
+            companyName: "SKT Travels",
+            location: "Tenkasi, Tamil Nadu",
+            phone: "9840708764",
+            whatsapp: "919840708764",
+            instagram: "https://www.instagram.com/shenbagakumar_m?stkn=NnplanZ0djJlMDdu",
+            serviceArea: "Tamil Nadu & Kerala"
+        };
+
+        const SUPABASE_URL = "https://yeoguwaqbedfqrjikqjx.supabase.co";
+        const SUPABASE_ANON_KEY = "EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inllb2d1d2FxYnFkZnFyamlrcWp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0MjQ2OTcsImV4cCI6MjEwNjAwMDY5N30.abQu5I78-GuJkAKbwr63UQ9GhAPzNt59zHuijZ-twlg";
+
+        let supabaseClient = null;
+        if (window.supabase) {
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        // =========================================
+        // 2. TRANSLATIONS (ENGLISH / TAMIL)
+        // =========================================
+        let currentLang = localStorage.getItem('skt_lang') || 'en';
+
+        const translations = {
+            en: {
+                lang_toggle: "தமிழ்",
+                nav_home: "Home",
+                nav_about: "About",
+                nav_fleet: "Fleet",
+                nav_destinations: "Destinations",
+                nav_reviews: "Reviews",
+                nav_contact: "Contact",
+                nav_book: "Book Your Trip",
+                hero_location: "Tenkasi • Tamil Nadu & Kerala",
+                hero_title: 'Your Journey.<br>Our <span class="text-gold">Drive.</span>',
+                hero_desc: "Comfortable, reliable, and premium travel services across Tamil Nadu and Kerala, starting from the heart of Tenkasi.",
+                hero_book_btn: 'Book Your Trip <i data-lucide="arrow-right" size="16"></i>',
+                hero_fleet_btn: "Explore Our Fleet",
+                qc_call_label: "Call Now",
+                qc_wa_label: "WhatsApp",
+                qc_wa_val: "Chat with Us",
+                qc_insta_label: "Instagram",
+                qc_insta_val: "Follow Us",
+                about_subtitle: "About Us",
+                about_title: 'Travel Across Tamil Nadu & Kerala With <span class="text-gold">SKT Travels</span>',
+                about_desc: "Based in the scenic town of Tenkasi, SKT Travels provides comfortable, reliable, and premium transportation services throughout Tamil Nadu and Kerala. Whether it's a family pilgrimage, an outstation trip, or a custom tourist itinerary, we ensure a smooth and safe drive.",
+                about_f1: "Experienced & Professional Drivers",
+                about_f2: "Well-Maintained, Sanitized Vehicles",
+                about_f3: "Flexible Custom Travel Requirements",
+                fleet_subtitle: "Our Fleet",
+                fleet_title: 'Choose Your <span class="text-gold">Comfort</span>',
+                fleet_desc: "Air-conditioned, clean, and reliable vehicles suited for every group size.",
+                modal_book_btn: "Book This Vehicle",
+                why_title: 'Why Choose <span class="text-gold">SKT Travels</span>',
+                stat_1: "Premium Vehicles",
+                stat_2: "TN & Kerala",
+                stat_3: "Call Support",
+                stat_4: "Top Rated",
+                dest_subtitle: "Destinations",
+                dest_title: 'Explore <span class="text-gold">Tamil Nadu, Kerala & Beyond</span>',
+                book_subtitle: "Book Now",
+                book_title: 'Plan Your <span class="text-gold">Journey</span>',
+                book_desc: "Fill out the details below. We will open WhatsApp directly to send your travel enquiry to SKT Travels.",
+                form_name: "Full Name *",
+                form_phone: "Phone Number *",
+                form_pickup: "Pickup Location *",
+                form_dest: "Destination *",
+                form_date: "Travel Date *",
+                form_return: "Return Date (Optional)",
+                form_passengers: "Number of Passengers *",
+                form_vehicle: "Preferred Vehicle",
+                form_vehicle_opt: "Select a vehicle (Optional)",
+                form_notes: "Additional Requirements",
+                form_submit_btn: 'Send Booking Request via WhatsApp <i data-lucide="send" size="16"></i>',
+                form_note: '<i data-lucide="info" size="13" style="vertical-align: middle;"></i> This is an enquiry request. Your booking will be confirmed by our team after review.',
+                form_err_name: "Please enter your name",
+                form_err_phone: "Please enter a valid 10-digit phone number",
+                form_err_pickup: "Please enter pickup location",
+                form_err_dest: "Please enter destination",
+                form_err_date: "Please select a travel date",
+                form_err_passengers: "Please enter valid passenger count",
+                gallery_subtitle: "Gallery",
+                gallery_title: 'Travel <span class="text-gold">Moments</span>',
+                rev_subtitle: "Traveler Testimonials",
+                rev_title: 'Customer <span class="text-gold">Reviews</span>',
+                rev_desc: "Share your experience riding with SKT Travels or read real customer feedback.",
+                rev_form_title: "Write a Review",
+                rev_name_label: "Your Name *",
+                rev_route_label: "Trip Route (Optional)",
+                rev_rating_label: "Your Rating",
+                rev_comment_label: "Your Feedback / Review *",
+                rev_post_btn: "Post Review",
+                rev_recent_title: "Recent Traveler Feedback",
+                cnt_subtitle: "Contact Us",
+                cnt_title: 'Ready for Your Next <span class="text-gold">Journey?</span>',
+                cnt_desc: "Contact SKT Travels and plan your trip across Tamil Nadu and Kerala.",
+                cnt_card_call: "Call Us",
+                cnt_card_wa: "WhatsApp",
+                cnt_card_loc: "Tenkasi",
+                cnt_btn: "Book Your Trip Now",
+                footer_rights: "© 2026 SKT Travels. All rights reserved."
+            },
+            ta: {
+                lang_toggle: "English",
+                nav_home: "முகப்பு",
+                nav_about: "எங்களை பற்றி",
+                nav_fleet: "வாகனங்கள்",
+                nav_destinations: "இடங்கள்",
+                nav_reviews: "கருத்துகள்",
+                nav_contact: "தொடர்புக்கு",
+                nav_book: "முன்பதிவு",
+                hero_location: "தென்காசி • தமிழ்நாடு & கேரளா",
+                hero_title: 'உங்கள் பயணம்.<br>எங்கள் <span class="text-gold">சேவை.</span>',
+                hero_desc: "தென்காசியில் இருந்து தமிழ்நாடு மற்றும் கேரளா முழுவதும் பாதுகாப்பான, சௌகரியமான மற்றும் நம்பகமான பயண சேவை.",
+                hero_book_btn: 'முன்பதிவு செய்ய <i data-lucide="arrow-right" size="16"></i>',
+                hero_fleet_btn: "வாகனங்களை பார்க்க",
+                qc_call_label: "அழைக்க",
+                qc_wa_label: "வாட்ஸ்அப்",
+                qc_wa_val: "மெசேஜ் செய்க",
+                qc_insta_label: "இன்ஸ்டாகிராம்",
+                qc_insta_val: "பின்தொடரவும்",
+                about_subtitle: "எங்களை பற்றி",
+                about_title: 'தமிழ்நாடு & கேரளா முழுவதும் <span class="text-gold">SKT டிராவல்ஸ்</span> உடன் பயணியுங்கள்',
+                about_desc: "தென்காசியை தலைமையிடமாகக் கொண்டு, தமிழ்நாடு மற்றும் கேரளா முழுவதும் குடும்பச் சுற்றுலா, ஆன்மீகக் கோவில் யாத்திரைகள் மற்றும் வெளியூர் பயணங்களுக்கு பாதுகாப்பான சிறந்த வாகன சேவைகளை வழங்குகிறோம்.",
+                about_f1: "அனுபவம் வாய்ந்த ஓட்டுநர்கள்",
+                about_f2: "சுத்தமான மற்றும் பராமரிக்கப்பட்ட வாகனங்கள்",
+                about_f3: "உங்கள் தேவைக்கேற்ப பயணத் திட்டம்",
+                fleet_subtitle: "எங்கள் வாகனங்கள்",
+                fleet_title: 'உங்கள் <span class="text-gold">வாகனத்தை</span> தேர்வு செய்க',
+                fleet_desc: "குடும்பத்தினர் மற்றும் குழுக்களுக்கு ஏற்ற வகையில் குளிரூட்டப்பட்ட சொகுசு கார்கள் மற்றும் வேன்கள்.",
+                modal_book_btn: "இந்த வாகனத்தை தேர்வு செய்க",
+                why_title: 'ஏன் <span class="text-gold">SKT டிராவல்ஸ்?</span>',
+                stat_1: "சொகுசு வாகனங்கள்",
+                stat_2: "TN & கேரளா",
+                stat_3: "தொலைபேசி உதவி",
+                stat_4: "சிறந்த சேவை",
+                dest_subtitle: "சுற்றுலா இடங்கள்",
+                dest_title: 'தமிழ்நாடு, கேரளா & பிற <span class="text-gold">இடங்கள்</span>',
+                book_subtitle: "முன்பதிவு",
+                book_title: 'பயணத்தை <span class="text-gold">திட்டமிடுங்கள்</span>',
+                book_desc: "கீழே உள்ள படிவத்தைப் பூர்த்தி செய்யவும். வாட்ஸ்அப் வழியாக உங்கள் கோரிக்கை உடனடியாக அனுப்பப்படும்.",
+                form_name: "முழு பெயர் *",
+                form_phone: "தொலைபேசி எண் *",
+                form_pickup: "புறப்படும் இடம் *",
+                form_dest: "செல்ல வேண்டிய இடம் *",
+                form_date: "பயண தேதி *",
+                form_return: "திரும்பும் தேதி (விருப்பப்பட்டால்)",
+                form_passengers: "பயணிகள் எண்ணிக்கை *",
+                form_vehicle: "விருப்பமான வாகனம்",
+                form_vehicle_opt: "வாகனத்தை தேர்வு செய்யவும் (விருப்பப்பட்டால்)",
+                form_notes: "கூடுதல் தகவல்கள்",
+                form_submit_btn: 'வாட்ஸ்அப் வழியாக அனுப்பவும் <i data-lucide="send" size="16"></i>',
+                form_note: '<i data-lucide="info" size="13" style="vertical-align: middle;"></i> இது முன்பதிவு கோரிக்கை மட்டுமே. எங்கள் குழு சரிபார்த்து உறுதி செய்யும்.',
+                form_err_name: "தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்",
+                form_err_phone: "சரியான 10 இலக்க எண்ணை உள்ளிடவும்",
+                form_err_pickup: "புறப்படும் இடத்தை உள்ளிடவும்",
+                form_err_dest: "செல்ல வேண்டிய இடத்தை உள்ளிடவும்",
+                form_err_date: "பயண தேதியை தேர்வு செய்யவும்",
+                form_err_passengers: "பயணிகள் எண்ணிக்கையை உள்ளிடவும்",
+                gallery_subtitle: "புகைப்படங்கள்",
+                gallery_title: 'பயண <span class="text-gold">நினைவுகள்</span>',
+                rev_subtitle: "பயணிகள் கருத்துகள்",
+                rev_title: 'வாடிக்கையாளர் <span class="text-gold">விமர்சனங்கள்</span>',
+                rev_desc: "எங்களோடு பயணித்த பயணிகளின் கருத்துக்களைப் படியுங்கள் அல்லது உங்கள் அனுபவத்தை பதிவு செய்யுங்கள்.",
+                rev_form_title: "கருத்து தெரிவிக்க",
+                rev_name_label: "உங்கள் பெயர் *",
+                rev_route_label: "பயண வழி (விருப்பப்பட்டால்)",
+                rev_rating_label: "உங்கள் மதிப்பீடு",
+                rev_comment_label: "உங்கள் கருத்து *",
+                rev_post_btn: "கருத்தை பதிவு செய்க",
+                rev_recent_title: "சமீபத்திய கருத்துகள்",
+                cnt_subtitle: "தொடர்புக்கு",
+                cnt_title: 'உங்கள் அடுத்த <span class="text-gold">பயணத்திற்கு தயாரா?</span>',
+                cnt_desc: "SKT டிராவல்ஸை தொடர்பு கொண்டு உங்கள் பயணத்தை உடனடியாக திட்டமிடுங்கள்.",
+                cnt_card_call: "அழைக்க",
+                cnt_card_wa: "வாட்ஸ்அப்",
+                cnt_card_loc: "தென்காசி",
+                cnt_btn: "இப்போதே பதிவு செய்யுங்கள்",
+                footer_rights: "© 2026 SKT டிராவல்ஸ். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ta' : 'en';
+            localStorage.setItem('skt_lang', currentLang);
+            applyLanguage(currentLang);
+        }
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            
+            document.getElementById('langLabelDesktop').textContent = t.lang_toggle;
+            document.getElementById('langLabelMobile').textContent = t.lang_toggle;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.style.opacity = '0.4';
+                    setTimeout(() => {
+                        el.innerHTML = t[key];
+                        el.style.opacity = '1';
+                    }, 150);
+                }
+            });
+
+            if (lang === 'ta') {
+                document.getElementById('name').placeholder = "உங்கள் பெயர்";
+                document.getElementById('phone').placeholder = "10 இலக்க செல்போன் எண்";
+                document.getElementById('pickup').placeholder = "எ.கா: தென்காசி";
+                document.getElementById('destination').placeholder = "எ.கா: மூணாறு / சபரிமலை / மதுரை";
+                document.getElementById('passengers').placeholder = "எ.கா: 4";
+                document.getElementById('requirements').placeholder = "புறப்படும் நேரம், கூடுதல் லக்கேஜ் மற்றும் பிற தகவல்கள்...";
+                document.getElementById('reviewRoute').placeholder = "எ.கா: தென்காசி to மூணாறு / சபரிமலை";
+                document.getElementById('reviewComment').placeholder = "வாகனம், ஓட்டுநரின் சேவை எவ்வாறு இருந்தது?";
+            } else {
+                document.getElementById('name').placeholder = "Your name";
+                document.getElementById('phone').placeholder = "10-digit mobile number";
+                document.getElementById('pickup').placeholder = "e.g., Tenkasi";
+                document.getElementById('destination').placeholder = "e.g., Munnar / Sabarimala / Madurai";
+                document.getElementById('passengers').placeholder = "e.g., 4";
+                document.getElementById('requirements').placeholder = "Pickup time, multiple destinations, luggage, etc.";
+                document.getElementById('reviewRoute').placeholder = "e.g. Tenkasi to Munnar / Sabarimala";
+                document.getElementById('reviewComment').placeholder = "How was the journey, driver punctuality, and vehicle comfort?";
+            }
+
+            lucide.createIcons();
+        }
+
+        // =========================================
+        // 3. FLEET DATA
+        // =========================================
+        const fleetData = [
+            {
+                id: 1,
+                name: "Maruti Suzuki Swift",
+                image: "Car1.png",
+                seats: "4 Passengers",
+                features: ["AC", "Compact & Fast", "Budget Friendly"],
+                description: "Comfortable and fuel-efficient hatchback ideal for couples, solo travelers, and small family city or outstation trips."
+            },
+            {
+                id: 2,
+                name: "Force Traveller Van",
+                image: "Car2.png",
+                seats: "12 Passengers",
+                features: ["AC", "Pushback Seats", "Spacious Luggage"],
+                description: "Spacious luxury van perfect for extended family pilgrimages, Sabarimala trips, group tours, and Kerala holiday circuits."
+            },
+            {
+                id: 3,
+                name: "Toyota Innova",
+                image: "Car3.png",
+                seats: "7 Seater",
+                features: ["Dual AC", "Captain Seats", "Smooth Ride"],
+                description: "Reliable and spacious outstation MPV offering great legroom and a stable drive across highways and ghat roads."
+            },
+            {
+                id: 4,
+                name: "Toyota Innova Crysta",
+                image: "Car4.png",
+                seats: "7 Seater",
+                features: ["Dual AC", "Premium Luxury", "Hill Specialist"],
+                description: "The gold standard in premium travel with exceptional ride comfort, powerful performance, and top-tier interior finish."
+            }
+        ];
+
+        // =========================================
+        // 4. DESTINATIONS
+        // =========================================
+        const destinations = [
+            { name: "Tenkasi", desc: "Kasi Viswanathar Temple & Courtallam Falls", img: "Dest1.jpg" },
+            { name: "Munnar", desc: "Tea Plantations & Misty Mountains", img: "Dest2.jpg" },
+            { name: "Kodaikanal", desc: "The Princess of Hill Stations", img: "Dest3.png" },
+            { name: "Alleppey", desc: "Venice of the East & Houseboat Cruises", img: "Dest4.png" },
+            { name: "Sabarimala", desc: "Sacred Ayyappan Pilgrimage Hub", img: "Dest5.jpg" },
+            { name: "Thiruvananthapuram", desc: "Padmanabhaswamy Temple & Capital City", img: "Dest6.png" },
+            { name: "Varkala", desc: "Pristine Red Cliffs & Coastal Views", img: "Dest7.png" },
+            { name: "Madurai", desc: "Historic Meenakshi Amman Temple City", img: "Dest8.png" },
+            { name: "Tirupati", desc: "Lord Venkateswara Sacred Temple Hill", img: "Dest9.png" },
+            { name: "Ooty", desc: "Queen of the Nilgiris Hill Ranges", img: "Dest10.png" },
+            { name: "Kanyakumari", desc: "Vivekananda Rock & Southern Lands End", img: "Dest11.png" },
+            { name: "Kochi", desc: "Historic Fort Kochi & International Port", img: "Dest12.png" },
+            { name: "Karnataka", desc: "Bengaluru, Mysuru & Coorg Travel Routes", img: "Dest13.png" }
+        ];
+
+        // =========================================
+        // 5. INITIALIZATION & REVIEWS
+        // =========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initFleet();
+            initDestinations();
+            initNavbar();
+            setMinDate();
+            initReviews();
+            applyLanguage(currentLang);
+            initScrollReveal();
+            initAboutReveal();
+            initStatsCounter();
+            lucide.createIcons();
+        });
+
+        function initFleet() {
+            const track = document.getElementById('fleetTrack');
+            const select = document.getElementById('vehicle');
+            
+            fleetData.forEach((vehicle, index) => {
+                const option = document.createElement('option');
+                option.value = vehicle.name;
+                option.textContent = vehicle.name;
+                select.appendChild(option);
+
+                const card = document.createElement('div');
+                card.className = 'fleet-card';
+                card.innerHTML = `
+                    <img src="${vehicle.image}" alt="${vehicle.name}" class="fleet-img" loading="lazy">
+                    <div class="fleet-info">
+                        <h3 class="fleet-name">${vehicle.name}</h3>
+                        <div class="fleet-actions">
+                            <span style="font-weight: 700; color: var(--navy); font-size: 0.85rem;">${vehicle.seats}</span>
+                            <button class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="openFleetModal(${index})">Details</button>
+                        </div>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
+        }
+
+        function openFleetModal(index) {
+            const vehicle = fleetData[index];
+            document.getElementById('modalImg').src = vehicle.image;
+            document.getElementById('modalName').textContent = vehicle.name;
+            document.getElementById('modalDesc').textContent = vehicle.description;
+            document.getElementById('modalFeatures').innerHTML = vehicle.features.map(f => `<span class="feature-tag">${f}</span>`).join('');
+            
+            const bookBtn = document.getElementById('modalBookBtn');
+            bookBtn.onclick = () => {
+                closeFleetModal();
+                document.getElementById('vehicle').value = vehicle.name;
+                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+            };
+            
+            document.getElementById('fleetModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFleetModal() {
+            document.getElementById('fleetModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('closeModal').onclick = closeFleetModal;
+        document.getElementById('fleetModal').onclick = (e) => {
+            if (e.target.id === 'fleetModal') closeFleetModal();
+        };
+
+        function initDestinations() {
+            const track = document.getElementById('destTrack');
+            destinations.forEach(dest => {
+                const card = document.createElement('div');
+                card.className = 'dest-card';
+                card.innerHTML = `
+                    <img src="${dest.img}" alt="${dest.name}" loading="lazy">
+                    <div class="dest-overlay">
+                        <h3 style="font-size: 1.15rem; font-weight: 700;">${dest.name}</h3>
+                        <p style="font-size: 0.8rem; opacity: 0.9; margin-bottom: 0.6rem;">${dest.desc}</p>
+                        <button type="button" class="btn btn-primary" onclick="selectDestination('${escapeJs(dest.name)}')" style="padding: 0.4rem 0.85rem; font-size: 0.78rem; width: fit-content; border: none;">Plan Trip</button>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
+        }
+
+        function selectDestination(destName) {
+            const destInput = document.getElementById('destination');
+            if (destInput) {
+                destInput.value = destName;
+                destInput.parentElement.classList.remove('error');
+            }
+            
+            const bookingSection = document.getElementById('booking');
+            if (bookingSection) {
+                bookingSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            setTimeout(() => {
+                destInput && destInput.focus();
+            }, 600);
+        }
+
+        function escapeJs(str) {
+            return (str || '').replace(/'/g, "\\'");
+        }
+
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('travelDate').min = today;
+            document.getElementById('returnDate').min = today;
+        }
+
+        // =========================================
+        // 6. BOOKING VIA WHATSAPP
+        // =========================================
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            const requiredFields = ['name', 'phone', 'pickup', 'destination', 'travelDate', 'passengers'];
+            
+            requiredFields.forEach(id => {
+                const field = document.getElementById(id);
+                const group = field.parentElement;
+                if (!field.value.trim()) {
+                    group.classList.add('error');
+                    isValid = false;
+                } else {
+                    group.classList.remove('error');
+                }
+            });
+
+            const phone = document.getElementById('phone').value.trim();
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById('phone').parentElement.classList.add('error');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            const name = document.getElementById('name').value.trim();
+            const pickup = document.getElementById('pickup').value.trim();
+            const destination = document.getElementById('destination').value.trim();
+            const travelDate = document.getElementById('travelDate').value;
+            const returnDate = document.getElementById('returnDate').value || 'One Way';
+            const passengers = document.getElementById('passengers').value;
+            const vehicle = document.getElementById('vehicle').value;
+            const requirements = document.getElementById('requirements').value.trim() || 'None';
+
+            const message = currentLang === 'ta'
+                ? `வணக்கம் SKT டிராவல்ஸ்,%0A%0Aநான் ஒரு பயணம் குறித்து விசாரிக்க விரும்புகிறேன்.%0A%0A*பெயர்:* ${name}%0A*தொலைபேசி:* ${phone}%0A*புறப்படும் இடம்:* ${pickup}%0A*செல்லுமிடம்:* ${destination}%0A*பயண தேதி:* ${travelDate}%0A*திரும்பும் தேதி:* ${returnDate}%0A*பயணிகள்:* ${passengers}%0A*வாகனம்:* ${vehicle}%0A*கூடுதல் தகவல்கள்:*%0A${requirements}%0A%0Aநன்றி.`
+                : `Hello SKT Travels,%0A%0AI would like to enquire about a trip.%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Pickup Location:* ${pickup}%0A*Destination:* ${destination}%0A*Travel Date:* ${travelDate}%0A*Return Date:* ${returnDate}%0A*Passengers:* ${passengers}%0A*Vehicle:* ${vehicle}%0A*Additional Requirements:*%0A${requirements}%0A%0AThank you.`;
+
+            const waUrl = `https://wa.me/${SKT_CONFIG.whatsapp}?text=${message}`;
+            window.open(waUrl, '_blank');
+        });
+
+        document.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                this.parentElement.classList.remove('error');
+            });
+        });
+
+        // =========================================
+        // 7. REVIEW POSTING & ACCORDION
+        // =========================================
+        function initReviews() {
+            setupStarSelector();
+            fetchAndRenderReviews();
+
+            const toggleBtn = document.getElementById('reviewToggleBtn');
+            const content = document.getElementById('reviewCollapsibleContent');
+
+            if (toggleBtn && content) {
+                toggleBtn.addEventListener('click', () => {
+                    const isExpanded = content.classList.toggle('expanded');
+                    toggleBtn.classList.toggle('active', isExpanded);
+                });
+            }
+
+            document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('reviewName').value.trim() || (currentLang === 'ta' ? "பயணி" : "Verified Traveler");
+                const route = document.getElementById('reviewRoute').value.trim() || (currentLang === 'ta' ? "சுற்றுலா பயணம்" : "Outstation Trip");
+                const rating = parseInt(document.getElementById('reviewRating').value, 10) || 5;
+                const comment = document.getElementById('reviewComment').value.trim();
+
+                const submitBtn = document.getElementById('reviewSubmitBtn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = currentLang === 'ta' ? 'பதிவாகிறது...' : 'Posting...';
+
+                const newReview = { name, route, rating, comment, created_at: new Date().toISOString() };
+
+                try {
+                    if (supabaseClient) {
+                        const { error } = await supabaseClient
+                            .from('reviews')
+                            .insert([{ name, route, rating, comment }]);
+                        if (error) throw error;
+                    }
+
+                    const stored = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
+                    stored.unshift(newReview);
+                    localStorage.setItem('skt_reviews', JSON.stringify(stored));
+
+                    document.getElementById('reviewComment').value = '';
+                    document.getElementById('reviewRoute').value = '';
+                    document.getElementById('reviewRating').value = 5;
+                    updateStarsUI(5);
+
+                    content.classList.remove('expanded');
+                    toggleBtn.classList.remove('active');
+
+                    await fetchAndRenderReviews();
+                    alert(currentLang === 'ta' ? 'உங்கள் கருத்துக்கு நன்றி!' : 'Thank you for your feedback!');
+                } catch (err) {
+                    console.error('Error posting review:', err);
+                    
+                    const stored = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
+                    stored.unshift(newReview);
+                    localStorage.setItem('skt_reviews', JSON.stringify(stored));
+
+                    document.getElementById('reviewComment').value = '';
+                    document.getElementById('reviewRoute').value = '';
+                    document.getElementById('reviewRating').value = 5;
+                    updateStarsUI(5);
+
+                    content.classList.remove('expanded');
+                    toggleBtn.classList.remove('active');
+
+                    await fetchAndRenderReviews();
+                    alert(currentLang === 'ta' ? 'உங்கள் கருத்து வெற்றிகரமாக பதிவு செய்யப்பட்டது!' : 'Review posted successfully!');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentLang === 'ta' ? 'கருத்தை பதிவு செய்க' : 'Post Review';
+                }
+            });
+        }
+
+        function setupStarSelector() {
+            const buttons = document.querySelectorAll('#starSelector .star-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const rating = parseInt(this.getAttribute('data-rating'), 10);
+                    document.getElementById('reviewRating').value = rating;
+                    updateStarsUI(rating);
+                });
+            });
+            updateStarsUI(5);
+        }
+
+        function updateStarsUI(rating) {
+            const buttons = document.querySelectorAll('#starSelector .star-btn');
+            buttons.forEach(btn => {
+                const btnRating = parseInt(btn.getAttribute('data-rating'), 10);
+                if (btnRating <= rating) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        async function fetchAndRenderReviews() {
+            const feed = document.getElementById('reviewsFeed');
+            let reviewsList = [];
+
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('reviews')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    if (!error && data && data.length > 0) {
+                        reviewsList = data;
+                    }
+                } catch (err) {
+                    console.warn('Could not read from Supabase', err);
+                }
+            }
+
+            if (reviewsList.length === 0) {
+                reviewsList = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
+            }
+
+            feed.innerHTML = '';
+            
+            if (reviewsList.length === 0) {
+                feed.innerHTML = `
+                    <div style="text-align: center; padding: 2rem 1rem; color: var(--text-muted);">
+                        <i data-lucide="message-square" size="32" style="margin-bottom: 0.5rem; opacity: 0.5;"></i>
+                        <p style="font-size: 0.9rem;">No reviews yet. Be the first to share your journey experience!</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            reviewsList.forEach((r, i) => {
+                const item = document.createElement('div');
+                item.className = 'review-item';
+                item.style.animation = `fadeUp 0.6s ease-out ${i * 0.08}s both`;
+                const starsMarkup = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+                item.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span class="reviewer-meta">${escapeHtml(r.name || 'Verified Traveler')}</span>
+                            <span class="reviewer-route">${escapeHtml(r.route || 'Outstation Trip')}</span>
+                        </div>
+                        <span class="stars-display">${starsMarkup}</span>
+                    </div>
+                    <p class="review-comment">"${escapeHtml(r.comment)}"</p>
+                `;
+                feed.appendChild(item);
+            });
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/[&<>"']/g, m => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            })[m]);
+        }
+
+        // =========================================
+        // 8. UI INTERACTIONS & LIGHTBOX
+        // =========================================
+        function initNavbar() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMenu = document.getElementById('closeMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            const navbar = document.getElementById('navbar');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            }
+
+            mobileMenuBtn.onclick = toggleMenu;
+            closeMenu.onclick = toggleMenu;
+            overlay.onclick = toggleMenu;
+            mobileLinks.forEach(link => link.onclick = toggleMenu);
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // =========================================
+        // 9. ORIGINAL SCROLL REVEAL ANIMATION
+        // =========================================
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        setTimeout(() => lucide.createIcons(), 100);
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        }
+
+        function initAboutReveal() {
+            const aboutCard = document.getElementById('aboutCard');
+            if (!aboutCard) return;
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        aboutCard.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.05,
+                rootMargin: '0px 0px 40px 0px'
+            });
+
+            observer.observe(aboutCard);
+        }
+
+        // =========================================
+        // 10. STATS COUNTER ANIMATION
+        // =========================================
+        function initStatsCounter() {
+            const statItems = document.querySelectorAll('.stat-item h3');
+            let animated = false;
+            
+            const section = document.querySelector('.stats-row').closest('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animated) {
+                        animated = true;
+                        statItems.forEach(el => {
+                            el.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+                            el.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                el.style.transform = 'scale(1)';
+                            }, 200);
+                        });
+                    }
+                });
+            }, { threshold: 0.4 });
+            
+            if (section) observer.observe(section);
+        }
+    </script>
+</body>
+</html>
